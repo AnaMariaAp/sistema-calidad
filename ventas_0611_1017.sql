@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-11-2017 a las 16:16:47
--- Versión del servidor: 10.1.26-MariaDB
--- Versión de PHP: 7.1.9
+-- Tiempo de generación: 06-11-2017 a las 08:02:47
+-- Versión del servidor: 10.1.25-MariaDB
+-- Versión de PHP: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -44,6 +44,24 @@ CREATE TABLE `administrador` (
 INSERT INTO `administrador` (`idAdmin`, `nombreAdmin`, `password`, `rol`, `intentos`, `fechaCreado`) VALUES
 (1, 'admin', 'admin', 'A', 0, '2017-11-06'),
 (5, 'ana', 'Amoldemiviya11', 'U', 0, '2017-11-06');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categorias`
+--
+
+CREATE TABLE `categorias` (
+  `idCategoria` int(11) NOT NULL,
+  `nombreCategoria` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `categorias`
+--
+
+INSERT INTO `categorias` (`idCategoria`, `nombreCategoria`) VALUES
+(1, 'General');
 
 -- --------------------------------------------------------
 
@@ -153,29 +171,6 @@ INSERT INTO `inventario` (`idInventario`, `cantidadIngresada`, `precioVenta`, `i
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `membresias`
---
-
-CREATE TABLE `membresias` (
-  `idMembresia` int(11) NOT NULL,
-  `nombreMembresia` varchar(50) NOT NULL,
-  `costoMembresia` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `membresias`
---
-
-INSERT INTO `membresias` (`idMembresia`, `nombreMembresia`, `costoMembresia`) VALUES
-(1, '  General  ', 122),
-(9, 'Gold', 123),
-(10, 'asdsad', 12),
-(11, 'adsadd', 123),
-(12, 'Silver', 123);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `pass`
 --
 
@@ -196,14 +191,14 @@ CREATE TABLE `productos` (
   `nombreProducto` varchar(50) NOT NULL,
   `idProveedor` int(11) NOT NULL,
   `precioProducto` double NOT NULL,
-  `idMembresia` int(11) NOT NULL
+  `idCategoria` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`idProducto`, `nombreProducto`, `idProveedor`, `precioProducto`, `idMembresia`) VALUES
+INSERT INTO `productos` (`idProducto`, `nombreProducto`, `idProveedor`, `precioProducto`, `idCategoria`) VALUES
 (33, 'Producto 1', 19, 14, 1);
 
 -- --------------------------------------------------------
@@ -281,6 +276,12 @@ ALTER TABLE `administrador`
   ADD PRIMARY KEY (`idAdmin`);
 
 --
+-- Indices de la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  ADD PRIMARY KEY (`idCategoria`);
+
+--
 -- Indices de la tabla `ciudad`
 --
 ALTER TABLE `ciudad`
@@ -320,12 +321,6 @@ ALTER TABLE `inventario`
   ADD KEY `FK_inventario_productos` (`idProducto`);
 
 --
--- Indices de la tabla `membresias`
---
-ALTER TABLE `membresias`
-  ADD PRIMARY KEY (`idMembresia`);
-
---
 -- Indices de la tabla `pass`
 --
 ALTER TABLE `pass`
@@ -336,8 +331,8 @@ ALTER TABLE `pass`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`idProducto`),
-  ADD KEY `FK_productos_proveedores` (`idProveedor`),
-  ADD KEY `FK_productos_categorias` (`idMembresia`) USING BTREE;
+  ADD KEY `FK_productos_categorias` (`idCategoria`),
+  ADD KEY `FK_productos_proveedores` (`idProveedor`);
 
 --
 -- Indices de la tabla `proveedores`
@@ -369,61 +364,51 @@ ALTER TABLE `temp`
 --
 ALTER TABLE `administrador`
   MODIFY `idAdmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
+--
+-- AUTO_INCREMENT de la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
   MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
 --
 -- AUTO_INCREMENT de la tabla `detalles`
 --
 ALTER TABLE `detalles`
-  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
 --
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `idFactura` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `idFactura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 --
 -- AUTO_INCREMENT de la tabla `inventario`
 --
 ALTER TABLE `inventario`
   MODIFY `idInventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
--- AUTO_INCREMENT de la tabla `membresias`
---
-ALTER TABLE `membresias`
-  MODIFY `idMembresia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
 --
 -- AUTO_INCREMENT de la tabla `pass`
 --
 ALTER TABLE `pass`
-  MODIFY `idpass` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `idpass` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
   MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
-
 --
 -- AUTO_INCREMENT de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
   MODIFY `idProveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
 --
 -- AUTO_INCREMENT de la tabla `temp`
 --
 ALTER TABLE `temp`
-  MODIFY `idTemp` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `idTemp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- Restricciones para tablas volcadas
 --
@@ -465,7 +450,7 @@ ALTER TABLE `inventario`
 -- Filtros para la tabla `productos`
 --
 ALTER TABLE `productos`
-  ADD CONSTRAINT `FK_productos_categorias` FOREIGN KEY (`idMembresia`) REFERENCES `membresias` (`idMembresia`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_productos_categorias` FOREIGN KEY (`idCategoria`) REFERENCES `categorias` (`idCategoria`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_productos_proveedores` FOREIGN KEY (`idProveedor`) REFERENCES `proveedores` (`idProveedor`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
