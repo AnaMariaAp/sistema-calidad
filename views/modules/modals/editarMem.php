@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="editaMem" role="dialog" tabindex="-1">
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="editarMem" role="dialog" tabindex="-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -14,10 +14,10 @@
             </div>
  <div class="modal-body">
     <form method="post">
-        <?php $cat = membresiasController::editarMembresiaController();?>
+        <?php $mem = membresiasController::editarMembresiaController();?>
          <div class="form-group">
             <label for="recipient-name" class="form-control-label">Nombre Usuario:</label>
-          <?php foreach ($cat as $resp): ?>
+          <?php foreach ($mem as $resp): ?>
             <input type="text" class="form-control" id="recipient-name" name="nombreMembresia" value=" <?php echo $resp['nombreMembresia'] ?> ">
             <label for="recipient-name" class="form-control-label" style="padding-top: 10px;">Costo Membresia:</label>
             <input type="text" class="form-control" id="recipient-name" name="costoMembresia" value=" <?php echo $resp['costoMembresia'] ?> ">
@@ -35,7 +35,7 @@
 </div>
 <?php
 
-$actualizarCat = new membresiasController();
-$actualizarCat->actualizarMembresiaController();
+$actualizarMem = new membresiasController();
+$actualizarMem->actualizarMembresiaController();
 
 ?>

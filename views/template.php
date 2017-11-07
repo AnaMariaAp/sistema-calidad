@@ -4,22 +4,17 @@
         require "views/modules/header/menu.php";
     }
 }?>
-<div class="row">
-    <div class="col-md-12">
+
         <div class="container-fluid">
-            <section>
-                <hr>
+            
                     <?php
 $mvc = new MvcController();
 $mvc->enlacesPaginasController();
 ?>
 
-            </section>
-
+            
         </div>
-    </div>
 
-</div>
 
     <script src="views/bootstrap/js/app.js"></script>
     <script src="views/bootstrap/js/validarUsuario.js"></script>

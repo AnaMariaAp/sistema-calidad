@@ -55,7 +55,7 @@ class membresiasModel
         $sql->close();
     }
 
-    public static function editarmembresiaModel($datosModel, $tabla)
+    public static function editarMembresiaModel($datosModel, $tabla)
     {
         $sql = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE idMembresia = :idMembresia");
         $sql->bindParam(":idMembresia", $datosModel);

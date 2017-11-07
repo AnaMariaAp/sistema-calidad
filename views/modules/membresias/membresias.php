@@ -32,7 +32,7 @@ La membresia fue agregada correctamente.
 </div>';
         echo '<meta http-equiv="Refresh" content="4;URL = membresias" >';
     }
-    if ($_GET['action'] == 'editadoCat') {
+    if ($_GET['action'] == 'editadoMem') {
         echo '
     <div class="alert alert-success alert-dismissible fade show" id="oks" role="alert">
         <button aria-label="Close" class="close" data-dismiss="alert" type="button">
@@ -126,7 +126,7 @@ $datos->deleteMembresiaController();
                                     </label>
                                     <input class="form-control" id="nombreMembresias" name="nombreMembresia" placeholder="Nombre de Membresia" required="" type="text">
                                         <input name="" type="hidden">
-                                            <span id="cat">
+                                            <span id="mem">
                                             </span>
                                         </input>
                                     </input>
@@ -135,7 +135,7 @@ $datos->deleteMembresiaController();
                                     </label>
                                     <input class="form-control" id="costoMembresia" name="costoMembresia" placeholder="Costo de Membresia" required="" type="text">
                                 </div>
-                                <input class="btn btn-outline-danger btn-block" id="button" name="agragarMembresias" type="submit" value="Agregar Categorías">
+                                <input class="btn btn-outline-danger btn-block" id="button" name="agragarMembresias" type="submit" value="Agregar Membresias">
                                 </input>
                             </form>
                         </div>
@@ -144,8 +144,8 @@ $datos->deleteMembresiaController();
                     <?php endif?>
                     <?php
 
-$cat = new membresiasController();
-$cat->agregarMembresiasController();
+$mem = new membresiasController();
+$mem->agregarMembresiasController();
 
 ?>
                 </div>

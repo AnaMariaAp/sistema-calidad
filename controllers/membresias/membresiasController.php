@@ -73,7 +73,7 @@ class membresiasController
     {
         $datosController = $_GET['idEditar'];
 
-        $respuesta = membresiasModel::editarmembresiaModel($datosController, 'membresias');
+        $respuesta = membresiasModel::editarMembresiaModel($datosController, 'membresias');
         return $respuesta;
 
     }

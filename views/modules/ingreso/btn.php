@@ -1,1 +1,1 @@
-<input  type="submit" name="submit" class="btn btn-outline-primary btn-block">
+<button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">Iniciar Sesión</button>

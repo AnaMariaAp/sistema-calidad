@@ -1,37 +1,54 @@
-		
-	 <div class="head">
-	      <div class="row">
-				<div class="col-md-12">
-				<ol class="breadcrumb ">
-				  <li class="breadcrumb-item active animated fadeInLeft">Aplicacion de Login</li>
-				</ol>
-					<section class="header animated fadeInDown">
-					  <h1>Login</h1>
-					</section>
-					<div class="main">
-						<div class="form-group">
-							<form action="index.php" method="post">
-								<section class="	">
-								<div class="input-group margin-bottom-sm input">
-								  <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-								  <input name="nombre" class="form-control" type="text" placeholder="Nombre  Usuario" required="">
-								</div><br>
-									<div class="input-group">
-									  <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-									  <input name="password" class="form-control" type="password" placeholder="Password" required="">
-									</div><br>
-							<?php 
-                             $ingreso = new Ingreso();
-                             $ingreso->ingresoController();
-							 ?>
-									<?php if (!isset($_SESSION['nombreAdmin'])) {
-										include 'btn.php';
-									}
-									 ?>
-								</section>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-</div>
+<style type="text/css">
+	body {
+	  padding-top: 40px;
+	  padding-bottom: 40px;
+	  background-color: #eee;
+	}
+	.form-signin {
+	  max-width: 330px;
+	  padding: 15px;
+	  margin: 0 auto;
+	}
+	.form-signin .form-signin-heading,
+	.form-signin .checkbox {
+	  margin-bottom: 10px;
+	}
+	.form-signin .checkbox {
+	  font-weight: normal;
+	}
+	.form-signin .form-control {
+	  position: relative;
+	  height: auto;
+	  -webkit-box-sizing: border-box;
+	          box-sizing: border-box;
+	  padding: 10px;
+	  font-size: 16px;
+	}
+	.form-signin .form-control:focus {
+	  z-index: 2;
+	}
+	.form-signin input[type="email"] {
+	  margin-bottom: -1px;
+	  border-bottom-right-radius: 0;
+	  border-bottom-left-radius: 0;
+	}
+	.form-signin input[type="password"] {
+	  margin-bottom: 10px;
+	  border-top-left-radius: 0;
+	  border-top-right-radius: 0;
+	}
+</style>
+<form class="form-signin" action="index.php" method="post">
+	<h2 class="form-signin-heading text-center">Ingresa</h2>
+	<label for="inputEmail" class="sr-only">Email address</label>
+	<input name="nombre" type="text" id="inputNombre" class="form-control" placeholder="Nombre de usuario" required autofocus>
+	<label for="inputPassword" class="sr-only">Password</label>
+	<input name="password" type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
+	<?php 
+		$ingreso = new Ingreso();
+		$ingreso->ingresoController();
+	?>
+	<?php if (!isset($_SESSION['nombreAdmin'])) {
+		include 'btn.php';
+	}?>
+</form>
