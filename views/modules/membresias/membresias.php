@@ -11,11 +11,17 @@ if (!$_SESSION["nombreAdmin"]) {
 }
 
 ?>
-<ol class="breadcrumb">
-    <li class="breadcrumb-item active">
-        Sección de Membresias
-    </li>
-</ol>
+<section class="jumbotron text-center" style="background-color: transparent;">
+    <div class="container">
+        <h1 class="jumbotron-heading">Membresias</h1>
+        <p class="lead text-muted">Aquí podras gestionar los tipos de membresias y los costos de cada uno, de igual manera crear nuevas membresias.</p>
+        <p>
+            <a href="membresias" class="btn btn-primary">Lista de Membresias</a>
+            <a href="agragarMembresias" class="btn btn-secondary">Crear una membresia</a>
+        </p>
+    </div>
+</section>
+
 <?php
 if (isset($_GET['action'])) {
     if ($_GET['action'] == 'okMembresias') {
@@ -68,85 +74,69 @@ La membresia fue agregada correctamente.
     }
 }
 ?>
+
             <div class="row">
-                <div class="col-md-3">
-                    <div class="list-group">
-                        <a class="list-group-item" href="membresias">
-                            <i class="fa fa-list-alt">
-                            </i>
-                            Listado Membresias
-                        </a>
-                        <a class="list-group-item" href="agragarMembresias">
-                            <i class="fa fa-edit">
-                            </i>
-                            Membresias Nuevas
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-9">
-                    <div class="card">
-                        <div class="card-block">
-                            <?php if (isset($_GET['action'])): ?>
-                            <?php if ($_GET['action'] == 'membresias' or $_GET['action'] == 'okMembresias' or $_GET['action'] == 'DeletMembresias' or $_GET['action'] == 'editarMem' or $_GET['action'] == 'editadoMem'): ?>
-                            <h1 class="alert alert-warning text-center">
-                                Listado de Membresias
-                            </h1>
-                            <table class="table table-striped table-sm" id="tablas">
-                                <thead class="bg-primary text-white">
-                                    <tr>
-                                        <td>
-                                            Id Membresia
-                                        </td>
-                                        <td>
-                                            Nombre de Membresia
-                                        </td>
-                                        <td>
-                                            Costo
-                                        </td>
-                                        <td>
-                                            Acciones
-                                        </td>
-                                    </tr>
-                                </thead>
-<?php
-$datos = new membresiasController();
-$datos->getMembresiasController();
-$datos->deleteMembresiaController();
-?>
-                            </table>
-                            <?php endif?>
-                            <?php if ($_GET['action'] == 'agragarMembresias'): ?>
-                            <h1 class="alert alert-warning text-center">
-                                Agregar Membresias
-                            </h1>
-                            <form method="post" onsubmit="return validarMembresias()">
-                                <div class="form-group" id="form">
-                                    <label for="nombreMembresias">
+                <div class="card col-lg-12">
+                    <div class="card-block">
+                        <?php if (isset($_GET['action'])): ?>
+                        <?php if ($_GET['action'] == 'membresias' or $_GET['action'] == 'okMembresias' or $_GET['action'] == 'DeletMembresias' or $_GET['action'] == 'editarMem' or $_GET['action'] == 'editadoMem'): ?>
+                        <h1 class="alert alert-warning text-center">
+                            Listado de Membresias
+                        </h1>
+                        <table class="table table-striped table-sm" id="tablas">
+                            <thead class="bg-primary text-white">
+                                <tr>
+                                    <td>
+                                        Id Membresia
+                                    </td>
+                                    <td>
                                         Nombre de Membresia
-                                    </label>
-                                    <input class="form-control" id="nombreMembresias" name="nombreMembresia" placeholder="Nombre de Membresia" required="" type="text">
-                                        <input name="" type="hidden">
-                                            <span id="mem">
-                                            </span>
-                                        </input>
+                                    </td>
+                                    <td>
+                                        Costo
+                                    </td>
+                                    <td>
+                                        Acciones
+                                    </td>
+                                </tr>
+                            </thead>
+                            <?php
+                            $datos = new membresiasController();
+                            $datos->getMembresiasController();
+                            $datos->deleteMembresiaController();
+                            ?>
+                        </table>
+                        <?php endif?>
+                        <?php if ($_GET['action'] == 'agragarMembresias'): ?>
+                        <h1 class="alert alert-warning text-center">
+                            Agregar Membresias
+                        </h1>
+                        <form method="post" onsubmit="return validarMembresias()">
+                            <div class="form-group" id="form">
+                                <label for="nombreMembresias">
+                                    Nombre de Membresia
+                                </label>
+                                <input class="form-control" id="nombreMembresias" name="nombreMembresia" placeholder="Nombre de Membresia" required="" type="text">
+                                    <input name="" type="hidden">
+                                        <span id="mem">
+                                        </span>
                                     </input>
-                                    <label for="costoMembresia" style="padding-top: 10px;">
-                                        Costo Membresia
-                                    </label>
-                                    <input class="form-control" id="costoMembresia" name="costoMembresia" placeholder="Costo de Membresia" required="" type="text">
-                                </div>
-                                <input class="btn btn-outline-danger btn-block" id="button" name="agragarMembresias" type="submit" value="Agregar Membresias">
                                 </input>
-                            </form>
-                        </div>
+                                <label for="costoMembresia" style="padding-top: 10px;">
+                                    Costo Membresia
+                                </label>
+                                <input class="form-control" id="costoMembresia" name="costoMembresia" placeholder="Costo de Membresia" required="" type="text">
+                            </div>
+                            <input class="btn btn-outline-danger btn-block" id="button" name="agragarMembresias" type="submit" value="Agregar Membresias">
+                            </input>
+                        </form>
                     </div>
-                    <?php endif?>
-                    <?php endif?>
-                    <?php
-
-$mem = new membresiasController();
-$mem->agregarMembresiasController();
-
-?>
                 </div>
+                <?php endif?>
+                <?php endif?>
+                <?php
+                    $mem = new membresiasController();
+                    $mem->agregarMembresiasController();
+                ?>
+
             </div>

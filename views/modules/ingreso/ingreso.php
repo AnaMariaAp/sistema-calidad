@@ -38,6 +38,7 @@
 	  border-top-right-radius: 0;
 	}
 </style>
+<img src="views/bootstrap/img/logo_rokagym.jpg" class="rounded mx-auto d-block" alt="..." style="width: 200px;">
 <form class="form-signin" action="index.php" method="post">
 	<h2 class="form-signin-heading text-center">Ingresa</h2>
 	<label for="inputEmail" class="sr-only">Email address</label>

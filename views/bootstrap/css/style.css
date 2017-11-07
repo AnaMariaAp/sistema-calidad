@@ -10,7 +10,8 @@ footer {
     color: #fff;
 }
 
-
-
+.dropdown-menu {
+    left: -45px !important;
+}
 
 
