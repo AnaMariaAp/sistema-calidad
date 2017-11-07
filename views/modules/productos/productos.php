@@ -3,11 +3,22 @@ if (!$_SESSION["nombreAdmin"]) {
     header("location:ingreso");exit();
 }
 ?>
+<section class="jumbotron text-center" style="background-color: transparent; margin-bottom: 0px;">
+    <div class="container">
+        <h1 class="jumbotron-heading">Matricula</h1>
+        <p class="lead text-muted">Aquí podras gestionar la matricula del cliente a una membresia.</p>
+        <p>
+            <a href="clientes" class="btn btn-primary">Lista de Matriculas</a>
+            <a href="agragarclientes" class="btn btn-secondary">Agregar nueva matricula</a>
+        </p>
+    </div>
+</section>
 <ol class="breadcrumb">
     <li class="breadcrumb-item active">
         Sección de Productos
     </li>
 </ol>
+
 <?php if (isset($_GET['action'])) {
 
     if ($_GET['action'] == 'editadoProd') {

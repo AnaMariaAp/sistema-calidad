@@ -16,7 +16,7 @@
     <form method="post">
         <?php $mem = membresiasController::editarMembresiaController();?>
          <div class="form-group">
-            <label for="recipient-name" class="form-control-label">Nombre Usuario:</label>
+            <label for="recipient-name" class="form-control-label">Nombre de Membresia:</label>
           <?php foreach ($mem as $resp): ?>
             <input type="text" class="form-control" id="recipient-name" name="nombreMembresia" value=" <?php echo $resp['nombreMembresia'] ?> ">
             <label for="recipient-name" class="form-control-label" style="padding-top: 10px;">Costo Membresia:</label>
@@ -26,7 +26,7 @@
           <?php endforeach?>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary" name="editarMem">Editar Membresia</button>
+            <button type="submit" class="btn btn-primary" name="editarMem">Guardar</button>
         </div>
     </form>
         </div>

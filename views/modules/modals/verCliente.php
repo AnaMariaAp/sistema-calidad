@@ -3,8 +3,8 @@
  id="verCliente" role="dialog" tabindex="-1">
    <div class="modal-dialog modal-lg" id="mdialTamanio">
         <div class="modal-content">
-            <div class="modal-header btn-info">
-               <i> <h4 class="modal-title" id="exampleModalLabel">
+            <div class="modal-header btn-primary">
+               <h4 class="modal-title" id="exampleModalLabel">
                     <i class="fa fa-edit">
                     </i>
                 <?php $cli = ClientesController::getClientesControllerId();?>
@@ -12,11 +12,11 @@
 
                 <?php endforeach?>
                  Cliente: <?php echo $key['nombreCliente'] . ' ' . $key['apellidoCliente'] ?>
-                </h4></i>
+                </h4>
             </div>
             <div class="modal-body">
                           <table class="table table-striped table-sm">
-                                <thead class="bg-inverse">
+                                <thead class="bg-primary text-white">
                                     <tr>
                                         <td>Ciudad</td>
                                         <td>Cuit</td>
