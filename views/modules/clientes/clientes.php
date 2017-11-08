@@ -130,6 +130,15 @@ El Cliente fue editado correctamente.
                         <h1>Agregar Clientes</h1>
                     </div>
                     <form method="post" onsubmit="return validarclientes()">
+                        <script type="text/javascript">
+                            $(document).ready(function(){
+                                $(".datepicker").datepicker({
+                                    dateFormat: 'dd/mm/yy',
+                                    yearRange: '1990:2050',
+                                    changeYear: true
+                                }); 
+                            })
+                        </script>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -145,41 +154,33 @@ El Cliente fue editado correctamente.
                             </div>
                             <div class="col-md-4">
                               <div class="form-group">
-                                <label for="exampleInputPassword1">Provincia</label>
-                                 <select class="chosen-select" id="exampleSelect1" style="width:239px;" name="idProvincia">
-                                 <?php $pro = ProveedoresController::getProvinciaController();?>
-                                 <?php foreach ($pro as $key): ?>
-
-                                  <option value="<?php echo $key['idProvincia'] ?>"><?php echo $key['nombreProvincia']; ?></option>
-                                 <?php endforeach?>
-                                </select>
+                                <label for="exampleInputPassword1">Telefono</label>
+                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Telefono" name="telefono" required="">
                               </div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-md-4">
                               <div class="form-group">
-                                <label for="exampleInputPassword1">Nombre Usuario</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Nombre Usuario" name="usuarioCliente" required="">
+                                <label for="sexo">Sexo</label>
+                               <input type="radio" name="sexo" value="femenino">Femenino
+                                <input type="radio" name="sexo" value="masculino">Masculino
                               </div>
                             </div>
                             <div class="col-md-4">
-                              <div class="form-group">
-                                <label for="emailCliente">Email</label>
-                                <input type="text" class="form-control" id="emailCliente" placeholder="Email" name="emailCliente" required="">
-                              </div>
+                                <div class="form-group" id="form">
+                                    <div class="form-group">
+                                        <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                                        <input readonly type="text" name="fechaNacimiento" value="" class="form-control datepicker" placeholder="Ingrese fecha de nacimiento" data-validacion-tipo="requerido" />
+                                    </div>
+                                </div>
+                                <span id="pro">
+                                </span>
                             </div>
-                        <div class="col-md-4">
+                            <div class="col-md-4">
                               <div class="form-group">
-                                <label for="exampleInputPassword1">Ciudad</label>
-                                <select class="chosen-select" id="exampleSelect1" style="width:239px;" name="idCiudad">
-                                 <?php $prov = ProveedoresController::getCiudadController();?>
-                                 <?php foreach ($prov as $row): ?>
-
-                                  <option value="<?php echo $row['idCiudad'] ?>"><?php echo $row['nombreCiudad']; ?></option>
-                                 <?php endforeach?>
-                                </select>
+                                <label for="edad">Edad</label>
+                                <input type="text" class="form-control" id="edad" name="edad" value="">
                               </div>
                             </div>
                         </div>
@@ -191,31 +192,19 @@ El Cliente fue editado correctamente.
                               </div>
                             </div>
                             <div class="col-md-4">
-                              <div class="form-group">
-                                <label for="exampleInputPassword1">Contraseña Usuario</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña Usuario" name="passwordCliente" required="">
-                              </div>
+                                <div class="form-group"  id="form">
+                                    <label for="exampleInputPassword1">DNI</label>
+                                <input class="form-control" id="clientes"  name="dni" type="text" placeholder="DNI">
+                                <span id="cli"></span>
                             </div>
-                          <div class="col-md-4">
-                              <div class="form-group">
-                                <label for="exampleInputPassword1">Telefono</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Telefono" name="telefono" required="">
-                              </div>
-                            </div>
+                        </div>
                         </div>
                         <div class="row">
-                         <div class="col-md-6">
-                            <div class="form-group"  id="form">
-                                <label for="exampleInputPassword1">DNI</label>
-                            <input class="form-control" id="clientes"  name="dni" type="text" placeholder="DNI">
-                            <span id="cli"></span>
-                            </div>
-                        </div>
                           <div class="col-md-6">
-                          <div class="form-group">
-                                <label for="exampleInputPassword1" class="label"></label>
-                            <input class="btn btn-outline-danger btn-block" id="button" name="agragarclientes" type="submit" value="Agregar Cliente">
-                        </div>
+                              <div class="form-group">
+                                    <label for="exampleInputPassword1" class="label"></label>
+                                <input class="btn btn-outline-danger btn-block" id="button" name="agragarclientes" type="submit" value="Agregar Cliente">
+                            </div>
                         </div>
                         </div>
                     </form>
@@ -235,117 +224,17 @@ El Cliente fue editado correctamente.
                 <?php $edit = ClientesController::editClientesController();?>
             <?php foreach ($edit as $value): ?>
             <?php endforeach?>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="nombreCliente">Nombre</label>
-                            <input type="text" class="form-control" id="nombreCliente" name="nombreCliente" value="<?php echo $value['nombreCliente'] ?>">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="apellidoCliente">Apellido</label>
-                            <input type="text" class="form-control" id="apellidoCliente" name="apellidoCliente"  value="<?php echo $value['apellidoCliente'] ?>">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="dni">DNI</label>
-                            <input type="text" class="form-control" id="dni" name="dni" value="<?php echo $value['dni'] ?>">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="telefono">Telefono</label>
-                            <input type="text" class="form-control" id="telefono" name="telefono" value="<?php echo $value['telefono'] ?>">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Sexo</label>
-                            <select name="Sexo" class="form-control">
-                                <!-- <option <?php echo $alm->Sexo == 1 ? 'selected' : ''; ?> value="1">Masculino</option>
-                                <option <?php echo $alm->Sexo == 2 ? 'selected' : ''; ?> value="2">Femenino</option> -->
-                                <option value="1">Masculino</option>
-                                <option value="2">Femenino</option>
-                            </select>
-                        </div>
-                        <!-- <div class="form-group">
-                            <label for="exampleInputPassword1">Sexo</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1" name="dni" value="">
-                        </div> -->
-                    </div>
-                    <div class="col-md-4">
-                        <script type="text/javascript">
-                            $(document).ready(function(){
-                                $(".datepicker").datepicker({
-                                    dateFormat: 'dd-mm-yy',
-                                    yearRange: '1950:2006',
-                                    changeYear: true
-                                }); 
-                            })
-                        </script>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Fecha de Nacimiento</label>
-                            <input readonly type="text" name="FechaNacimiento" value="" class="form-control datepicker" placeholder="Ingrese su fecha de nacimiento" data-validacion-tipo="requerido" />
-                            <!-- <input readonly type="text" name="FechaNacimiento" value="<?php echo $alm->FechaNacimiento; ?>" class="form-control datepicker" placeholder="Ingrese su fecha de nacimiento" data-validacion-tipo="requerido" /> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="edad">Edad</label>
-                            <input type="text" class="form-control" id="edad" name="edad" value="">
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <label for="direccion">Direccion</label>
-                            <input type="text" class="form-control" id="direccion" name="direccion" value="">
-                        </div>
-                    </div>
-                </div>
-                <div class="jumbotron" style="padding: 1rem 2rem; margin-top: 2rem;">
-                    <h1>Matricula</h1>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Tipo de Membresia</label>
-                            <select name="Sexo" class="form-control">
-                                <!-- <option <?php echo $alm->Sexo == 1 ? 'selected' : ''; ?> value="1">Masculino</option>
-                                <option <?php echo $alm->Sexo == 2 ? 'selected' : ''; ?> value="2">Femenino</option> -->
-                                <option value="1">Mem 1</option>
-                                <option value="2">Mem 2</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Costo</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1" name="dni" value="">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Fecha de Inicio</label>
-                            <input readonly type="text" name="fechainicio" value="" class="form-control datepicker" placeholder="Ingrese fecha de inicio" data-validacion-tipo="requerido" />
-                            <!-- <input readonly type="text" name="FechaNacimiento" value="<?php echo $alm->FechaNacimiento; ?>" class="form-control datepicker" placeholder="Ingrese su fecha de nacimiento" data-validacion-tipo="requerido" /> -->
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Fecha de Fin</label>
-                            <input readonly type="text" name="fechafin" value="" class="form-control datepicker" placeholder="Ingrese fecha de termino" data-validacion-tipo="requerido" />
-                            <!-- <input readonly type="text" name="FechaNacimiento" value="<?php echo $alm->FechaNacimiento; ?>" class="form-control datepicker" placeholder="Ingrese su fecha de nacimiento" data-validacion-tipo="requerido" /> -->
-                        </div>
-                    </div>
-                </div> 
-                <p>----------------------------------------------------------------------------------------------------------</p>
+
                 <form method="post" onsubmit="return validarclientes()">
+                    <script type="text/javascript">
+                        $(document).ready(function(){
+                            $(".datepicker").datepicker({
+                                dateFormat: 'dd/mm/yy',
+                                yearRange: '1990:2050',
+                                changeYear: true
+                            }); 
+                        })
+                    </script>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -361,42 +250,39 @@ El Cliente fue editado correctamente.
                         </div>
                         <div class="col-md-4">
                           <div class="form-group">
-                            <label for="exampleInputPassword1">Provincia</label>
-                             <select class="chosen-select" id="exampleSelect1" style="width:239px;" name="idProvincia">
-                             <?php $pro = ProveedoresController::getProvinciaController();?>
-
-                              <option value="<?php echo $value['idProvincia'] ?>"><?php echo $value['nombreProvincia']; ?></option>
-                             <?php foreach ($pro as $key): ?>
-                              <option value="<?php echo $key['idProvincia'] ?>"><?php echo $key['nombreProvincia']; ?></option>
-                             <?php endforeach?>
-                            </select>
+                            <label for="exampleInputPassword1">Telefono</label>
+                            <input type="text" class="form-control" id="exampleInputPassword1" name="telefono" value="<?php echo $value['telefono'] ?>">
                           </div>
                         </div>
+                        
                     </div>
 
                     <div class="row">
                         <div class="col-md-4">
                           <div class="form-group">
-                            <label for="exampleInputPassword1">Nombre Usuario</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1"  name="usuarioCliente" value="<?php echo $value['usuarioCliente'] ?>">
+                            <label for="sexo">Sexo</label>
+                           <input type="radio" name="sexo"
+                            <?php if (isset($value['sexo']) && $value['sexo']=="femenino") echo "checked";?>
+                            value="femenino">Femenino
+                            <input type="radio" name="sexo"
+                            <?php if (isset($value['sexo']) && $value['sexo']=="masculino") echo "checked";?>
+                            value="masculino">Masculino
                           </div>
                         </div>
                         <div class="col-md-4">
-                          <div class="form-group">
-                            <label for="emailCliente">Email</label>
-                            <input type="text" class="form-control" id="emailCliente" name="emailCliente" value="<?php echo $value['emailCliente'] ?>">
-                          </div>
+                            <div class="form-group" id="form">
+                                <div class="form-group">
+                                    <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                                    <input readonly type="text" name="fechaNacimiento" value="<?php echo date("d/m/Y", strtotime($key['fechaNacimiento'])) ?>" class="form-control datepicker" placeholder="Ingrese fecha de nacimiento" data-validacion-tipo="requerido" />
+                                </div>
+                            </div>
+                            <span id="pro">
+                            </span>
                         </div>
-                    <div class="col-md-4">
+                        <div class="col-md-4">
                           <div class="form-group">
-                            <label for="exampleInputPassword1">Ciudad</label>
-                            <select class="chosen-select" id="exampleSelect1" style="width:239px;" name="idCiudad">
-                             <option value="<?php echo $value['idCiudad'] ?>"><?php echo $value['nombreCiudad']; ?></option>
-                             <?php $prov = ProveedoresController::getCiudadController();?>
-                             <?php foreach ($prov as $row): ?>
-                              <option value="<?php echo $row['idCiudad'] ?>"><?php echo $row['nombreCiudad']; ?></option>
-                             <?php endforeach?>
-                            </select>
+                            <label for="edad">Edad</label>
+                            <input type="text" class="form-control" id="edad" name="edad" value="<?php echo $value['edad'] ?>">
                           </div>
                         </div>
                     </div>
@@ -407,26 +293,16 @@ El Cliente fue editado correctamente.
                             <input type="text" class="form-control" id="exampleInputPassword1" name="direccion" value="<?php echo $value['direccion'] ?>">
                           </div>
                         </div>
+                      
                         <div class="col-md-4">
-                          <div class="form-group">
-                            <label for="exampleInputPassword1">Contraseña Usuario</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1"  name="passwordCliente" value="<?php echo $value['passwordCliente'] ?>">
-                          </div>
-                        </div>
-                      <div class="col-md-4">
-                          <div class="form-group">
-                            <label for="exampleInputPassword1">Telefono</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1" name="telefono" value="<?php echo $value['telefono'] ?>">
-                          </div>
+                            <div class="form-group">
+                                <label for="dni">DNI</label>
+                            <input class="form-control"  name="dni" type="text" value="<?php echo $value['dni'] ?>">
+                            </div>
                         </div>
                     </div>
                     <div class="row">
-                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">DNI</label>
-                        <input class="form-control"  name="dni" type="text" value="<?php echo $value['dni'] ?>">
-                        </div>
-                    </div>
+                     
                       <div class="col-md-6">
                       <div class="form-group">
                             <label for="exampleInputPassword1" class="label"></label>

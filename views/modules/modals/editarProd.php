@@ -5,7 +5,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Editar Producto <?php echo $key['nombreProducto'] ?></h5>
+        <h5 class="modal-title" id="exampleModalLabel">Editar Matrícula <?php echo $key['nombreCliente'] ?></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -15,13 +15,32 @@
 <?php foreach ($editarProd as $key): ?>
 
 		<form method="post">
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    $(".datepicker").datepicker({
+                        dateFormat: 'dd/mm/yy',
+                        yearRange: '1990:2050',
+                        changeYear: true
+                    }); 
+                })
+            </script>
     <div class="row">
         <div class="col-md-6">
             <div class="form-group" id="form">
-                <label for="nombreMembresia">
-                    Nombre Productos
-                </label>
-                <input type="text" class="form-control" id="nombreProductos"   name="nombreProducto" value="<?php echo $key['nombreProducto'] ?>"/>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Fecha de Inicio</label>
+                    <input readonly type="text" name="fechaInicio" value="<?php echo date("d/m/Y", strtotime($key['fechaInicio'])) ?>" class="form-control datepicker" placeholder="Ingrese fecha de inicio" data-validacion-tipo="requerido" />
+                </div>
+            </div>
+            <span id="pro">
+            </span>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group" id="form">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Fecha de Fin</label>
+                    <input readonly type="text" name="fechaFin" value="<?php echo date("d/m/Y", strtotime($key['fechaFin'])) ?>" class="form-control datepicker" placeholder="Ingrese fecha de fin" data-validacion-tipo="requerido" />
+                </div>
             </div>
             <span id="pro">
             </span>
@@ -29,44 +48,24 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="nombreMembresia">
-                    Nombre Proveedor
-                </label>
-                <select  class="form-control"  name="idProveedor">
-                    <option value="<?php echo $key['idProveedor'] ?>"><?php echo $key['nombreEmpresa'] ?></option>
-                    <?php $b = new ProveedoresController();
-$b->getProveedoresSelectController();
-?>
-                </select>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="nombreMembresia">
-                    Precio Productos ($ 2.50 )
-                </label>
-                <input type="text" class="form-control" id="precioCategorias" placeholder="precio del Producto"  name="precioProducto" value="<?php echo $key['precioProducto'] ?>"/>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="nombreMembresia">
-                    Nombre Cateroría
+                    Tipo de Membresía
                 </label>
                 <select  class="form-control"  name="idMembresia">
                        <option value="<?php echo $key['idMembresia'] ?>"><?php echo $key['nombreMembresia'] ?></option>
                     <?php $a = new membresiasController;
-$a->getMembresiasSelectController();?>
+                        $a->getMembresiasSelectController();
+                    ?>
                 </select>
             </div>
         </div>
-        <input type="hidden" name="idProducto" value="<?php echo $key['idProducto'] ?>">
-        <div class="center">
-            <input type="submit" name="editarProd" id="button" value="Agregar Productos" class="btn btn-outline-danger"/>
-        </div>
+        <input type="hidden" name="idMatricula" value="<?php echo $key['idMatricula'] ?>">
+        <input type="hidden" name="idCliente" value="<?php echo $key['idCliente'] ?>">
+        <input type="hidden" name="idAdmin" value="<?php echo $key['idAdmin'] ?>">
     </form>
 
        </div>
       <div class="modal-footer">
+        <input type="submit" name="editarProd" id="button" value="Editar" class="btn btn-outline-danger"/>
         <button type="button" class="btn btn-outline-secondary " data-dismiss="modal">Salir</button>
       </div>
     </div>

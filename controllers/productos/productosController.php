@@ -6,7 +6,7 @@ class ProductosController
     public static function getProductosControllers()
     {
 
-        $respuesta = ProductosModel::getProductoModel('productos');
+        $respuesta = ProductosModel::getProductoModel('matricula');
 
         return $respuesta;
     }
@@ -16,13 +16,17 @@ class ProductosController
 
         if (isset($_POST['agragarpro'])) {
 
-            $datosController = array('nombreProducto' => $_POST['nombreProducto'],
-                'idProveedor' => $_POST['idProveedor'],
+            $datosController = array(
+                'idCliente' => $_POST['idCliente'],
                 'precioProducto' => $_POST['precioProducto'],
                 'idMembresia' => $_POST['idMembresia'],
+                'idAdmin' => $_POST['idAdmin'],
+                'fechaInicio' => date('Y-m-d ', strtotime($_POST['fechaInicio'])),
+                'fechaFin' => date('Y-m-d ', strtotime($_POST['fechaFin'])),
+                'fechaMatricula' => date('Y-m-d ', strtotime($_POST['fechaMatricula'])),
             );
 
-            $respuesta = ProductosModel::registroProductoModel($datosController, 'productos');
+            $respuesta = ProductosModel::registroProductoModel($datosController, 'matricula');
 
             if ($respuesta == 'success') {
                 header('location:okProductos');
@@ -40,38 +44,11 @@ class ProductosController
     public function validarProductoController($validarProducto)
     {
         $datosController = $validarProducto;
-        $respuesta = ProductosModel::validarProductoModel($datosController, 'productos');
+        $respuesta = ProductosModel::validarProductoModel($datosController, 'matricula');
         if ($respuesta) {
             echo 1;
         } else {
             echo 0;
-        }
-    }
-
-    public static function getInventarioController()
-    {
-        $respuesta = ProductosModel::getInventarioModel('inventario');
-
-        return $respuesta;
-    }
-
-    public function agregarInventarioController()
-    {
-        if (isset($_POST['agregarInventario'])) {
-            $porciones = explode(" / ", $_POST['idProducto']);
-            $datosController = array('cantidadIngresada' => $_POST['cantidadIngresada'],
-                'cantidad' => strval($_POST['cantidadIngresada'] + $porciones[1]),
-                'precioVenta' => $_POST['precioVenta'],
-                'idProducto' => $porciones[0]);
-            // var_dump($datosController);
-            // var_dump('id : ' . $porciones[0]); // porción1
-            // var_dump('cantidad : ' . $porciones[1]); // porción2
-            $respuesta = ProductosModel::agregarInventarioModel($datosController, 'inventario');
-            var_dump($respuesta);
-
-            if ($respuesta == 'success') {
-                header('location:okInventarios');
-            }
         }
     }
 
@@ -80,7 +57,7 @@ class ProductosController
         if (isset($_GET['idProd'])) {
             $idProd = $_GET['idProd'];
 
-            $respuesta = ProductosModel::deleteProductosModel($idProd, 'productos');
+            $respuesta = ProductosModel::deleteProductosModel($idProd, 'matricula');
 
             if ($respuesta == 'success') {
                 header('location:okProdDelete');
@@ -93,7 +70,7 @@ class ProductosController
     {
         $datosController = $_GET['idProEdit'];
 
-        $respuesta = ProductosModel::editarProductosModel($datosController, 'productos');
+        $respuesta = ProductosModel::editarProductosModel($datosController, 'matricula');
         return $respuesta;
 
     }
@@ -103,14 +80,16 @@ class ProductosController
 
         if (isset($_POST['editarProd'])) {
             $datosController = array(
-                'nombreProducto' => $_POST['nombreProducto'],
-                'idProveedor' => $_POST['idProveedor'],
+                'fechaInicio' => date('Y-m-d ', strtotime($_POST['fechaInicio'])),
+                'fechaFin' => date('Y-m-d ', strtotime($_POST['fechaFin'])),
+                'idCliente' => $_POST['idCliente'],
+                'idAdmin' => $_POST['idAdmin'],
                 'precioProducto' => $_POST['precioProducto'],
                 'idMembresia' => $_POST['idMembresia'],
-                'idProducto' => $_POST['idProducto'],
+                'idMatricula' => $_POST['idMatricula'],
             );
 
-            $respuesta = ProductosModel::actualizarProductosModel($datosController, 'productos');
+            $respuesta = ProductosModel::actualizarProductosModel($datosController, 'matricula');
 
             if ($respuesta == 'success') {
 

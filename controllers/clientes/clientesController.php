@@ -9,6 +9,17 @@ class ClientesController
         return $respuesta;
     }
 
+    public function getClientesSelectController()
+    {
+        $respuesta = ClientesModel::getClientesModel('clientes');
+
+        foreach ($respuesta as $key) {
+            echo '
+            <option value="' . $key['idCliente'] . '">' . ucwords($key['nombreCliente']) . '  /  ' . ucwords($key['dni']) . ' </option>
+          ';
+        }
+    }
+    
     public function validarClienteController($validarCliente)
     {
         $datosController = $validarCliente;
@@ -36,15 +47,14 @@ class ClientesController
     public function registrarClientesController()
     {
         if (isset($_POST['agragarclientes'])) {
-            $datosController = array('nombreCliente' => $_POST['nombreCliente'],
+            $datosController = array(
+                'nombreCliente' => $_POST['nombreCliente'],
                 'apellidoCliente' => $_POST['apellidoCliente'],
-                'idProvincia' => $_POST['idProvincia'],
-                'usuarioCliente' => $_POST['usuarioCliente'],
-                'passwordCliente' => $_POST['passwordCliente'],
                 'telefono' => $_POST['telefono'],
-                'emailCliente' => $_POST['emailCliente'],
+                'sexo' => $_POST['sexo'],
+                'fechaNacimiento' => date('Y-m-d ', strtotime($_POST['fechaNacimiento'])),
+                'edad' => $_POST['edad'],
                 'direccion' => $_POST['direccion'],
-                'idCiudad' => $_POST['idCiudad'],
                 'dni' => $_POST['dni'],
             );
             $respuesta = ClientesModel::registrarClientesModel($datosController, 'clientes');
@@ -67,14 +77,13 @@ class ClientesController
     {
         if (isset($_POST['editarClientes'])) {
             $datosController = array('nombreCliente' => $_POST['nombreCliente'],
+                'nombreCliente' => $_POST['nombreCliente'],
                 'apellidoCliente' => $_POST['apellidoCliente'],
-                'idProvincia' => $_POST['idProvincia'],
-                'usuarioCliente' => $_POST['usuarioCliente'],
-                'passwordCliente' => $_POST['passwordCliente'],
                 'telefono' => $_POST['telefono'],
-                'emailCliente' => $_POST['emailCliente'],
+                'sexo' => $_POST['sexo'],
+                'fechaNacimiento' => date('Y-m-d ', strtotime($_POST['fechaNacimiento'])),
+                'edad' => $_POST['edad'],
                 'direccion' => $_POST['direccion'],
-                'idCiudad' => $_POST['idCiudad'],
                 'dni' => $_POST['dni'],
                 'idCliente' => $_POST['idCliente'],
             );

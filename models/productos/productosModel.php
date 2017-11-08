@@ -7,9 +7,11 @@ class ProductosModel
 
     public static function getProductoModel($tabla)
     {
-        $sql = Conexion::conectar()->prepare("SELECT * FROM $tabla ta JOIN proveedores prov ON prov.idProveedor = ta.idProveedor
-    JOIN membresias cat ON cat.idMembresia = ta.idMembresia
-    JOIN inventario inv ON inv.idProducto = ta.idProducto ");
+        $sql = Conexion::conectar()->prepare("SELECT * FROM $tabla ta JOIN administrador admin ON ta.idAdmin=admin.idAdmin
+        JOIN clientes cl ON ta.idCliente=cl.idCliente
+        JOIN membresias cat ON ta.idMembresia=cat.idMembresia");
+
+        //$sql = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE  estado=1");
         $sql->execute();
 
         return $sql->fetchAll();
@@ -19,8 +21,8 @@ class ProductosModel
     public static function validarProductoModel($datosModel, $tabla)
     {
 
-        $sql = Conexion::conectar()->prepare("SELECT nombreProducto FROM $tabla WHERE nombreProducto = :nombreProducto");
-        $sql->bindParam(':nombreProducto', $datosModel);
+        $sql = Conexion::conectar()->prepare("SELECT idMatricula FROM $tabla WHERE idMatricula = :idMatricula");
+        $sql->bindParam(':idMatricula', $datosModel);
 
         $sql->execute();
 
@@ -32,29 +34,21 @@ class ProductosModel
     public static function registroProductoModel($datosModel, $tabla)
     {
 
-        $sql = Conexion::conectar()->prepare("INSERT INTO $tabla (nombreProducto,idProveedor,precioProducto,idMembresia)
-            VALUES(:nombreProducto,:idProveedor,:precioProducto,:idMembresia)");
-
-        $sql->bindParam(':nombreProducto', $datosModel['nombreProducto']);
-        $sql->bindParam(':idProveedor', $datosModel['idProveedor']);
-        $sql->bindParam(':precioProducto', $datosModel['precioProducto']);
+        $sql = Conexion::conectar()->prepare("INSERT INTO $tabla (idCliente,idMembresia,idAdmin,fechaInicio,fechaFin,fechaMatricula)
+            VALUES(:idCliente,:idMembresia,:idAdmin,:fechaInicio,:fechaFin,:fechaMatricula)");
+        $sql->bindParam(':idCliente', $datosModel['idCliente']);
         $sql->bindParam(':idMembresia', $datosModel['idMembresia']);
+        $sql->bindParam(':idAdmin', $datosModel['idAdmin']);
+        $sql->bindParam(':fechaInicio', $datosModel['fechaInicio']);
+        $sql->bindParam(':fechaFin', $datosModel['fechaFin']);
+        $sql->bindParam(':fechaMatricula', $datosModel['fechaMatricula']);
 
         if ($sql->execute()) {
-// aqui agrega al inventario con el correspondiente idProducto para su relacion
-            $ult = Conexion::conectar()->prepare("SELECT MAX(idProducto)as ID FROM productos");
-            $ult->execute();
-            $res = $ult->fetch();
-            // var_dump($res['ID']);
-            $a = $res['ID'];
-            $sqlInv = Conexion::conectar()->prepare("INSERT INTO inventario(cantidadIngresada, precioVenta,idProducto)
-                        VALUES(0,0,$a)");
-            $sqlInv->execute();
             return 'success';
         } else {
             return 'Error';
-
         }
+        
 
         $sql->close();
     }
@@ -64,7 +58,7 @@ class ProductosModel
 
     public static function getInventarioModel($tabla)
     {
-        $sql = Conexion::conectar()->prepare("SELECT * FROM $tabla ta JOIN productos pro ON ta.idProducto = pro.idProducto  ");
+        $sql = Conexion::conectar()->prepare("SELECT * FROM $tabla ta JOIN productos pro ON ta.idMatricula = pro.idMatricula  ");
         $sql->execute();
         return $sql->fetchAll();
         $sql->close();
@@ -73,11 +67,11 @@ class ProductosModel
     public static function agregarInventarioModel($datosModel, $tabla)
     {
 
-        $sql = Conexion::conectar()->prepare(" UPDATE $tabla SET cantidadIngresada=:cantidadIngresada,precioVenta=:precioVenta WHERE idProducto =:idProducto");
+        $sql = Conexion::conectar()->prepare(" UPDATE $tabla SET cantidadIngresada=:cantidadIngresada,precioVenta=:precioVenta WHERE idMatricula =:idMatricula");
 
         $sql->bindParam(':cantidadIngresada', $datosModel['cantidad']);
         $sql->bindParam(':precioVenta', $datosModel['precioVenta']);
-        $sql->bindParam(':idProducto', $datosModel['idProducto']);
+        $sql->bindParam(':idMatricula', $datosModel['idMatricula']);
         if ($sql->execute()) {
             return 'success';
         } else {
@@ -89,8 +83,8 @@ class ProductosModel
 
     public function deleteProductosModel($datosModel, $tabla)
     {
-        $sql = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE idProducto = :idProducto");
-        $sql->bindParam(':idProducto', $datosModel);
+        $sql = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE idMatricula = :idMatricula");
+        $sql->bindParam(':idMatricula', $datosModel);
 
         if ($sql->execute()) {
             return 'success';
@@ -102,12 +96,12 @@ class ProductosModel
     public static function editarProductosModel($datosModel, $tabla)
     {
         $sql = Conexion::conectar()->prepare("SELECT * FROM $tabla ta
-        JOIN proveedores prov ON ta.idProveedor=prov.idProveedor
+        JOIN administrador admin ON ta.idAdmin=admin.idAdmin
+        JOIN clientes cl ON ta.idCliente=cl.idCliente
         JOIN membresias cat ON ta.idMembresia=cat.idMembresia
-        WHERE idProducto = :idProducto");
-        $sql->bindParam(":idProducto", $datosModel);
+        WHERE idMatricula = :idMatricula");
+        $sql->bindParam(":idMatricula", $datosModel);
         $sql->execute();
-
         return $sql->fetchAll();
         $sql->close();
     }
@@ -116,14 +110,15 @@ class ProductosModel
     {
 
         $sql = Conexion::conectar()->prepare("UPDATE $tabla SET
-            nombreProducto=:nombreProducto,idProveedor=:idProveedor,
-            precioProducto=:precioProducto,idMembresia =:idMembresia
-            WHERE idProducto = :idProducto");
-        $sql->bindParam(':nombreProducto', $datosModel['nombreProducto']);
-        $sql->bindParam(':idProveedor', $datosModel['idProveedor']);
-        $sql->bindParam(':precioProducto', $datosModel['precioProducto']);
+            fechaInicio=:fechaInicio,fechaFin=:fechaFin,
+            idMembresia =:idMembresia,idAdmin=:idAdmin,idCliente=:idCliente,idMatricula=:idMatricula
+            WHERE idMatricula = :idMatricula");
+        $sql->bindParam(':fechaInicio', $datosModel['fechaInicio']);
+        $sql->bindParam(':fechaFin', $datosModel['fechaFin']);
         $sql->bindParam(':idMembresia', $datosModel['idMembresia']);
-        $sql->bindParam(':idProducto', $datosModel['idProducto']);
+        $sql->bindParam(':idMatricula', $datosModel['idMatricula']);
+        $sql->bindParam(':idAdmin', $datosModel['idAdmin']);
+        $sql->bindParam(':idCliente', $datosModel['idCliente']);
 
         if ($sql->execute()) {
             return 'success';

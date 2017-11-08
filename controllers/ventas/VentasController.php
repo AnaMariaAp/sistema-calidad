@@ -23,7 +23,7 @@ class VentasController
     {
         if (isset($_POST['post'])) {
             $datosController = array(
-                'idProducto' => $_POST['idProducto'],
+                'idMatricula' => $_POST['idMatricula'],
                 'nombreProducto' => $_POST['nombreProducto'],
                 'idCliente' => $_POST['idCliente'],
                 'precioVenta' => $_POST['precioVenta'],
@@ -56,7 +56,7 @@ class VentasController
     {
         if (isset($_GET['idTemp'])) {
             $datosController = $_GET['idTemp'];
-            $datosControl = $_GET['idProducto'];
+            $datosControl = $_GET['idMatricula'];
             $unidad = $_GET['unidad'];
             $respuesta = VentasModel::borrarVentasModel($datosController, $datosControl, $unidad, 'temp');
 

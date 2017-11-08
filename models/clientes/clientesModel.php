@@ -36,9 +36,7 @@ class ClientesModel
     }
     public static function getClientesModelId($datosModel, $tabla)
     {
-        $sql = Conexion::conectar()->prepare("SELECT * FROM $tabla ta
-        JOIN provincia pro ON ta.idProvincia= pro.idProvincia
-        JOIN ciudad ciu ON ciu.idProvincia=pro.idProvincia
+        $sql = Conexion::conectar()->prepare("SELECT * FROM $tabla
          WHERE idCliente= $datosModel");
 
         $sql->execute();
@@ -48,17 +46,15 @@ class ClientesModel
 
     public static function registrarClientesModel($datosModel, $tabla)
     {
-        $sql = Conexion::conectar()->prepare("INSERT INTO $tabla (nombreCliente,apellidoCliente,idProvincia,usuarioCliente,passwordCliente,telefono,emailCliente,direccion,idCiudad,dni)
-            VALUES(:nombreCliente,:apellidoCliente,:idProvincia,:usuarioCliente,:passwordCliente,:telefono,:emailCliente,:direccion,:idCiudad,:dni)");
+        $sql = Conexion::conectar()->prepare("INSERT INTO $tabla (nombreCliente,apellidoCliente,telefono,sexo,fechaNacimiento,edad,direccion,dni)
+            VALUES(:nombreCliente,:apellidoCliente,:telefono,:sexo,:fechaNacimiento,:edad,:direccion,:dni)");
         $sql->bindParam(":nombreCliente", $datosModel['nombreCliente']);
         $sql->bindParam(":apellidoCliente", $datosModel['apellidoCliente']);
-        $sql->bindParam(":idProvincia", $datosModel['idProvincia']);
-        $sql->bindParam(":usuarioCliente", $datosModel['usuarioCliente']);
-        $sql->bindParam(":passwordCliente", $datosModel['passwordCliente']);
         $sql->bindParam(":telefono", $datosModel['telefono']);
-        $sql->bindParam(":emailCliente", $datosModel['emailCliente']);
+        $sql->bindParam(":sexo", $datosModel['sexo']);
+        $sql->bindParam(":fechaNacimiento", $datosModel['fechaNacimiento']);
+        $sql->bindParam(":edad", $datosModel['edad']);
         $sql->bindParam(":direccion", $datosModel['direccion']);
-        $sql->bindParam(":idCiudad", $datosModel['idCiudad']);
         $sql->bindParam(":dni", $datosModel['dni']);
 
         if ($sql->execute()) {
@@ -71,8 +67,6 @@ class ClientesModel
     public static function editClientesModel($datosModel, $tabla)
     {
         $sql = Conexion::conectar()->prepare("SELECT * FROM $tabla ta
-        JOIN provincia prov ON ta.idProvincia = prov.idProvincia
-        JOIN ciudad ciu ON prov.idProvincia=ciu.idProvincia
          WHERE idCliente = :idCliente");
 
         $sql->bindParam(':idCliente', $datosModel);
@@ -85,19 +79,16 @@ class ClientesModel
 
     public static function actualizarClientesModel($datosModel, $tabla)
     {
-        $sql = Conexion::conectar()->prepare("UPDATE  $tabla SET nombreCliente= :nombreCliente,apellidoCliente=:apellidoCliente,idProvincia=:idProvincia,usuarioCliente=:usuarioCliente,passwordCliente=:passwordCliente,telefono=:telefono,emailCliente=:emailCliente,direccion=:direccion,idCiudad=:idCiudad,dni=:dni WHERE idCliente=:idCliente");
+        $sql = Conexion::conectar()->prepare("UPDATE  $tabla SET nombreCliente= :nombreCliente,apellidoCliente=:apellidoCliente,telefono=:telefono,sexo=:sexo,fechaNacimiento=:fechaNacimientodireccion=:direccion,dni=:dni,edad=:edad WHERE idCliente=:idCliente");
 
         $sql->bindParam(":nombreCliente", $datosModel['nombreCliente']);
         $sql->bindParam(":apellidoCliente", $datosModel['apellidoCliente']);
-        $sql->bindParam(":idProvincia", $datosModel['idProvincia']);
-        $sql->bindParam(":usuarioCliente", $datosModel['usuarioCliente']);
-        $sql->bindParam(":passwordCliente", $datosModel['passwordCliente']);
         $sql->bindParam(":telefono", $datosModel['telefono']);
-        $sql->bindParam(":emailCliente", $datosModel['emailCliente']);
+        $sql->bindParam(":sexo", $datosModel['sexo']);
+        $sql->bindParam(":fechaNacimiento", $datosModel['fechaNacimiento']);
         $sql->bindParam(":direccion", $datosModel['direccion']);
-        $sql->bindParam(":idCiudad", $datosModel['idCiudad']);
         $sql->bindParam(":dni", $datosModel['dni']);
-        $sql->bindParam(":idCliente", $datosModel['idCliente']);
+        $sql->bindParam(":edad", $datosModel['edad']);
 
         if ($sql->execute()) {
             return 'success';
