@@ -100,23 +100,25 @@ La membresia fue agregada correctamente.
                 <div class="jumbotron text-center" style="padding: 1rem 2rem;">
                     <h1>Crear membresia</h1>
                 </div>
-                <form method="post" onsubmit="return validarMembresias()">
+                <form method="post" id="form-validate" onsubmit="return validarMembresias()">
                     <div class="form-group" id="form">
                         <label for="nombreMembresias">
                             Nombre de Membresia
                         </label>
-                        <input class="form-control" id="nombreMembresias" name="nombreMembresia" placeholder="Nombre de Membresia" required="" type="text">
+                        <input class="form-control" id="nombreMembresias" name="nombreMembresia" placeholder="Nombre de Membresia" data-validacion-tipo="requerido|min:3" type="text">
                             <input name="" type="hidden">
                                 <span id="mem">
                                 </span>
                             </input>
                         </input>
+                    </div>
+                    <div class="form-group">
                         <label for="costoMembresia" style="padding-top: 10px;">
                             Costo Membresia
                         </label>
-                        <input class="form-control" id="costoMembresia" name="costoMembresia" placeholder="Costo de Membresia" required="" type="text">
+                        <input class="form-control" id="costoMembresia" name="costoMembresia" placeholder="Costo de Membresia" data-validacion-tipo="requerido|numero|max:3|min:2" type="text">
                     </div>
-                   <input class="btn btn-outline-danger btn-block" id="button" name="agragarMembresias" type="submit" value="Agregar Membresias">
+                   <input class="btn btn-primary btn-block" id="button" name="agragarMembresias" type="submit" value="Agregar Membresias">
                     </input>
                     
                 </form>

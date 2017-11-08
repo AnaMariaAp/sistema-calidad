@@ -19,6 +19,13 @@
         <script src="views/bootstrap/js/app.js"></script>
         <script src="views/bootstrap/js/validarUsuario.js"></script>
         <script src="views/bootstrap/js/claseMenu.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#form-validate").submit(function(){
+                    return $(this).validate();
+                });
+            })
+        </script>
     </body>
 </html>
 

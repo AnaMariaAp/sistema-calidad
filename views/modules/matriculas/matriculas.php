@@ -149,17 +149,21 @@ if (!$_SESSION["nombreAdmin"]) {
 <!-- Formulario de registro de las matriculas -->
 <!-- ========================================== -->
 <?php if ($_GET['action'] == 'agragarmatriculas'): ?>
-<h1 class="alert alert-warning text-center">
-    Nueva Matrícula
-</h1>
-<form method="post">
+<div class="jumbotron text-center" style="padding: 1rem 2rem;">
+    <h1>Registrar Matricula</h1>
+</div>
+<form id="form-validate" method="post">
     <script type="text/javascript">
         $(document).ready(function(){
             $(".datepicker").datepicker({
                 dateFormat: 'dd/mm/yy',
-                yearRange: '1990:2050',
-                changeYear: true
-            }); 
+                yearRange: '2017:2018',
+                changeYear: true,
+                changeMonth: true,
+                selectOtherMonths: true
+            });
+            $(".datepicker-today").datepicker().datepicker("setDate", new Date());
+
         })
     </script>
     <div class="row">
@@ -168,7 +172,7 @@ if (!$_SESSION["nombreAdmin"]) {
                 <label for="nombreCategorias">
                     Nombre Cliente
                 </label>
-                <select style="width:356px;"  class="chosen-select" id="idClienteNuevo" name="idCliente">
+                <select class="form-control chosen-select" id="idClienteNuevo" name="idCliente">
                     <option>
                         Elegir Cliente
                     </option>
@@ -183,7 +187,7 @@ if (!$_SESSION["nombreAdmin"]) {
                 <label for="nombreCategorias">
                     Membresia
                 </label>
-                <select style="width:356px;"  class="chosen-select"  name="idMembresia">
+                <select class="form-control chosen-select"  name="idMembresia" data-validacion-tipo="requerido">
                     <option>
                         Elegir Membresia
                     </option>
@@ -195,8 +199,8 @@ if (!$_SESSION["nombreAdmin"]) {
         <div class="col-md-6">
             <div class="form-group" id="form">
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Fecha de Inicio</label>
-                    <input readonly type="text" name="fechaInicio" class="form-control datepicker" placeholder="Ingrese fecha de inicio" data-validacion-tipo="requerido" />
+                    <label for="exampleInputPassword1">Fecha de Inicio </label>
+                    <input readonly type="text" name="fechaInicio" class="form-control datepicker-today" placeholder="Ingrese fecha de inicio" data-validacion-tipo="requerido" disabled="" />
                 </div>
             </div>
             <span id="pro">
@@ -205,17 +209,19 @@ if (!$_SESSION["nombreAdmin"]) {
         <div class="col-md-6">
             <div class="form-group" id="form">
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Fecha de Fin</label>
+                    <label for="exampleInputPassword1">Fecha de Fin </label>
                     <input readonly type="text" name="fechaFin" class="form-control datepicker" placeholder="Ingrese fecha de fin" data-validacion-tipo="requerido" />
                 </div>
             </div>
             <span id="pro">
             </span>
         </div>
-        <div class="center">
-            <input type="hidden" id="idAdmin" name="idAdmin" value="1"/>
-            <input type="hidden" id="fechaMatricula" name="fechaMatricula" value="<?php echo date('Y-m-d'); ?> "/>
-            <input type="submit" name="agragarpro" id="button" value="Guardar Matrícula" class="btn btn-outline-danger"/>
+        <div class="col-md-6">
+            <div class="form-group" style="padding-top: 12px">
+                <input type="hidden" id="idAdmin" name="idAdmin" value="1"/>
+                <input type="hidden" id="fechaMatricula" name="fechaMatricula" value="<?php echo date('Y-m-d'); ?> "/>
+                <input type="submit" name="agragarpro" id="button" value="Guardar Matrícula" class="btn btn-primary"/>
+            </div>
         </div>
     </form>
 </div>

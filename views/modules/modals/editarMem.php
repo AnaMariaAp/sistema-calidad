@@ -13,20 +13,23 @@
                 </span>
             </div>
  <div class="modal-body">
-    <form method="post">
+    <form method="post" id="form-validate">
         <?php $mem = membresiasController::editarMembresiaController();?>
          <div class="form-group">
             <label for="recipient-name" class="form-control-label">Nombre de Membresia:</label>
           <?php foreach ($mem as $resp): ?>
-            <input type="text" class="form-control" id="recipient-name" name="nombreMembresia" value=" <?php echo $resp['nombreMembresia'] ?> ">
+            <input type="text" class="form-control" id="recipient-name" name="nombreMembresia" value="<?php echo $resp['nombreMembresia'] ?> " data-validacion-tipo="requerido|min:2">
+        </div>
+        <div class="form-group">
             <label for="recipient-name" class="form-control-label" style="padding-top: 10px;">Costo Membresia:</label>
-            <input type="text" class="form-control" id="recipient-name" name="costoMembresia" value=" <?php echo $resp['costoMembresia'] ?> ">
+            <input type="text" class="form-control" id="recipient-name" name="costoMembresia" value="<?php echo (int)$resp['costoMembresia'] ?>" data-validacion-tipo="requerido|numero|max:3|min:2">
           </div>
             <input type="hidden" name="idMembresia" value="<?php echo $resp['idMembresia']; ?>">
           <?php endforeach?>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
             <button type="submit" class="btn btn-primary" name="editarMem">Guardar</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            
         </div>
     </form>
         </div>

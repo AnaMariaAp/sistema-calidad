@@ -3,7 +3,7 @@ jQuery.fn.validate = function ()
     /* Mensajes por defecto */
     var _mensaje = {
         campo_obligatorio: 'Este campo es obligatorio',
-        campo_numerico: 'Este campo no es numérico',
+        campo_numerico: 'Este campo es numérico',
         campo_correo: 'Este campo no es un correo',
         campo_longitud: 'Este campo debe tener una longitud de {0} caracteres',
         campo_min: 'Este campo debe tener como mínimo {0} caracteres',
