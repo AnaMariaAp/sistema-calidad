@@ -2,14 +2,12 @@
 
 require_once '../controllers/admin/adminController.php';
 require_once '../controllers/membresias/membresiasController.php';
-require_once '../controllers/proveedores/proveedoresController.php';
 require_once '../controllers/matriculas/matriculasController.php';
 require_once '../controllers/ventas/ventasController.php';
 require_once '../controllers/clientes/clientesController.php';
 
 require_once '../models/admin/adminModel.php';
 require_once '../models/membresias/membresiasModel.php';
-require_once '../models/proveedores/proveedoresModel.php';
 require_once '../models/matriculas/matriculasModel.php';
 require_once '../models/ventas/ventasModel.php';
 require_once '../models/clientes/clientesModel.php';
@@ -39,13 +37,6 @@ class Ajax
         $datos = $this->validarMembresia;
 
         $respuesta = membresiasController::validarMembresiaController($datos);
-        echo $respuesta;
-    }
-    public function validarProveedorAjax()
-    {
-        $datos = $this->validarProveedor;
-
-        $respuesta = ProveedoresController::validarProveedorController($datos);
         echo $respuesta;
     }
     public function validarMatriculaAjax()
