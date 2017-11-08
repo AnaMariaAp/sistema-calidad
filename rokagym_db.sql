@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-11-2017 a las 10:08:39
--- Versión del servidor: 10.1.25-MariaDB
--- Versión de PHP: 5.6.31
+-- Tiempo de generación: 08-11-2017 a las 17:42:30
+-- Versión del servidor: 10.1.26-MariaDB
+-- Versión de PHP: 7.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `ventas`
+-- Base de datos: `rokagym_db`
 --
 
 -- --------------------------------------------------------
@@ -43,7 +43,11 @@ CREATE TABLE `administrador` (
 
 INSERT INTO `administrador` (`idAdmin`, `nombreAdmin`, `password`, `rol`, `intentos`, `fechaCreado`) VALUES
 (1, 'admin', 'admin', 'A', 0, '2017-11-06'),
-(5, 'ana', 'usuario', 'U', 0, '2017-11-06');
+(6, 'karenGamarra', 'Gamarra123', 'U', 0, '2017-11-08'),
+(7, 'yadiraGomero', 'Gomero123', 'U', 0, '2017-11-08'),
+(8, 'silviaSanchez', 'Silvia123', 'U', 0, '2017-11-08'),
+(9, 'anaAlvarado', 'Ana123', 'U', 0, '2017-11-08'),
+(10, 'anthonyTorres', 'Anthony123', 'U', 0, '2017-11-08');
 
 -- --------------------------------------------------------
 
@@ -75,7 +79,11 @@ INSERT INTO `clientes` (`idCliente`, `nombreCliente`, `apellidoCliente`, `estado
 (14, 'David', 'Coperfield', 1, '977183442', 'admin', 4, '', 0, '0000-00-00'),
 (16, 'Koky', 'Belaunde', 1, '123456', 'admin', 123456, '', 0, '0000-00-00'),
 (17, 'Rosy', 'War', 1, '147258', 'Jr. Zorritos 1399 block 38 dpto 402', 123456789, 'femenino', 12, '1969-12-31'),
-(19, 'Susy', 'Diaz', 1, '977183442', 'admin', 70126281, '', 0, '0000-00-00');
+(19, 'Susy', 'Diaz', 1, '977183442', 'admin', 70126281, '', 0, '0000-00-00'),
+(20, 'ada', 'asdasdasd', 1, '1222', 'asdasdasd', 2147483647, 'masculino', 12, '1969-12-31'),
+(21, '1', 'adsdasdsa', 1, '1231232', 'asdasdsda', 123123, 'masculino', 12, '1969-12-31'),
+(22, 'a', 'asddsd', 1, '12323', 'asdasdsds', 123, 'masculino', 12, '2017-09-11'),
+(23, 'Ana Maria', 'Alvarado Porras', 1, '962768687', 'asdadasdadsad', 75071786, 'femenino', 21, '1969-12-31');
 
 -- --------------------------------------------------------
 
@@ -147,10 +155,14 @@ CREATE TABLE `matricula` (
 INSERT INTO `matricula` (`idMatricula`, `idCliente`, `idMembresia`, `fechaInicio`, `fechaFin`, `fechaMatricula`, `idAdmin`) VALUES
 (39, 11, 3, '2018-07-12', '2017-08-12', '0000-00-00', 1),
 (45, 13, 1, '0000-00-00', '0000-00-00', '0000-00-00', 1),
-(46, 14, 1, '2017-06-11', '2017-10-11', '2017-11-08', 1),
+(46, 14, 2, '1969-12-31', '1969-12-31', '2017-11-08', 1),
 (47, 19, 2, '2017-08-11', '1969-12-31', '2017-11-08', 1),
 (48, 12, 1, '2017-09-11', '1969-12-31', '2017-11-08', 1),
-(49, 16, 2, '1969-12-31', '1969-12-31', '2017-11-08', 1);
+(49, 16, 2, '1969-12-31', '1969-12-31', '2017-11-08', 1),
+(50, 17, 3, '1969-12-31', '1969-12-31', '2017-11-08', 1),
+(51, 12, 2, '1969-12-31', '1969-12-31', '2017-11-08', 1),
+(52, 23, 2, '2017-07-11', '1969-12-31', '2017-11-08', 1),
+(53, 12, 2, '1969-12-31', '1969-12-31', '2017-11-08', 1);
 
 -- --------------------------------------------------------
 
@@ -281,47 +293,56 @@ ALTER TABLE `temp`
 -- AUTO_INCREMENT de la tabla `administrador`
 --
 ALTER TABLE `administrador`
-  MODIFY `idAdmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idAdmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
 --
 -- AUTO_INCREMENT de la tabla `detalles`
 --
 ALTER TABLE `detalles`
   MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
   MODIFY `idFactura` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `inventario`
 --
 ALTER TABLE `inventario`
   MODIFY `idInventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
 --
 -- AUTO_INCREMENT de la tabla `matricula`
 --
 ALTER TABLE `matricula`
-  MODIFY `idMatricula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `idMatricula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+
 --
 -- AUTO_INCREMENT de la tabla `membresias`
 --
 ALTER TABLE `membresias`
   MODIFY `idMembresia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT de la tabla `pass`
 --
 ALTER TABLE `pass`
   MODIFY `idpass` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `temp`
 --
 ALTER TABLE `temp`
   MODIFY `idTemp` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- Restricciones para tablas volcadas
 --
