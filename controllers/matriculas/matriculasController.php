@@ -1,17 +1,17 @@
-<?php
+}<?php
 
-class ProductosController
+class MatriculasController
 {
 
-    public static function getProductosControllers()
+    public static function getMatriculasControllers()
     {
 
-        $respuesta = ProductosModel::getProductoModel('matricula');
+        $respuesta = MatriculasModel::getMatriculaModel('matricula');
 
         return $respuesta;
     }
 
-    public function registroProductosController()
+    public function registroMatriculasController()
     {
 
         if (isset($_POST['agragarpro'])) {
@@ -26,10 +26,10 @@ class ProductosController
                 'fechaMatricula' => date('Y-m-d ', strtotime($_POST['fechaMatricula'])),
             );
 
-            $respuesta = ProductosModel::registroProductoModel($datosController, 'matricula');
+            $respuesta = MatriculasModel::registroMatriculaModel($datosController, 'matricula');
 
             if ($respuesta == 'success') {
-                header('location:okProductos');
+                header('location:okMatriculas');
             } else {
                 header('location:membresias');
 
@@ -41,10 +41,10 @@ class ProductosController
     //
     // INVENTARIO
     //
-    public function validarProductoController($validarProducto)
+    public function validarMatriculaController($validarMatricula)
     {
-        $datosController = $validarProducto;
-        $respuesta = ProductosModel::validarProductoModel($datosController, 'matricula');
+        $datosController = $validarMatricula;
+        $respuesta = MatriculasModel::validarMatriculaModel($datosController, 'matricula');
         if ($respuesta) {
             echo 1;
         } else {
@@ -52,30 +52,30 @@ class ProductosController
         }
     }
 
-    public function deleteProductosController()
+    public function deleteMatriculasController()
     {
         if (isset($_GET['idProd'])) {
             $idProd = $_GET['idProd'];
 
-            $respuesta = ProductosModel::deleteProductosModel($idProd, 'matricula');
+            $respuesta = MatriculasModel::deleteMatriculasModel($idProd, 'matricula');
 
             if ($respuesta == 'success') {
-                header('location:okProdDelete');
+                header('location:okMatrDelete');
             }
 
         }
     }
 
-    public static function editarProductosController()
+    public static function editarMatriculasController()
     {
-        $datosController = $_GET['idProEdit'];
+        $datosController = $_GET['idMatrEdit'];
 
-        $respuesta = ProductosModel::editarProductosModel($datosController, 'matricula');
+        $respuesta = MatriculasModel::editarMatriculasModel($datosController, 'matricula');
         return $respuesta;
 
     }
 
-    public function actualizarProductosController()
+    public function actualizarMatriculasController()
     {
 
         if (isset($_POST['editarProd'])) {
@@ -84,16 +84,16 @@ class ProductosController
                 'fechaFin' => date('Y-m-d ', strtotime($_POST['fechaFin'])),
                 'idCliente' => $_POST['idCliente'],
                 'idAdmin' => $_POST['idAdmin'],
-                'precioProducto' => $_POST['precioProducto'],
+                'precioMatricula' => $_POST['precioMatricula'],
                 'idMembresia' => $_POST['idMembresia'],
                 'idMatricula' => $_POST['idMatricula'],
             );
 
-            $respuesta = ProductosModel::actualizarProductosModel($datosController, 'matricula');
+            $respuesta = MatriculasModel::actualizarMatriculasModel($datosController, 'matricula');
 
             if ($respuesta == 'success') {
 
-                header('location:editadoProd');
+                header('location:editadoMatr');
             }
         }
     }

@@ -2,10 +2,10 @@
 
 // require_once 'models/conexion.php';
 
-class ProductosModel
+class MatriculasModel
 {
 
-    public static function getProductoModel($tabla)
+    public static function getMatriculaModel($tabla)
     {
         $sql = Conexion::conectar()->prepare("SELECT * FROM $tabla ta JOIN administrador admin ON ta.idAdmin=admin.idAdmin
         JOIN clientes cl ON ta.idCliente=cl.idCliente
@@ -18,7 +18,7 @@ class ProductosModel
         $sql->close();
     }
 
-    public static function validarProductoModel($datosModel, $tabla)
+    public static function validarMatriculaModel($datosModel, $tabla)
     {
 
         $sql = Conexion::conectar()->prepare("SELECT idMatricula FROM $tabla WHERE idMatricula = :idMatricula");
@@ -31,7 +31,7 @@ class ProductosModel
         $sql->close();
     }
 
-    public static function registroProductoModel($datosModel, $tabla)
+    public static function registroMatriculaModel($datosModel, $tabla)
     {
 
         $sql = Conexion::conectar()->prepare("INSERT INTO $tabla (idCliente,idMembresia,idAdmin,fechaInicio,fechaFin,fechaMatricula)
@@ -58,7 +58,7 @@ class ProductosModel
 
     public static function getInventarioModel($tabla)
     {
-        $sql = Conexion::conectar()->prepare("SELECT * FROM $tabla ta JOIN productos pro ON ta.idMatricula = pro.idMatricula  ");
+        $sql = Conexion::conectar()->prepare("SELECT * FROM $tabla ta JOIN matricula pro ON ta.idMatricula = pro.idMatricula  ");
         $sql->execute();
         return $sql->fetchAll();
         $sql->close();
@@ -81,7 +81,7 @@ class ProductosModel
         $sql->close();
     }
 
-    public function deleteProductosModel($datosModel, $tabla)
+    public function deleteMatriculasModel($datosModel, $tabla)
     {
         $sql = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE idMatricula = :idMatricula");
         $sql->bindParam(':idMatricula', $datosModel);
@@ -93,7 +93,7 @@ class ProductosModel
         $sql->close();
     }
 
-    public static function editarProductosModel($datosModel, $tabla)
+    public static function editarMatriculasModel($datosModel, $tabla)
     {
         $sql = Conexion::conectar()->prepare("SELECT * FROM $tabla ta
         JOIN administrador admin ON ta.idAdmin=admin.idAdmin
@@ -106,7 +106,7 @@ class ProductosModel
         $sql->close();
     }
 
-    public static function actualizarProductosModel($datosModel, $tabla)
+    public static function actualizarMatriculasModel($datosModel, $tabla)
     {
 
         $sql = Conexion::conectar()->prepare("UPDATE $tabla SET

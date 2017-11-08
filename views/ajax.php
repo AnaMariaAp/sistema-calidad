@@ -3,14 +3,14 @@
 require_once '../controllers/admin/adminController.php';
 require_once '../controllers/membresias/membresiasController.php';
 require_once '../controllers/proveedores/proveedoresController.php';
-require_once '../controllers/productos/productosController.php';
+require_once '../controllers/matriculas/matriculasController.php';
 require_once '../controllers/ventas/ventasController.php';
 require_once '../controllers/clientes/clientesController.php';
 
 require_once '../models/admin/adminModel.php';
 require_once '../models/membresias/membresiasModel.php';
 require_once '../models/proveedores/proveedoresModel.php';
-require_once '../models/productos/productosModel.php';
+require_once '../models/matriculas/matriculasModel.php';
 require_once '../models/ventas/ventasModel.php';
 require_once '../models/clientes/clientesModel.php';
 
@@ -23,7 +23,7 @@ class Ajax
     public $validarUsuario;
     public $validarMembresia;
     public $validarProveedor;
-    public $validarProducto;
+    public $validarMatricula;
     public $validarCliente;
 
     public function validarUsuarioAjax()
@@ -48,11 +48,11 @@ class Ajax
         $respuesta = ProveedoresController::validarProveedorController($datos);
         echo $respuesta;
     }
-    public function validarProductoAjax()
+    public function validarMatriculaAjax()
     {
-        $datos = $this->validarProducto;
+        $datos = $this->validarMatricula;
 
-        $respuesta = ProductosController::validarProductoController($datos);
+        $respuesta = MatriculasController::validarMatriculaController($datos);
         echo $respuesta;
     }
 
@@ -60,7 +60,7 @@ class Ajax
     {
         $datos = $this->validarExistencia;
 
-        $respuesta = ProductosController::validarProductoController($datos);
+        $respuesta = MatriculasController::validarMatriculaController($datos);
         echo $respuesta;
     }
 
@@ -92,10 +92,10 @@ if (isset($_POST['inputvalidarProveedor'])) {
     $c->validarProveedorAjax();
 }
 
-if (isset($_POST['inputvalidarProducto'])) {
+if (isset($_POST['inputvalidarMatricula'])) {
     $c = new Ajax();
-    $c->validarProducto = $_POST['inputvalidarProducto'];
-    $c->validarProductoAjax();
+    $c->validarMatricula = $_POST['inputvalidarMatricula'];
+    $c->validarMatriculaAjax();
 }
 
 if (isset($_POST['inputvalidarCliente'])) {

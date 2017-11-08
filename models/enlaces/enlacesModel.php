@@ -84,33 +84,29 @@ class EnlacesPaginas
         //
 
         //  //
-        //  Páginas DE Productos
+        //  Páginas DE Matriculas
         // --------------------------------------------------------
 
-        else if ($get == "productos" or $get == 'okProdDelete' or $get == 'editadoProd') {
+        else if ($get == "matriculas" or $get == 'okMatrDelete' or $get == 'editadoMatr') {
 
-            $module = "views/modules/productos/productos.php";
+            $module = "views/modules/matriculas/matriculas.php";
 
-        } else if ($get == "editarProd") {
+        } else if ($get == "editarMatr") {
 
-            $module = "views/modules/productos/editarProd.php";
+            $module = "views/modules/matriculas/editarMatr.php";
 
-        } else if ($get == "agragarproductos") {
+        } else if ($get == "agragarmatriculas") {
 
-            $module = "views/modules/productos/productos.php";
+            $module = "views/modules/matriculas/matriculas.php";
 
-        } else if ($get == "okInventarios") {
+        } else if ($get == "okMatriculas" or $get == "editadoMatr") {
 
-            $module = "views/modules/productos/productos.php";
-
-        } else if ($get == "okProductos" or $get == "editadoPro" or $get == 'inventario') {
-
-            $module = "views/modules/productos/productos.php";
+            $module = "views/modules/matriculas/matriculas.php";
 
         }
 
         //
-        //  FIN DE Productos
+        //  FIN DE Matriculas
         // --------------------------------------------------------
         //
         //  Páginas DE CATEGIRIAS

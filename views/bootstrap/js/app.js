@@ -24,7 +24,7 @@ $('#password').modal('show');
 $('#noCliente').modal('show');
 $('#editar').modal('show');
 $('#editarMem').modal('show');
-$('#editarProd').modal('show');
+$('#editarMatr').modal('show');
 $('#tablas').DataTable({
     "language": {
         "sProcessing": "Procesando...",

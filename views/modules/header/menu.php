@@ -18,8 +18,8 @@
                 </a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="productos">
-                    Productos
+                <a class="nav-link" href="matriculas">
+                    Matriculas
                 </a>
             </li>
             <li class="nav-item active">
@@ -89,8 +89,8 @@
                 </a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="productos">
-                    Productos
+                <a class="nav-link" href="matriculas">
+                    Matriculas
                 </a>
             </li>
             <li class="nav-item active">

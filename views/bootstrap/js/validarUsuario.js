@@ -148,7 +148,7 @@ $("#idClienteNuevo").change(function() {
     var clientenuevo = $('#idClienteNuevo').val();
     // console.log(producto);
     var datos = new FormData();
-    datos.append('inputvalidarProducto', clientenuevo);
+    datos.append('inputvalidarMatricula', clientenuevo);
     console.log(clientenuevo);
     $.ajax({
         url: 'views/ajax.php',

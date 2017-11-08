@@ -8,20 +8,17 @@ if (!$_SESSION["nombreAdmin"]) {
         <h1 class="jumbotron-heading">Matricula</h1>
         <p class="lead text-muted">Aquí podras gestionar la matricula del cliente a una membresia.</p>
         <p>
-            <a href="clientes" class="btn btn-primary">Lista de Matriculas</a>
-            <a href="agragarclientes" class="btn btn-secondary">Agregar nueva matricula</a>
+            <a href="matriculas" class="btn btn-primary">Lista de Matriculas</a>
+            <a href="agragarmatriculas" class="btn btn-secondary">Agregar nueva matricula</a>
         </p>
     </div>
 </section>
-<ol class="breadcrumb">
-    <li class="breadcrumb-item active">
-        Sección de Matriculas
-    </li>
-</ol>
+<div class="album text-muted">
+      <div class="container">
 
 <?php if (isset($_GET['action'])) {
 
-    if ($_GET['action'] == 'editadoProd') {
+    if ($_GET['action'] == 'editadoMatr') {
         echo '
 <div id="oks" class="alert alert-success alert-dismissible fade show" role="alert">
 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -32,10 +29,10 @@ if (!$_SESSION["nombreAdmin"]) {
 <strong>
     Enorabuena!
 </strong>
-El Producto fue Editado correctamente al Sistema.
+La matricula fue Editado correctamente al Sistema.
 </div>
 ';
-        echo "  <META HTTP-EQUIV='Refresh' CONTENT='4; URL=productos'/> ";
+        echo "  <META HTTP-EQUIV='Refresh' CONTENT='4; URL=matriculas'/> ";
     }
     if ($_GET['action'] == 'okInventarios') {
         echo '<div id="oks"  class="alert alert-success alert-dismissible fade show" role="alert">
@@ -47,12 +44,12 @@ El Producto fue Editado correctamente al Sistema.
 <strong>
     Enorabuena!
 </strong>
-El Inventario fue agregado correctamente al sistema.
+El Inventario fue agregada correctamente al sistema.
 </div>
 ';
         echo "  <META HTTP-EQUIV='Refresh' CONTENT='4; URL=inventario'/> ";
     }
-    if ($_GET['action'] == 'okProductos') {
+    if ($_GET['action'] == 'okMatriculas') {
         echo '<div id="oks"  class="alert alert-success alert-dismissible fade show" role="alert">
 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">
@@ -62,12 +59,12 @@ El Inventario fue agregado correctamente al sistema.
 <strong>
     Enorabuena!
 </strong>
-El Producto fue agregado correctamente al sistema.
+La matricula fue agregada correctamente al sistema.
 </div>
 ';
-        echo "  <META HTTP-EQUIV='Refresh' CONTENT='4; URL=productos'/> ";
+        echo "  <META HTTP-EQUIV='Refresh' CONTENT='4; URL=matriculas'/> ";
     }
-    if ($_GET['action'] == 'okProdDelete') {
+    if ($_GET['action'] == 'okMatrDelete') {
         echo '
 <div id="oks" class="alert alert-warning alert-dismissible fade show" role="alert">
 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -81,32 +78,15 @@ El Producto fue agregado correctamente al sistema.
 La matrícula fue borrada correctamente del sistema.
 </div>
 ';
-        echo "  <META HTTP-EQUIV='Refresh' CONTENT='4; URL=productos'/> ";
+        echo "  <META HTTP-EQUIV='Refresh' CONTENT='4; URL=matriculas'/> ";
     }
 }
 ?>
-<div class="row">
-<div class="col-md-2">
-    <div class="list-group">
-        <a href="productos"  class="list-group-item">
-            <i  class="fa fa-list"></i> Listado
-        </a>
-        <a href="agragarproductos" class="list-group-item">
-           <i  class="fa fa-edit"></i>  Nuevos
-        </a>
-        <!--a href="inventario" class="list-group-item">
-           <i class="fa fa-stack-overflow" aria-hidden="true"></i> Inventario
-        </a-->
-    </div>
-</div>
-<div class="col-md-10">
-    <div class="card">
-        <div class="card-block">
             <?php if (isset($_GET['action'])): ?>
-            <?php if ($_GET['action'] == 'productos' or $_GET['action'] == 'okProductos' or $_GET['action'] == 'okProdDelete' or $_GET['action'] == 'editarProd' or $_GET['action'] == 'editadoProd'): ?>
-             <i class="fa fa-list"></i>  <h1 class="alert alert-warning text-center">
-             <i class="fa fa-list"></i>  Listado de Matrículas
-            </h1>
+            <?php if ($_GET['action'] == 'matriculas' or $_GET['action'] == 'okMatriculas' or $_GET['action'] == 'okMatrDelete' or $_GET['action'] == 'editarMatr' or $_GET['action'] == 'editadoMatr'): ?>
+            <div class="jumbotron text-center" style="padding: 1rem 2rem;">
+                <h1>Lista de Matriculas</h1>
+            </div>
             <table class="table table-bordered table-sm" id="tablas">
                 <thead class="badge-primary text-white">
                     <tr>
@@ -130,11 +110,11 @@ La matrícula fue borrada correctamente del sistema.
                         </td>
                     </tr>
                 </thead>
-                <?php $get = ProductosController::getProductosControllers();?>
+                <?php $get = MatriculasController::getMatriculasControllers();?>
                 <?php foreach ($get as $key):
                 ?>
                 <tr>
-                    <td class='tooltips' data-toggle='tooltip' data-placement='top' title='id Producto :<?php echo $key['idMatricula'] ?>'  >
+                    <td class='tooltips' data-toggle='tooltip' data-placement='top' title='id Matricula :<?php echo $key['idMatricula'] ?>'  >
                         <?php echo $key['nombreCliente'] ?>
                     </td>
                     <td>
@@ -151,11 +131,11 @@ La matrícula fue borrada correctamente del sistema.
                         <?php echo date("d/m/Y", strtotime($key['fechaFin'])) ?>
                     </td>
                     <td align="center">
-                        <a href="index.php?action=editarProd&idProEdit=<?php echo $key['idMatricula'] ?> ">
+                        <a href="index.php?action=editarMatr&idMatrEdit=<?php echo $key['idMatricula'] ?> ">
                             <i class="fa fa-edit btn btn-outline-primary btn-sm">
                             </i>
                         </a>
-                        <a href="index.php?action=productos&idProd=<?php echo $key['idMatricula'] ?> ">
+                        <a href="index.php?action=matriculas&idMatr=<?php echo $key['idMatricula'] ?> ">
                             <i class="fa fa-trash  btn btn-outline-danger btn-sm">
                             </i>
                         </a>
@@ -163,14 +143,12 @@ La matrícula fue borrada correctamente del sistema.
                 </tr>
                 <?php endforeach?>
             </table>
-        </div>
     </div>
 </div>
-<span class="text-danger">(*) <small>Es el Precio de Compra.</small></span>
 <?php endif?>
-<!-- Formulario de registro de los productos -->
+<!-- Formulario de registro de las matriculas -->
 <!-- ========================================== -->
-<?php if ($_GET['action'] == 'agragarproductos'): ?>
+<?php if ($_GET['action'] == 'agragarmatriculas'): ?>
 <h1 class="alert alert-warning text-center">
     Nueva Matrícula
 </h1>
@@ -246,8 +224,8 @@ La matrícula fue borrada correctamente del sistema.
 
 <?php endif?>
 <?php
-$re = new ProductosController();
-$re->registroProductosController();
-$re->deleteProductosController();
-$re->actualizarProductosController();
+$re = new MatriculasController();
+$re->registroMatriculasController();
+$re->deleteMatriculasController();
+$re->actualizarMatriculasController();
 ?>

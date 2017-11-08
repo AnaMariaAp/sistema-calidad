@@ -1,6 +1,6 @@
-<!-- Modal Editar Productos -->
+<!-- Modal Editar Matriculas -->
 
-<div class="modal fade bd-example-modal-lg" id="editarProd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg" id="editarMatr" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -11,8 +11,8 @@
         </button>
       </div>
       <div class="modal-body">
-<?php $editarProd = ProductosController::editarProductosController();?>
-<?php foreach ($editarProd as $key): ?>
+<?php $editarMatr = MatriculasController::editarMatriculasController();?>
+<?php foreach ($editarMatr as $key): ?>
 
 		<form method="post">
             <script type="text/javascript">
@@ -61,11 +61,13 @@
         <input type="hidden" name="idMatricula" value="<?php echo $key['idMatricula'] ?>">
         <input type="hidden" name="idCliente" value="<?php echo $key['idCliente'] ?>">
         <input type="hidden" name="idAdmin" value="<?php echo $key['idAdmin'] ?>">
+         <div class="center">
+            <input type="submit" name="editarProd" id="button" value="Agregar Productos" class="btn btn-outline-danger"/>
+        </div>
     </form>
 
        </div>
       <div class="modal-footer">
-        <input type="submit" name="editarProd" id="button" value="Editar" class="btn btn-outline-danger"/>
         <button type="button" class="btn btn-outline-secondary " data-dismiss="modal">Salir</button>
       </div>
     </div>
