@@ -5,7 +5,7 @@
         </span>
     </button>
     <a class="navbar-brand" href="inicio">
-        Sistema
+        <img src="views/bootstrap/img/logo_rokagym.jpg" class="rounded mx-auto d-block" alt="..." style="width: 40px;">
     </a>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
@@ -22,19 +22,9 @@
                     Matriculas
                 </a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="proveedores">
-                    Proveedores
-                </a>
-            </li>
              <li class="nav-item active">
                 <a class="nav-link" href="clientes">
                     Clientes
-                </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="ventas">
-                    Ventas
                 </a>
             </li>
             <!-- user -->
@@ -76,7 +66,7 @@
         </span>
     </button>
     <a class="navbar-brand" href="inicioUs">
-        Sistema
+        <img src="views/bootstrap/img/logo_rokagym.jpg" class="rounded mx-auto d-block" alt="..." style="width: 40px;">
     </a>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
@@ -91,16 +81,6 @@
             <li class="nav-item active">
                 <a class="nav-link" href="matriculas">
                     Matriculas
-                </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="proveedores">
-                    Proveedores
-                </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="ventas">
-                    Ventas
                 </a>
             </li>
              <li class="nav-item active">
