@@ -6,13 +6,22 @@ if (!isset($_SESSION['nombreAdmin'])) {
     exit();
 }
 require 'views/modules/modals/verClientesNoActivos.php';?>
-<ol class="breadcrumb">
-  <li class="breadcrumb-item active animated fadeInRight">Listado de Usuarios del Sistema</li>
-</ol>
+<section class="jumbotron text-center" style="background-color: transparent; margin-bottom: 0px;">
+    <div class="container">
+        <h1 class="jumbotron-heading">Usuarios</h1>
+        <p class="lead text-muted">Aquí podras gestionar los usuarios que tendran acceso al sistema.</p>
+        <p>
+            <a href="membresias" class="btn btn-primary" data-target="#ingresar" data-toggle="modal">Agregar usuario</a>
+        </p>
+    </div>
+</section>
+<div class="album text-muted">
+      <div class="container">
+
 <!-- <button class="btn btn-outline-success" data-target="#ingresar" data-toggle="modal" type="button">
     Agragar nuevo Usuario
 </button> -->
-<div class="btn-group float-lg-right" role="group" aria-label="Basic example">
+<!-- <div class="btn-group float-lg-right" role="group" aria-label="Basic example">
     <button class="btn btn-outline-danger" data-target="#verClienteNoActivo" data-toggle="modal" type="button"">
         <i class="fa fa-edit"></i> Clientes no Activos
     </button>
@@ -24,7 +33,7 @@ require 'views/modules/modals/verClientesNoActivos.php';?>
             <i class="fa fa-print"></i> Imprimir
         </button>
     </a>
-</div>
+</div> -->
 <br>
 <br>
 <?php require 'views/modules/modals/nuevoAdmin.php';?>
