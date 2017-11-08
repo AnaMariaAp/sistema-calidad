@@ -17,6 +17,7 @@
    <script src="views/bootstrap/dataTables/js/jquery.js"></script>
     <script src="views/bootstrap/chosen/chosen.jquery.js"></script>
     <script src="views/bootstrap/js/tether.min.js"></script>
+    <script src="views/bootstrap/js/jquery.calidad-validator.js"></script>
     <script src="views/bootstrap/dataTables/js/jquery.dataTables.js"></script>
     <script src="views/bootstrap/dataTables/js/dataTables.bootstrap4.js"></script>
     <script src="views/bootstrap/js/jquery-ui.min.js"></script>

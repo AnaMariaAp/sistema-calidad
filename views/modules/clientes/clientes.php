@@ -109,18 +109,23 @@ El Cliente fue editado correctamente.
                 <table class="table table-striped table-sm" id="tablas">
                     <thead class="bg-primary text-white">
                         <tr>
-                            <td>Nombre</td>
-                            <td>Apellido</td>
-                            <td>Teléfono</td>
-                            <td>Ver </td>
+                            <td class="text-lg-center">NOMBRES</td>
+                            <td class="text-lg-center">APELLIDOS</td>
+                            <td class="text-lg-center">DNI</td>
+                            <td class="text-lg-center">ACCIONES</td>
                         </tr>
                     </thead>
                     <?php foreach ($cli as $key): ?>
                         <tr>
-                            <td class="text-lg-center"><?php echo $key['nombreCliente'] ?></td>
-                            <td class="text-lg-center"><?php echo $key['apellidoCliente'] ?></td>
-                            <td class="text-lg-center"><?php echo $key['telefono'] ?></td>
-                            <td class="text-lg-center"><a href="index.php?action=verClientes&idCliente=<?php echo $key['idCliente'] ?>"> <i class="fa fa-eye"></i></a></td>
+                            <td class="text-lg-left"><?php echo $key['nombreCliente'] ?></td>
+                            <td class="text-lg-left"><?php echo $key['apellidoCliente'] ?></td>
+                            <td class="text-lg-left"><?php echo $key['dni'] ?></td>
+                            <td class="text-lg-center">
+                                <a href="index.php?action=verClientes&idCliente=<?php echo $key['idCliente'] ?>"> <i class="fa fa-eye"></i></a>
+                                <a href="index.php?action=editClientes&idCliente=<?php echo $key['idCliente'] ?>"> <i class="fa fa-edit"></i></a>
+                                <a href="index.php?action=clientes&id=<?php echo $key['idCliente'] ?>"> <i class="fa fa-trash"></i></a>
+                            </td>
+
                         </tr>
                     <?php endforeach?>
                 </table>
@@ -129,7 +134,7 @@ El Cliente fue editado correctamente.
                     <div class="jumbotron text-center" style="padding: 1rem 2rem;">
                         <h1>Agregar Clientes</h1>
                     </div>
-                    <form method="post" onsubmit="return validarclientes()">
+                    <form method="post" id="form-validate" onsubmit="return validarclientes()">
                         <script type="text/javascript">
                             $(document).ready(function(){
                                 $(".datepicker").datepicker({
@@ -142,20 +147,20 @@ El Cliente fue editado correctamente.
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="nombreCliente">Nombre</label>
-                                    <input type="text" class="form-control" id="nombreCliente" placeholder="Nombre Cliente" name="nombreCliente" required="">
+                                    <label for="nombreCliente">Nombre </label>
+                                    <input type="text" class="form-control" id="nombreCliente" placeholder="Nombre Cliente" name="nombreCliente"  data-validacion-tipo="requerido|numero">
                                   </div>
                             </div>
                             <div class="col-md-4">
                                <div class="form-group">
-                                <label for="exampleInputPassword1">Apellido</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Apellido Cliente" name="apellidoCliente" required="">
+                                <label for="exampleInputPassword1">Apellido </label>
+                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Apellido Cliente" name="apellidoCliente" data-validacion-tipo="requerido|min:3">
                               </div>
                             </div>
                             <div class="col-md-4">
                               <div class="form-group">
-                                <label for="exampleInputPassword1">Telefono</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Telefono" name="telefono" required="">
+                                <label for="exampleInputPassword1">Telefono </label>
+                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Telefono" name="telefono" data-validacion-tipo="requerido|numero">
                               </div>
                             </div>
                         </div>
@@ -163,14 +168,14 @@ El Cliente fue editado correctamente.
                             <div class="col-md-4">
                               <div class="form-group">
                                 <label for="sexo">Sexo</label>
-                               <input type="radio" name="sexo" value="femenino">Femenino
-                                <input type="radio" name="sexo" value="masculino">Masculino
+                                <input type="radio" name="sexo" value="femenino" data-validacion-tipo="requerido">Femenino
+                                <input type="radio" name="sexo" value="masculino" data-validacion-tipo="requerido">Masculino
                               </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group" id="form">
                                     <div class="form-group">
-                                        <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                                        <label for="fechaNacimiento">Fecha de Nacimiento </label>
                                         <input readonly type="text" name="fechaNacimiento" value="" class="form-control datepicker" placeholder="Ingrese fecha de nacimiento" data-validacion-tipo="requerido" />
                                     </div>
                                 </div>
@@ -180,7 +185,7 @@ El Cliente fue editado correctamente.
                             <div class="col-md-4">
                               <div class="form-group">
                                 <label for="edad">Edad</label>
-                                <input type="text" class="form-control" id="edad" name="edad" value="">
+                                <input type="text" class="form-control" id="edad" name="edad" value="" data-validacion-tipo="requerido|min:1">
                               </div>
                             </div>
                         </div>
@@ -188,13 +193,13 @@ El Cliente fue editado correctamente.
                             <div class="col-md-4">
                               <div class="form-group">
                                 <label for="exampleInputPassword1">Dirección</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Dirección" name="direccion" required="">
+                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Dirección" name="direccion" data-validacion-tipo="requerido">
                               </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group"  id="form">
                                     <label for="exampleInputPassword1">DNI</label>
-                                <input class="form-control" id="clientes"  name="dni" type="text" placeholder="DNI">
+                                <input class="form-control" id="clientes"  name="dni" type="text" placeholder="DNI" data-validacion-tipo="requerido|min:8">
                                 <span id="cli"></span>
                             </div>
                         </div>
@@ -208,6 +213,13 @@ El Cliente fue editado correctamente.
                         </div>
                         </div>
                     </form>
+                    <script>
+                        $(document).ready(function(){
+                            $("#form-validate").submit(function(){
+                                return $(this).validate();
+                            });
+                        })
+                    </script>
                 </div>
             </div>
             <?php endif?>
@@ -239,7 +251,7 @@ El Cliente fue editado correctamente.
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Nombre Cliente</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" name="nombreCliente" value="<?php echo $value['nombreCliente'] ?>">
+                                <input type="text" class="form-control" id="exampleInputPassword1" name="nombreCliente" value="<?php echo $value['nombreCliente'] ?>"  data-validacion-tipo="requerido|min:1">
                               </div>
                         </div>
                         <div class="col-md-4">
@@ -259,15 +271,23 @@ El Cliente fue editado correctamente.
 
                     <div class="row">
                         <div class="col-md-4">
-                          <div class="form-group">
-                            <label for="sexo">Sexo</label>
-                           <input type="radio" name="sexo"
-                            <?php if (isset($value['sexo']) && $value['sexo']=="femenino") echo "checked";?>
-                            value="femenino">Femenino
-                            <input type="radio" name="sexo"
-                            <?php if (isset($value['sexo']) && $value['sexo']=="masculino") echo "checked";?>
-                            value="masculino">Masculino
-                          </div>
+                          <fieldset class="form-group">
+                              <label>Sexo</label>
+                              <div class="">
+                                <div class="form-check form-check-inline">
+                                  <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="sexo" <?php if (isset($value['sexo']) && $value['sexo']=="femenino") echo "checked";?> value="femenino" checked>
+                                    Femenino
+                                  </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                  <label class="form-check-label">
+                                    <input class="form-check-input" type="radio" name="sexo" <?php if (isset($value['sexo']) && $value['sexo']=="masculino") echo "checked";?> value="masculino">
+                                    Masculino
+                                  </label>
+                                </div>
+                              </div>
+                            </fieldset>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group" id="form">

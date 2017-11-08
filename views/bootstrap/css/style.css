@@ -14,4 +14,6 @@ footer {
     left: -45px !important;
 }
 
-
+.has-error small{
+	color: red;
+}
