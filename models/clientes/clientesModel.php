@@ -79,7 +79,7 @@ class ClientesModel
 
     public static function actualizarClientesModel($datosModel, $tabla)
     {
-        $sql = Conexion::conectar()->prepare("UPDATE  $tabla SET nombreCliente= :nombreCliente,apellidoCliente=:apellidoCliente,telefono=:telefono,sexo=:sexo,fechaNacimiento=:fechaNacimientodireccion=:direccion,dni=:dni,edad=:edad WHERE idCliente=:idCliente");
+        $sql = Conexion::conectar()->prepare("UPDATE  $tabla SET nombreCliente= :nombreCliente,apellidoCliente=:apellidoCliente,telefono=:telefono,sexo=:sexo,fechaNacimiento=:fechaNacimiento,direccion=:direccion,dni=:dni,edad=:edad WHERE idCliente=:idCliente");
 
         $sql->bindParam(":nombreCliente", $datosModel['nombreCliente']);
         $sql->bindParam(":apellidoCliente", $datosModel['apellidoCliente']);
@@ -89,6 +89,7 @@ class ClientesModel
         $sql->bindParam(":direccion", $datosModel['direccion']);
         $sql->bindParam(":dni", $datosModel['dni']);
         $sql->bindParam(":edad", $datosModel['edad']);
+        $sql->bindParam(":idCliente", $datosModel['idCliente']);
 
         if ($sql->execute()) {
             return 'success';
