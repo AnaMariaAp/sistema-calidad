@@ -27,6 +27,10 @@ SET time_zone = "+00:00";
 --
 -- Estructura de tabla para la tabla `administrador`
 --
+DROP DATABASE IF EXISTS `ventas`;
+CREATE DATABASE IF NOT EXISTS `ventas` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `ventas`;
+
 
 CREATE TABLE `administrador` (
   `idAdmin` int(11) NOT NULL,
@@ -84,17 +88,61 @@ CREATE TABLE `clientes` (
   `emailCliente` varchar(50) NOT NULL,
   `direccion` varchar(50) NOT NULL,
   `idCiudad` int(11) NOT NULL,
-  `cuit` int(11) NOT NULL
+  `dni` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `clientes`
 --
 
-INSERT INTO `clientes` (`idCliente`, `nombreCliente`, `apellidoCliente`, `idProvincia`, `estado`, `usuarioCliente`, `passwordCliente`, `telefono`, `emailCliente`, `direccion`, `idCiudad`, `cuit`) VALUES
+INSERT INTO `clientes` (`idCliente`, `nombreCliente`, `apellidoCliente`, `idProvincia`, `estado`, `usuarioCliente`, `passwordCliente`, `telefono`, `emailCliente`, `direccion`, `idCiudad`, `dni`) VALUES
 (11, 'Jenny Lucia', 'Vega Guerrero', 1, 1, 'jelusita', 'admin', '123456789', 'jelusita11@gmail.com', 'Jr. Zorritos 1399 block 38 dpto 402', 1, 1),
 (12, 'Jenny Lucia', 'Vega', 1, 1, 'jelusita', 'jelusita', '977183442', 'jelusita11@gmail.com', 'administrador', 1, 2),
 (13, 'asdasd', 'asdasdasd', 1, 1, 'test', 'test', '1234', 'jelusita11@gmail.com', 'administrador', 1, 4);
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `proveedores`
+--
+
+CREATE TABLE `proveedores` (
+  `idProveedor` int(11) NOT NULL,
+  `nombreProveedor` varchar(100) NOT NULL,
+  `apellidoProveedor` varchar(100) NOT NULL,
+  `nombreEmpresa` varchar(100) DEFAULT NULL,
+  `telefonoProveedor` varchar(100) NOT NULL,
+  `direccionProveedor` varchar(100) NOT NULL,
+  `idCiudad` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+--
+-- Volcado de datos para la tabla `proveedores`
+--
+
+INSERT INTO `proveedores` (`idProveedor`, `nombreProveedor`, `apellidoProveedor`, `nombreEmpresa`, `telefonoProveedor`, `direccionProveedor`, `idCiudad`) VALUES
+(19, 'Juan', 'Perez', 'Test', '1234', 'Jr. Zorritos 1399 block 38 dpto 402', 1);
+
+--
+-- Estructura de tabla para la tabla `productos`
+--
+
+CREATE TABLE `productos` (
+  `idProducto` int(11) NOT NULL,
+  `nombreProducto` varchar(50) NOT NULL,
+  `idProveedor` int(11) NOT NULL,
+  `precioProducto` double NOT NULL,
+  `idMembresia` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+-- --------------------------------------------------------
+
+INSERT INTO `productos` (`idProducto`, `nombreProducto`, `idProveedor`, `precioProducto`, `idMembresia`) VALUES
+(33, 'Producto 1', 19, 14, 1);
+
 
 -- --------------------------------------------------------
 
@@ -113,6 +161,8 @@ CREATE TABLE `detalles` (
   `numFac` int(110) NOT NULL,
   `tipoFactura` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
 
 -- --------------------------------------------------------
 
@@ -185,49 +235,7 @@ CREATE TABLE `pass` (
   `idAdmin` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
 
---
--- Estructura de tabla para la tabla `productos`
---
-
-CREATE TABLE `productos` (
-  `idProducto` int(11) NOT NULL,
-  `nombreProducto` varchar(50) NOT NULL,
-  `idProveedor` int(11) NOT NULL,
-  `precioProducto` double NOT NULL,
-  `idMembresia` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `productos`
---
-
-INSERT INTO `productos` (`idProducto`, `nombreProducto`, `idProveedor`, `precioProducto`, `idMembresia`) VALUES
-(33, 'Producto 1', 19, 14, 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `proveedores`
---
-
-CREATE TABLE `proveedores` (
-  `idProveedor` int(11) NOT NULL,
-  `nombreProveedor` varchar(100) NOT NULL,
-  `apellidoProveedor` varchar(100) NOT NULL,
-  `nombreEmpresa` varchar(100) DEFAULT NULL,
-  `telefonoProveedor` varchar(100) NOT NULL,
-  `direccionProveedor` varchar(100) NOT NULL,
-  `idCiudad` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `proveedores`
---
-
-INSERT INTO `proveedores` (`idProveedor`, `nombreProveedor`, `apellidoProveedor`, `nombreEmpresa`, `telefonoProveedor`, `direccionProveedor`, `idCiudad`) VALUES
-(19, 'Juan', 'Perez', 'Test', '1234', 'Jr. Zorritos 1399 block 38 dpto 402', 1);
 
 -- --------------------------------------------------------
 

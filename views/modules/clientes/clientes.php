@@ -133,13 +133,13 @@ El Cliente fue editado correctamente.
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Nombre Cliente</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Nombre Cliente" name="nombreCliente" required="">
+                                    <label for="nombreCliente">Nombre</label>
+                                    <input type="text" class="form-control" id="nombreCliente" placeholder="Nombre Cliente" name="nombreCliente" required="">
                                   </div>
                             </div>
                             <div class="col-md-4">
                                <div class="form-group">
-                                <label for="exampleInputPassword1">Apellido Cliente</label>
+                                <label for="exampleInputPassword1">Apellido</label>
                                 <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Apellido Cliente" name="apellidoCliente" required="">
                               </div>
                             </div>
@@ -166,8 +166,8 @@ El Cliente fue editado correctamente.
                             </div>
                             <div class="col-md-4">
                               <div class="form-group">
-                                <label for="exampleInputPassword1">Email</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Email " name="emailCliente" required="">
+                                <label for="emailCliente">Email</label>
+                                <input type="text" class="form-control" id="emailCliente" placeholder="Email" name="emailCliente" required="">
                               </div>
                             </div>
                         <div class="col-md-4">
@@ -206,8 +206,8 @@ El Cliente fue editado correctamente.
                         <div class="row">
                          <div class="col-md-6">
                             <div class="form-group"  id="form">
-                                <label for="exampleInputPassword1">Cuit</label>
-                            <input class="form-control" id="clientes"  name="cuit" type="text" placeholder="Cuit">
+                                <label for="exampleInputPassword1">DNI</label>
+                            <input class="form-control" id="clientes"  name="dni" type="text" placeholder="DNI">
                             <span id="cli"></span>
                             </div>
                         </div>
@@ -238,28 +238,28 @@ El Cliente fue editado correctamente.
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Nombre</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1" name="dni" value="">
+                            <label for="nombreCliente">Nombre</label>
+                            <input type="text" class="form-control" id="nombreCliente" name="nombreCliente" value="<?php echo $value['nombreCliente'] ?>">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Apellido</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1" name="dni" value="">
+                            <label for="apellidoCliente">Apellido</label>
+                            <input type="text" class="form-control" id="apellidoCliente" name="apellidoCliente"  value="<?php echo $value['apellidoCliente'] ?>">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="exampleInputPassword1">DNI</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1" name="dni" value="">
+                            <label for="dni">DNI</label>
+                            <input type="text" class="form-control" id="dni" name="dni" value="<?php echo $value['dni'] ?>">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Telefono</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1" name="dni" value="">
+                            <label for="telefono">Telefono</label>
+                            <input type="text" class="form-control" id="telefono" name="telefono" value="<?php echo $value['telefono'] ?>">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -297,14 +297,14 @@ El Cliente fue editado correctamente.
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Edad</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1" name="dni" value="">
+                            <label for="edad">Edad</label>
+                            <input type="text" class="form-control" id="edad" name="edad" value="">
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Direccion</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1" name="dni" value="">
+                            <label for="direccion">Direccion</label>
+                            <input type="text" class="form-control" id="direccion" name="direccion" value="">
                         </div>
                     </div>
                 </div>
@@ -383,8 +383,8 @@ El Cliente fue editado correctamente.
                         </div>
                         <div class="col-md-4">
                           <div class="form-group">
-                            <label for="exampleInputPassword1">Email</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1" name="emailCliente" value="<?php echo $value['emailCliente'] ?>">
+                            <label for="emailCliente">Email</label>
+                            <input type="text" class="form-control" id="emailCliente" name="emailCliente" value="<?php echo $value['emailCliente'] ?>">
                           </div>
                         </div>
                     <div class="col-md-4">
@@ -423,8 +423,8 @@ El Cliente fue editado correctamente.
                     <div class="row">
                      <div class="col-md-6">
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Cuit</label>
-                        <input class="form-control"  name="cuit" type="text" value="<?php echo $value['cuit'] ?>">
+                            <label for="exampleInputPassword1">DNI</label>
+                        <input class="form-control"  name="dni" type="text" value="<?php echo $value['dni'] ?>">
                         </div>
                     </div>
                       <div class="col-md-6">

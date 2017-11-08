@@ -25,8 +25,8 @@ class ClientesModel
     public static function validarClienteModel($datosModel, $tabla)
     {
 
-        $sql = Conexion::conectar()->prepare("SELECT cuit FROM $tabla WHERE cuit = :cuit");
-        $sql->bindParam(':cuit', $datosModel);
+        $sql = Conexion::conectar()->prepare("SELECT dni FROM $tabla WHERE dni = :dni");
+        $sql->bindParam(':dni', $datosModel);
 
         $sql->execute();
 
@@ -48,8 +48,8 @@ class ClientesModel
 
     public static function registrarClientesModel($datosModel, $tabla)
     {
-        $sql = Conexion::conectar()->prepare("INSERT INTO $tabla (nombreCliente,apellidoCliente,idProvincia,usuarioCliente,passwordCliente,telefono,emailCliente,direccion,idCiudad,cuit)
-            VALUES(:nombreCliente,:apellidoCliente,:idProvincia,:usuarioCliente,:passwordCliente,:telefono,:emailCliente,:direccion,:idCiudad,:cuit)");
+        $sql = Conexion::conectar()->prepare("INSERT INTO $tabla (nombreCliente,apellidoCliente,idProvincia,usuarioCliente,passwordCliente,telefono,emailCliente,direccion,idCiudad,dni)
+            VALUES(:nombreCliente,:apellidoCliente,:idProvincia,:usuarioCliente,:passwordCliente,:telefono,:emailCliente,:direccion,:idCiudad,:dni)");
         $sql->bindParam(":nombreCliente", $datosModel['nombreCliente']);
         $sql->bindParam(":apellidoCliente", $datosModel['apellidoCliente']);
         $sql->bindParam(":idProvincia", $datosModel['idProvincia']);
@@ -59,7 +59,7 @@ class ClientesModel
         $sql->bindParam(":emailCliente", $datosModel['emailCliente']);
         $sql->bindParam(":direccion", $datosModel['direccion']);
         $sql->bindParam(":idCiudad", $datosModel['idCiudad']);
-        $sql->bindParam(":cuit", $datosModel['cuit']);
+        $sql->bindParam(":dni", $datosModel['dni']);
 
         if ($sql->execute()) {
             return 'success';
@@ -85,7 +85,7 @@ class ClientesModel
 
     public static function actualizarClientesModel($datosModel, $tabla)
     {
-        $sql = Conexion::conectar()->prepare("UPDATE  $tabla SET nombreCliente= :nombreCliente,apellidoCliente=:apellidoCliente,idProvincia=:idProvincia,usuarioCliente=:usuarioCliente,passwordCliente=:passwordCliente,telefono=:telefono,emailCliente=:emailCliente,direccion=:direccion,idCiudad=:idCiudad,cuit=:cuit WHERE idCliente=:idCliente");
+        $sql = Conexion::conectar()->prepare("UPDATE  $tabla SET nombreCliente= :nombreCliente,apellidoCliente=:apellidoCliente,idProvincia=:idProvincia,usuarioCliente=:usuarioCliente,passwordCliente=:passwordCliente,telefono=:telefono,emailCliente=:emailCliente,direccion=:direccion,idCiudad=:idCiudad,dni=:dni WHERE idCliente=:idCliente");
 
         $sql->bindParam(":nombreCliente", $datosModel['nombreCliente']);
         $sql->bindParam(":apellidoCliente", $datosModel['apellidoCliente']);
@@ -96,7 +96,7 @@ class ClientesModel
         $sql->bindParam(":emailCliente", $datosModel['emailCliente']);
         $sql->bindParam(":direccion", $datosModel['direccion']);
         $sql->bindParam(":idCiudad", $datosModel['idCiudad']);
-        $sql->bindParam(":cuit", $datosModel['cuit']);
+        $sql->bindParam(":dni", $datosModel['dni']);
         $sql->bindParam(":idCliente", $datosModel['idCliente']);
 
         if ($sql->execute()) {

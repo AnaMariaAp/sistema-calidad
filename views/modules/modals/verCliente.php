@@ -19,7 +19,7 @@
                                 <thead class="bg-primary text-white">
                                     <tr>
                                         <td>Ciudad</td>
-                                        <td>Cuit</td>
+                                        <td>DNI</td>
                                          <td>Usuario</td>
                                          <td>contraseña</td>
                                          <td>Email</td>
@@ -29,7 +29,7 @@
                                 </thead>
                                     <tr>
                                         <td class="text-lg-center"><?php echo $key['nombreCiudad'] ?></td>
-                                        <td class="text-lg-center"><?php echo $key['cuit'] ?></td>
+                                        <td class="text-lg-center"><?php echo $key['dni'] ?></td>
                                         <td class="text-lg-center"><?php echo $key['usuarioCliente'] ?></td>
                                         <td class="text-lg-center"><?php echo $key['passwordCliente'] ?></td>
                                         <td class="text-lg-center"><?php echo $key['emailCliente'] ?></td>

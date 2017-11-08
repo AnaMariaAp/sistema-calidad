@@ -45,7 +45,7 @@ class ClientesController
                 'emailCliente' => $_POST['emailCliente'],
                 'direccion' => $_POST['direccion'],
                 'idCiudad' => $_POST['idCiudad'],
-                'cuit' => $_POST['cuit'],
+                'dni' => $_POST['dni'],
             );
             $respuesta = ClientesModel::registrarClientesModel($datosController, 'clientes');
             if ($respuesta == 'success') {
@@ -75,7 +75,7 @@ class ClientesController
                 'emailCliente' => $_POST['emailCliente'],
                 'direccion' => $_POST['direccion'],
                 'idCiudad' => $_POST['idCiudad'],
-                'cuit' => $_POST['cuit'],
+                'dni' => $_POST['dni'],
                 'idCliente' => $_POST['idCliente'],
             );
             $respuesta = ClientesModel::actualizarClientesModel($datosController, 'clientes');

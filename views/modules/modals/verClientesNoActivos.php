@@ -17,7 +17,7 @@
                                     <tr>
                                         <td>Nombre</td>
                                         <td>Apellido</td>
-                                        <td>Cuit</td>
+                                        <td>DNI</td>
                                         <td>Email</td>
                                         <td>Dirección</td>
                                         <td>Teléfono</td>
@@ -29,7 +29,7 @@
                                     <tr>
                                         <td class="text-lg-center"><?php echo $key['nombreCliente'] ?></td>
                                         <td class="text-lg-center"><?php echo $key['apellidoCliente'] ?></td>
-                                        <td class="text-lg-center"><?php echo $key['cuit'] ?></td>
+                                        <td class="text-lg-center"><?php echo $key['dni'] ?></td>
                                         <td class="text-lg-center"><?php echo $key['emailCliente'] ?></td>
                                         <td class="text-lg-center"><?php echo $key['direccion'] ?></td>
                                          <td class="text-lg-center"><?php echo $key['telefono'] ?></td>

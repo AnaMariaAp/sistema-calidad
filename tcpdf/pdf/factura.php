@@ -101,7 +101,7 @@ class ImprimirVentas
           <td style="width:540px">Ciudad : $ciudad  - $resultado[nombreProvincia]</td>
         </tr>
          <tr>
-          <td style="width:540px">Cuit : $resultado[cuit]</td>
+          <td style="width:540px">DNI : $resultado[dni]</td>
         </tr>
         <tr>
           <td style="width:540px">Tipo Factura : $resultado[tipoFactura]</td>
