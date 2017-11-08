@@ -1,4 +1,12 @@
-<?php session_start();if (!$_SESSION["nombreAdmin"]) {header("location:ingreso");exit();} else if ($_SESSION['rol'] !== 'A') {header('location:inicioUs');exit();}?>
+<?php session_start();
+if (!$_SESSION["nombreAdmin"]) 
+    {
+        header("location:ingreso");exit();
+    } else if ($_SESSION['rol'] !== 'A') 
+    {
+        header('location:inicioUs');exit();
+    }
+?>
 <body class="body">
     <div class="container">
         <h1 class="jumbotron-heading" style="padding-top: 50px">Hola <?php echo strtoupper($_SESSION['nombreAdmin']); ?></h1>

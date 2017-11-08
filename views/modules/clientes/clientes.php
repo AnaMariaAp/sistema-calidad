@@ -19,50 +19,6 @@ if (!$_SESSION["nombreAdmin"]) {
 if (isset($_GET['action'])) {
     if ($_GET['action'] == 'okClientes') {
         echo '<div id="oks" class="alert alert-success alert-dismissible fade show" role="alert">
-<button aria-label="Close" class="close" data-dismiss="alert" type="button">
-    <span aria-hidden="true">
-        ×
-    </span>
-</button>
-<strong>
-    Enorabuena!
-</strong>
-El Cliente fue agregado correctamente.
-</div>';
-        echo '<meta http-equiv="Refresh" content="4;URL = clientes" >';
-    }
-    if ($_GET['action'] == 'alta') {
-        echo '<div id="oks" class="alert alert-success alert-dismissible fade show" role="alert">
-<button aria-label="Close" class="close" data-dismiss="alert" type="button">
-    <span aria-hidden="true">
-        ×
-    </span>
-</button>
-<strong>
-    Enorabuena!
-</strong>
-El Cliente fue dado de alta correctamente al sistema.
-</div>';
-        echo '<meta http-equiv="Refresh" content="4;URL = clientes" >';
-    }
-
-    if ($_GET['action'] == 'okClientesEdit') {
-        echo '<div id="oks" class="alert alert-success alert-dismissible fade show" role="alert">
-<button aria-label="Close" class="close" data-dismiss="alert" type="button">
-    <span aria-hidden="true">
-        ×
-    </span>
-</button>
-<strong>
-    Enorabuena!
-</strong>
-El Cliente fue editado correctamente.
-</div>';
-        echo '<meta http-equiv="Refresh" content="4;URL = clientes" >';
-    }
-    if ($_GET['action'] == 'editadoCat') {
-        echo '
-    <div class="alert alert-success alert-dismissible fade show" id="oks" role="alert">
         <button aria-label="Close" class="close" data-dismiss="alert" type="button">
             <span aria-hidden="true">
                 ×
@@ -71,8 +27,51 @@ El Cliente fue editado correctamente.
         <strong>
             Enorabuena!
         </strong>
-        La Categoria fue Editada correctamente al Sistema.
-    </div>';
+        El Cliente fue agregado correctamente.
+        </div>';
+        echo '<meta http-equiv="Refresh" content="4;URL = clientes" >';
+    }
+    if ($_GET['action'] == 'alta') {
+        echo '<div id="oks" class="alert alert-success alert-dismissible fade show" role="alert">
+        <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+            <span aria-hidden="true">
+                ×
+            </span>
+        </button>
+        <strong>
+            Enorabuena!
+        </strong>
+        El Cliente fue dado de alta correctamente al sistema.
+        </div>';
+        echo '<meta http-equiv="Refresh" content="4;URL = clientes" >';
+    }
+    if ($_GET['action'] == 'okClientesEdit') {
+        echo '<div id="oks" class="alert alert-success alert-dismissible fade show" role="alert">
+        <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+            <span aria-hidden="true">
+                ×
+            </span>
+        </button>
+        <strong>
+            Enorabuena!
+        </strong>
+        El Cliente fue editado correctamente.
+        </div>';
+        echo '<meta http-equiv="Refresh" content="4;URL = clientes" >';
+    }
+    if ($_GET['action'] == 'editadoCat') {
+        echo '
+        <div class="alert alert-success alert-dismissible fade show" id="oks" role="alert">
+            <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+                <span aria-hidden="true">
+                    ×
+                </span>
+            </button>
+            <strong>
+                Enorabuena!
+            </strong>
+            La Categoria fue Editada correctamente al Sistema.
+        </div>';
         echo '<meta content="4; URL = clientes" http-equiv="Refresh"> ';
     }
     if ($_GET['action'] == 'baja') {

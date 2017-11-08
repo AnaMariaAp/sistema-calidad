@@ -20,64 +20,64 @@ if (!$_SESSION["nombreAdmin"]) {
 
     if ($_GET['action'] == 'editadoMatr') {
         echo '
-<div id="oks" class="alert alert-success alert-dismissible fade show" role="alert">
-<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">
-        &times;
-    </span>
-</button>
-<strong>
-    Enorabuena!
-</strong>
-La matricula fue Editado correctamente al Sistema.
-</div>
-';
+        <div id="oks" class="alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">
+                &times;
+            </span>
+        </button>
+        <strong>
+            Enorabuena!
+        </strong>
+        La matricula fue Editado correctamente al Sistema.
+        </div>
+        ';
         echo "  <META HTTP-EQUIV='Refresh' CONTENT='4; URL=matriculas'/> ";
     }
     if ($_GET['action'] == 'okInventarios') {
         echo '<div id="oks"  class="alert alert-success alert-dismissible fade show" role="alert">
-<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">
-        &times;
-    </span>
-</button>
-<strong>
-    Enorabuena!
-</strong>
-El Inventario fue agregada correctamente al sistema.
-</div>
-';
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">
+                &times;
+            </span>
+        </button>
+        <strong>
+            Enorabuena!
+        </strong>
+        El Inventario fue agregada correctamente al sistema.
+        </div>
+        ';
         echo "  <META HTTP-EQUIV='Refresh' CONTENT='4; URL=inventario'/> ";
     }
     if ($_GET['action'] == 'okMatriculas') {
         echo '<div id="oks"  class="alert alert-success alert-dismissible fade show" role="alert">
-<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">
-        &times;
-    </span>
-</button>
-<strong>
-    Enorabuena!
-</strong>
-La matricula fue agregada correctamente al sistema.
-</div>
-';
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">
+                &times;
+            </span>
+        </button>
+        <strong>
+            Enorabuena!
+        </strong>
+        La matricula fue agregada correctamente al sistema.
+        </div>
+        ';
         echo "  <META HTTP-EQUIV='Refresh' CONTENT='4; URL=matriculas'/> ";
     }
     if ($_GET['action'] == 'okMatrDelete') {
         echo '
-<div id="oks" class="alert alert-warning alert-dismissible fade show" role="alert">
-<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">
-        &times;
-    </span>
-</button>
-<strong>
-    Enorabuena!
-</strong>
-La matrícula fue borrada correctamente del sistema.
-</div>
-';
+        <div id="oks" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">
+                &times;
+            </span>
+        </button>
+        <strong>
+            Enorabuena!
+        </strong>
+        La matrícula fue borrada correctamente del sistema.
+        </div>
+        ';
         echo "  <META HTTP-EQUIV='Refresh' CONTENT='4; URL=matriculas'/> ";
     }
 }
