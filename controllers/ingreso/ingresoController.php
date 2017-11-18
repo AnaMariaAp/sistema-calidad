@@ -11,9 +11,10 @@ class Ingreso{
 			   preg_match('/^[a-zA-Z0-9]+$/', $_POST["password"])){
 
 			   	// $encriptar = crypt($_POST["passwordIngreso"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+			   	$encriptar = md5($_POST["password"]);
 
 				$datosController = array("nombreAdmin"=>$_POST["nombre"],
-				                     "password"=>$_POST["password"]);
+				                     "password"=>$encriptar);
 
 				$respuesta = IngresoModels::ingresoModel($datosController, "administrador");
 
@@ -23,7 +24,7 @@ class Ingreso{
 
 				if($intentos < $maximoIntentos){
 
-					if($respuesta["nombreAdmin"] == $_POST["nombre"] && $respuesta["password"] == $_POST["password"]){
+					if($respuesta["nombreAdmin"] == $_POST["nombre"] && $respuesta["password"] == $encriptar){
 
 						$intentos = 0;
 

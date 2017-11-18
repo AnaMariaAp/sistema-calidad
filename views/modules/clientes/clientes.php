@@ -147,7 +147,7 @@ if (isset($_GET['action'])) {
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="nombreCliente">Nombre </label>
-                                    <input type="text" class="form-control" id="nombreCliente" placeholder="Nombre Cliente" name="nombreCliente"  data-validacion-tipo="requerido|numero">
+                                    <input type="text" class="form-control" id="nombreCliente" placeholder="Nombre Cliente" name="nombreCliente"  data-validacion-tipo="requerido|min:3">
                                   </div>
                             </div>
                             <div class="col-md-4">

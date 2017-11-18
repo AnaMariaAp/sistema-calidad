@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-11-2017 a las 17:42:30
+-- Tiempo de generación: 08-11-2017 a las 20:45:57
 -- Versión del servidor: 10.1.26-MariaDB
 -- Versión de PHP: 7.1.9
 
@@ -161,8 +161,10 @@ INSERT INTO `matricula` (`idMatricula`, `idCliente`, `idMembresia`, `fechaInicio
 (49, 16, 2, '1969-12-31', '1969-12-31', '2017-11-08', 1),
 (50, 17, 3, '1969-12-31', '1969-12-31', '2017-11-08', 1),
 (51, 12, 2, '1969-12-31', '1969-12-31', '2017-11-08', 1),
-(52, 23, 2, '2017-07-11', '1969-12-31', '2017-11-08', 1),
-(53, 12, 2, '1969-12-31', '1969-12-31', '2017-11-08', 1);
+(52, 23, 1, '2008-12-01', '1969-12-31', '2017-11-08', 1),
+(53, 12, 2, '1969-12-31', '1969-12-31', '2017-11-08', 1),
+(58, 17, 3, '1969-12-31', '1969-12-31', '2017-11-08', 1),
+(61, 16, 3, '1969-12-31', '1969-12-31', '2017-11-08', 1);
 
 -- --------------------------------------------------------
 
@@ -181,7 +183,7 @@ CREATE TABLE `membresias` (
 --
 
 INSERT INTO `membresias` (`idMembresia`, `nombreMembresia`, `costoMembresia`) VALUES
-(1, 'General  ', 150),
+(1, 'General', 500),
 (2, 'Gold', 320),
 (3, 'Silver', 250);
 
@@ -317,19 +319,19 @@ ALTER TABLE `factura`
 -- AUTO_INCREMENT de la tabla `inventario`
 --
 ALTER TABLE `inventario`
-  MODIFY `idInventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `idInventario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `matricula`
 --
 ALTER TABLE `matricula`
-  MODIFY `idMatricula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `idMatricula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT de la tabla `membresias`
 --
 ALTER TABLE `membresias`
-  MODIFY `idMembresia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idMembresia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `pass`

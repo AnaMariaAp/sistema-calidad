@@ -56,14 +56,17 @@ class AdminModel
         //
         $sql = Conexion::conectar()->prepare("UPDATE $tabla SET password = :password, fechaCreado= :fechaCreado WHERE idAdmin = :idAdmin");
 
-        $sql->bindParam(":password", $datosModel['password']);
+        $passw = $datosModel['password'];
+        $passEncry = md5($passw);
+
+        $sql->bindParam(":password", $passEncry);
         $sql->bindParam(":fechaCreado", $datosModel['fechaCreado']);
         $sql->bindParam(":idAdmin", $datosModel['idAdmin']);
 
         // selecciona de la tabla pass para comparar las password.
         //
         //
-        $pa = $datosModel['password'];
+        $pa = $passEncry;
         $id = $datosModel['idAdmin'];
         $pass = Conexion::conectar()->prepare("SELECT password FROM pass
             WHERE idAdmin = $id
@@ -94,7 +97,7 @@ class AdminModel
 
         //// si todo va bien realiza el insert al tabla pass
         $sql1 = Conexion::conectar()->prepare("INSERT INTO pass(password ,idAdmin)VALUES (:password,:idAdmin)");
-        $sql1->bindParam(":password", $datosModel['password']);
+        $sql1->bindParam(":password", $passEncry);
         $sql1->bindParam(":idAdmin", $datosModel['idAdmin']);
 
         if ($sql->execute() and $sql1->execute()) {
@@ -109,9 +112,11 @@ class AdminModel
 
         $sql = Conexion::conectar()->prepare("INSERT INTO $tabla (nombreAdmin,password,rol,fechaCreado)
        VALUES(:nombreAdmin,:password,:rol,:fechaCreado)");
+        $passw = $datosModel['password'];
+        $passEncry = md5($passw);
 
         $sql->bindParam(":nombreAdmin", $datosModel['nombreAdmin']);
-        $sql->bindParam(":password", $datosModel['password']);
+        $sql->bindParam(":password", $passEncry);
         $sql->bindParam(":rol", $datosModel['rol']);
         $sql->bindParam(":fechaCreado", $datosModel['fechaCreado']);
 
@@ -155,8 +160,12 @@ class AdminModel
     {
 
         $sql = Conexion::conectar()->prepare("UPDATE $tabla SET nombreAdmin=:nombreAdmin,password=:password,rol=:rol WHERE idAdmin=:idAdmin");
+
+        $passw = $datosModel['password'];
+        $passEncry = md5($passw);
+
         $sql->bindParam(':nombreAdmin', $datosModel['nombreAdmin']);
-        $sql->bindParam(':password', $datosModel['password']);
+        $sql->bindParam(':password', $passEncry);
         $sql->bindParam(':rol', $datosModel['rol']);
         $sql->bindParam(':idAdmin', $datosModel['idAdmin']);
 
