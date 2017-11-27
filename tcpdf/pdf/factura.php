@@ -30,8 +30,6 @@ class ImprimirVentas
         $numFac = $_GET['numFac'];
         $sql = Conexion::conectar()->prepare("SELECT *  FROM factura fa
         JOIN clientes cli ON fa.idCliente=cli.idCliente
-        JOIN ciudad ciu ON ciu.idCiudad=cli.idCiudad
-        JOIN provincia prov ON prov.idProvincia=cli.idProvincia
             WHERE numFac=$numFac");
         $sql->execute();
         $result = $sql->fetchAll();
@@ -87,7 +85,6 @@ class ImprimirVentas
             $pdf->setTextShadow(array('enabled' => true, 'depth_w' => 0.2, 'depth_h' => 0.2, 'color' => array(196, 196, 196), 'opacity' => 2, 'blend_mode' => 'Normal'));
 
 // Set some content to print
-            $ciudad = strtolower($resultado[nombreCiudad]);
             $html = <<<EOD
         <div  style="border: 1px solid #c9c9c9">
        <table>
@@ -96,9 +93,6 @@ class ImprimirVentas
         </tr>
          <tr>
           <td style="width:540px">Direccion: $resultado[direccion]</td>
-        </tr>
-         <tr>
-          <td style="width:540px">Ciudad : $ciudad  - $resultado[nombreProvincia]</td>
         </tr>
          <tr>
           <td style="width:540px">DNI : $resultado[dni]</td>
@@ -142,7 +136,7 @@ EOD;
             <table style="border: 1px solid #333; text-align:center; line-height: 20px; font-size:13px">
                 <tr>
                     <td style="border: 1px solid #666;">$item[nombreProducto]</td>
-                    <td style="border: 1px solid #666;">$item[cantidadKilos]</td>
+                    <td style="border: 1px solid #666;">$item[cantidad]</td>
                     <td style="border: 1px solid #666;">$item[precioVenta]</td>
                     <td style="border: 1px solid #666;">$item[totalVenta]</td>
                 </tr>

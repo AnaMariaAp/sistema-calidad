@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-11-2017 a las 01:01:15
+-- Tiempo de generación: 22-11-2017 a las 18:55:02
 -- Versión del servidor: 10.1.26-MariaDB
 -- Versión de PHP: 7.1.9
 
@@ -43,8 +43,7 @@ CREATE TABLE `administrador` (
 
 INSERT INTO `administrador` (`idAdmin`, `nombreAdmin`, `password`, `rol`, `intentos`, `fechaCreado`) VALUES
 (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'A', 0, '2017-11-06'),
-(13, 'test1', 'b4011246cdd7ba2713bd62a5a82b1f1d', 'U', 0, '2017-11-18'),
-(14, 'test2', 'b4011246cdd7ba2713bd62a5a82b1f1d', 'A', 0, '2017-11-23');
+(13, 'test1', 'b4011246cdd7ba2713bd62a5a82b1f1d', 'U', 0, '2017-11-18');
 
 -- --------------------------------------------------------
 
@@ -104,15 +103,6 @@ CREATE TABLE `detalles` (
   `tipoFactura` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `detalles`
---
-
-INSERT INTO `detalles` (`idDetalle`, `idCliente`, `idProducto`, `fechaVenta`, `precioVenta`, `cantidadKilos`, `totalVenta`, `numFac`, `tipoFactura`) VALUES
-(1, 23, 32, '2017-11-22', 3, 4, 12, 1, 'A'),
-(2, 11, 32, '2017-11-22', 3, 5, 15, 2, 'A'),
-(3, 23, 32, '2017-11-23', 3, 1, 3, 3, 'A');
-
 -- --------------------------------------------------------
 
 --
@@ -134,10 +124,7 @@ CREATE TABLE `factura` (
 --
 
 INSERT INTO `factura` (`idFactura`, `numFac`, `fechaVenta`, `idCliente`, `idAdmin`, `totalVenta`, `tipoFactura`) VALUES
-(4, 3, '2017-11-22', 21, 1, 2400, 'A'),
-(5, 1, '2017-11-22', 23, 5, 12, 'A'),
-(6, 2, '2017-11-22', 11, 5, 15, 'A'),
-(7, 3, '2017-11-23', 23, 1, 3, 'A');
+(4, 3, '2017-11-22', 21, 1, 2400, 'A');
 
 -- --------------------------------------------------------
 
@@ -157,7 +144,7 @@ CREATE TABLE `inventario` (
 --
 
 INSERT INTO `inventario` (`idInventario`, `cantidadIngresada`, `precioVenta`, `idProducto`) VALUES
-(20, 105, 3, 32),
+(20, 110, 3, 32),
 (21, 30, 1.5, 33),
 (22, 40, 3.5, 34);
 
@@ -270,14 +257,6 @@ CREATE TABLE `temp` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `temp`
---
-
-INSERT INTO `temp` (`idTemp`, `idProducto`, `idCliente`, `precioVenta`, `cantidad`, `iva`, `totalVenta`, `numFac`, `fechaVenta`, `unidad`, `tipoFactura`) VALUES
-(22, 32, 0, 3, 3, 1.89, 9, 4, '2017-11-23', 1, 'A'),
-(23, 32, 0, 3, 5, 3.15, 15, 4, '2017-11-23', 1, 'A');
-
---
 -- Índices para tablas volcadas
 --
 
@@ -359,7 +338,7 @@ ALTER TABLE `temp`
 -- AUTO_INCREMENT de la tabla `administrador`
 --
 ALTER TABLE `administrador`
-  MODIFY `idAdmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `idAdmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
@@ -371,13 +350,13 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de la tabla `detalles`
 --
 ALTER TABLE `detalles`
-  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `idFactura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idFactura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `inventario`
@@ -413,8 +392,41 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `temp`
 --
 ALTER TABLE `temp`
-  MODIFY `idTemp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
-COMMIT;
+  MODIFY `idTemp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `detalles`
+--
+ALTER TABLE `detalles`
+  ADD CONSTRAINT `FK_detalles_clientes` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`idCliente`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_detalles_productos` FOREIGN KEY (`idProducto`) REFERENCES `matricula` (`idMatricula`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `factura`
+--
+ALTER TABLE `factura`
+  ADD CONSTRAINT `FK_factura_administrador` FOREIGN KEY (`idAdmin`) REFERENCES `administrador` (`idAdmin`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_factura_clientes` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`idCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `inventario`
+--
+ALTER TABLE `inventario`
+  ADD CONSTRAINT `FK_inventario_productos` FOREIGN KEY (`idProducto`) REFERENCES `productos` (`idProducto`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `matricula`
+--
+ALTER TABLE `matricula`
+  ADD CONSTRAINT `FK_admin_ID` FOREIGN KEY (`idAdmin`) REFERENCES `administrador` (`idAdmin`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_cliente_ID` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`idCliente`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_productos_categorias` FOREIGN KEY (`idMembresia`) REFERENCES `membresias` (`idMembresia`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

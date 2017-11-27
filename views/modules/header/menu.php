@@ -22,9 +22,19 @@
                     Matriculas
                 </a>
             </li>
-             <li class="nav-item active">
+            <li class="nav-item active">
                 <a class="nav-link" href="clientes">
                     Clientes
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="productos">
+                    Productos
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="ventas">
+                    Ventas
                 </a>
             </li>
             <!-- user -->
@@ -86,6 +96,16 @@
              <li class="nav-item active">
                 <a class="nav-link" href="clientes">
                     Clientes
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="productos">
+                    Productos
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="ventas">
+                    Ventas
                 </a>
             </li>
             <!-- user -->

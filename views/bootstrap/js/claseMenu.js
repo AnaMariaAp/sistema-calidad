@@ -5,6 +5,11 @@ $(document).ready(function() {
     if (path == '') {
         path = 'inicio';
     }
+    if (path == 'agragarproductos' || path == 'inventario' || path == 'okInventarios') {
+        var main = 'productos';
+        var target = $('nav a[href="' + main + '"]');
+        target.addClass('actives');
+    }
     if (path == 'agragarmatriculas') {
         var main = 'matriculas';
         var target = $('nav a[href="' + main + '"]');

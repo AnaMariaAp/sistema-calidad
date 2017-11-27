@@ -72,7 +72,7 @@ class EnlacesPaginas
 
             $module = "views/modules/ventas/ventas.php";
 
-        } else if ($get == "agragarventas" or $get == 'okBorradoVentas' or $get == 'okBorradoFactura') {
+        } else if ($get == "agragarventas" or $get == 'okBorradoVentas' or $get == 'okBorradoFactura' or $get == "borrarVentaTotal") {
 
             $module = "views/modules/ventas/ventas.php";
 
@@ -109,7 +109,7 @@ class EnlacesPaginas
         //  FIN DE Matriculas
         // --------------------------------------------------------
         //
-        //  Páginas DE CATEGIRIAS
+        //  Páginas DE MEMBRESIAS
         // --------------------------------------------------------
 
         else if ($get == "membresias") {
@@ -134,8 +134,38 @@ class EnlacesPaginas
 
         }
         //
-        // FIN DE LAS CATEGORIAS
+        // FIN DE LAS MEMBRESIAS
         //
+        
+        //
+        //  Páginas DE Productos
+        // --------------------------------------------------------
+
+        else if ($get == "productos" or $get == 'okProdDelete' or $get == 'editadoProd') {
+
+            $module = "views/modules/productos/productos.php";
+
+        } else if ($get == "editarProd") {
+
+            $module = "views/modules/productos/editarProd.php";
+
+        } else if ($get == "agragarproductos") {
+
+            $module = "views/modules/productos/productos.php";
+
+        } else if ($get == "okInventarios") {
+
+            $module = "views/modules/productos/productos.php";
+
+        } else if ($get == "okProductos" or $get == "editadoPro" or $get == 'inventario') {
+
+            $module = "views/modules/productos/productos.php";
+
+        }
+
+        //
+        //  FIN DE Productos
+        // --------------------------------------------------------
         //
         // Página del login
         //

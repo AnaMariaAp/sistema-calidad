@@ -150,7 +150,7 @@ EOD;
             <table style="border: 1px solid #333; text-align:center; line-height: 20px; font-size:18px">
                 <tr>
                     <td style="border: 1px solid #666;">$item[nombreProducto]</td>
-                    <td style="border: 1px solid #666;">$item[cantidadKilos]</td>
+                    <td style="border: 1px solid #666;">$item[cantidad]</td>
                     <td style="border: 1px solid #666;">$item[precioVenta]</td>
                     <td style="border: 1px solid #666;">$item[totalVenta]</td>
                 </tr>

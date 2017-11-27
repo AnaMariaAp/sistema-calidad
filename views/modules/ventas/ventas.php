@@ -1,206 +1,148 @@
 <?php session_start();if (!$_SESSION["nombreAdmin"]) {header("location:ingreso");exit();}?>
-<!-- <ol class="breadcrumb">
-    <li class="breadcrumb-item active">
-        Sección de Ventas
-    </li>
-</ol> -->
-
-<!-- Menu de ventas -->
-<ul class="nav nav-tabs">
-    <li class="nav-item">
-        <a class="nav-link" href="ventas">
-            Ventas
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="detalles">
-            Detalles
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="factura">
-            Facturas
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="reportes">
-            Reportes
-        </a>
-    </li>
-</ul>
-<br/>
-<!--Fin Menu de ventas -->
-
-
-<!-- Formulario de ventas -->
-<div id="ventasPrincipal">
-    <?php if (isset($_GET['action'])): ?>
-    <?php if ($_GET['action'] == 'ventas'): ?>
-    <div class="row">
-        <div class="col-lg-6">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active">
-                    <i class="fa fa-product-hunt">
-                    </i>
-                    Ventas
-                </li>
-            </ol>
-            <?php $ven = ProductosController::getInventarioController();
-$array = array();?>
-
-            <?php foreach ($ven as $key): ?>
-
-            <?php $prod = $key['idProducto'] . ' - ' . $key['nombreProducto'];
-array_push($array, $prod);?>
-
-            <?php endforeach?>
+<section class="jumbotron text-center" style="background-color: transparent; margin-bottom: 0px;">
+    <div class="container">
+        <h1 class="jumbotron-heading">Ventas</h1>
+        <p class="lead text-muted">Aquí podras gestionar las ordenes de venta de productos</p>
+        <p>
+            <a href="ventas" class="btn btn-primary">Generar venta</a>
+            <a href="detalles" class="btn btn-primary">Detalles</a>
+            <a href="factura" class="btn btn-primary">Recibos</a>
+            <a href="reportes" class="btn btn-primary">Reportes</a>
+        </p>
+    </div>
+</section>
+<div class="album text-muted">
+    <div class="container">
+        <!-- Formulario de ventas -->
+        <?php if (isset($_GET['action'])): ?>
+        <?php if ($_GET['action'] == 'ventas' or $_GET['action'] == 'enviaPrueba'): ?>
+        <div class="row">
+            <div class="col-md-8">
+                <?php $ven = ProductosController::getInventarioController();
+                $array = array();?>
+                <?php foreach ($ven as $key): ?>
+                <?php $prod = $key['idProducto'] . ' - ' . $key['nombreProducto'];
+                array_push($array, $prod);?>
+                <?php endforeach?>
                 <div class="row">
+                    <?php 
+                        $get = VentasController::getTempController();
+                        if(empty($get)):
+                    ?>
+                    <!-- aqui va el select sin value -->
                     <div class="col-md-12 col-sm-12">
-                        <span class="label label-default text-warning">
-                            Producto
-                        </span>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-search fa-fw" aria-hidden="true">
-                                </i>
-                            </span>
-                            <input type="text" class="form-control" name="" id="producto" placeholder="Buscar Productos:"/>
-                        </div>
-                    </div>
-                    <div class="col-8 col-sm-6">
-                        <span class="label label-default text-warning">
-                            Clientes
-                        </span>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-search fa-fw" aria-hidden="true">
-                                </i>
-                            </span>
-                            <?php $cli = ClientesController::getClientesController();?>
-                            <select style="width:356px;"  class="chosen-select"  id="clientes">
-                                <option value="">
-                                    Clientes
-                                </option>
-                                <?php foreach ($cli as $cliente): ?>
-                                <option value=" <?php echo $cliente['idCliente']; ?> ">
-                                    <?php echo $cliente['nombreCliente'], ' ' . $cliente['apellidoCliente']; ?>
-                                </option>
-                                <?php endforeach?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-8 col-sm-6">
-                        <span class="label label-default text-warning">
-                            Kilos
-
-                        </span>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-contao fa-fw" aria-hidden="true">
-                                </i>
-                            </span>
-                            <input type="number" name="cantidad" id="cantidad" class="form-control" placeholder="Ingrese la Cantidad:"/>
-                        </div>
-                    </div>
-                    <div class="col-8 col-sm-8">
-                        <span class="label label-default text-warning">
-                           Unidades
-
-                        </span>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-search fa-fw" aria-hidden="true">
-                                </i>
-                            </span>
-                            <input type="number" class="form-control"  id="unidades" placeholder="Cantidad de productos Unidades:" value="1" />
-                            <div id="stock">
+                        <div class="form-group">
+                            <label class="">
+                                Cliente
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-search fa-fw" aria-hidden="true">
+                                    </i>
+                                </span>
+                                <?php $cli = ClientesController::getClientesController();?>
+                                <select style="width:100%;"  class="chosen-select form-control"  id="clientes">
+                                    <option value="">
+                                        Buscar cliente
+                                    </option>
+                                    <?php foreach ($cli as $cliente): ?>
+                                    <option value=" <?php echo $cliente['idCliente']; ?> ">
+                                        <?php echo $cliente['nombreCliente'], ' ' . $cliente['apellidoCliente'], ' ' . $cliente['idCliente']; ?>
+                                    </option>
+                                    <?php endforeach?>
+                                </select>
                             </div>
                         </div>
                     </div>
-                    <div class="col-8 col-sm-4">
-                        <span class="label label-default text-warning">
-                            Tipo Fac
-                        </span>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-search fa-fw" aria-hidden="true">
-                                </i>
-                            </span>
-                            <select style="width:236px;" class="chosen-select"  id="Factura">
-                                <option value="A">
-                                    A
-                                </option>
-                                <option value="B">
-                                    B
-                                </option>
-                            </select>
+                    <?php else: ?>
+                    <?php foreach ($get as $key): ?>
+                        <!-- <div class="alert alert-info">Cliente: <?php echo $key['nombreCliente'] . ' ' . $key['apellidoCliente'] ?></div>  -->
+                    <?php endforeach?>
+                    <!-- aqui va el select con value con el nombre del cliente -->
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label class="">
+                                Cliente
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-search fa-fw" aria-hidden="true">
+                                    </i>
+                                </span>
+                                <select style="width:100%;"  class="chosen-select form-group"  id="clientes" disabled="">
+                                    <option value=" <?php echo $key['idCliente']; ?> ">
+                                        <?php echo $key['nombreCliente'] . ' ' . $key['apellidoCliente']; ?>
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endif ?>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="">
+                                Producto
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-search fa-fw" aria-hidden="true">
+                                    </i>
+                                </span>
+                                <input type="text" class="form-control" name="" id="producto" placeholder="Buscar Productos:"/>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="">
+                                Cantidad
+                            </label>
+                            <input type="number" name="cantidad" id="cantidad" class="form-control" placeholder="Ingrese cantidad"/>
                         </div>
                     </div>
                 </div>
-                  <hr/>
-                <div class="col-8 col-sm-12">
-                    <button type="button" id="aceptar" class="btn btn-primary btn-block">
-                        Aceptar
-                    </button>
+                <br>
+                <input type="hidden" value="A" name="Factura" id="Factura" readonly/>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <button type="button" id="aceptar" class="btn btn-primary btn-block btn-block">
+                                Calcular precio
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-
-        <!-- Fin Formulario de ventas -->
-
-        <!--Formulario del precio Ventas -->
-        <form method="post">
-            <div class="row">
-                <div class="col-lg-12">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item active">
-                            <i class="fa fa-money">
-                            </i>
-                            Total de venta
-                        </li>
-                    </ol>
-                    <div class="">
-                        <span class="label label-default">
-                            Sub Total
-                        </span>
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-usd fa-fw" aria-hidden="true">
-                                </i>
-                            </span>
-                            <input class="form-control text-md-center ventas" type="text" placeholder="0.00" id="disabledTextInput" name="totalVenta" readonly required=""/>
-                        </div>
-                        <div class="row">
-                            <div class="col-8 col-sm-6">
-                                <span class="label label-default">
-                                    Iva 21 %
-                                </span>
+            <!-- Fin Formulario de ventas -->
+            <!--Formulario del precio Ventas -->
+            <div class="col-md-4">
+                <form method="post">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="">
+                                    <!-- Sub Total -->
+                                    Total
+                                </label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
-                                        <i class="fa fa-usd fa-fw" aria-hidden="true">
-                                        </i>
+                                        <i class="fa fa-mone fa-fw" aria-hidden="true">
+                                        
+                                        </i>S/.
                                     </span>
-                                    <input class="form-control text-md-center ventas" type="text" placeholder="0.00" id="iva" name="iva" readonly/>
-                                </div>
-                            </div>
-                            <div class="col-4 col-sm-6">
-                                <span class="label label-default">
-                                    Total s/iva
-                                </span>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-usd fa-fw" aria-hidden="true">
-                                        </i>
-                                    </span>
-                                    <input class="form-control text-md-center ventas" type="text" placeholder="0.00" id="sub"  readonly/>
+                                    <input class="form-control text-md-center " type="text" placeholder="0.00" id="disabledTextInput" name="totalVenta" readonly required=""/>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-8 col-sm-6">
-                                <span class="label label-default">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="">
                                     Fecha
-                                </span>
+                                </label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <i class="fa fa-calendar-o fa-fw" aria-hidden="true">
@@ -209,41 +151,124 @@ array_push($array, $prod);?>
                                     <input class="form-control" type="text" value="<?php echo date('d-m-Y'); ?> " name="fechaVenta" id="fecha" readonly/>
                                 </div>
                             </div>
-                            <div class="col - 4col - sm - 6">
-                                <span class="label label-default">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="">
                                     Nro de Fac.
-                                </span>
-                                <div class="input - group">
-                                    <span class="input - group - addon">
-                                        <i class="fafa - sort - numeric - descfa - fw" aria-hidden="true">
-                                        </i>
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-sort-numeric-descfa - fw" aria-hidden="true">
+                                        </i>N°
                                     </span>
                                     <?php $idFact = VentasController::getFecturaController();?>
                                     <?php foreach ($idFact as $key): ?>
-                                    <input class="form-control text-md-center ventas" type="text" id="numFac" name="numFac" value="<?php echo $key['total'] + 1; ?>" readonly/>
+                                    <input class="form-control text-md-center " type="text" id="numFac" name="numFac" value="<?php echo $key['total'] + 1; ?>" readonly/>
                                     <?php endforeach?>
                                 </div>
                             </div>
                         </div>
-                            <hr/>
-                            <button type="submit" class="btn btn-outline-danger btn-block" name="post" id="post">
-                                <i class="fa fa-check">
-                                </i>
-                                Confirmar
-                            </button>
                     </div>
+                    <br>
+                    <button type="submit" class="btn btn-outline-danger btn-block" name="post" id="post">
+                        <i class="fa fa-check">
+                        </i>
+                        Confirmar
+                    </button>
+                    <input type="hidden" name="idProducto" id="idProducto"/>
+                    <input type="hidden" name="nombreProducto" id="nombreProducto"/>
+                    <input type="hidden" name="idCliente" id="idCliente"/>
+                    <input type="hidden" name="cantidad" id="cant"/>
+                    <input type="hidden" name="precioVenta" id="precioVenta"/>
+                    <input type="hidden" name="tipoFactura" id="tipoFactura"/>
+                </form>
+            </div>
+        <!-- Fin Formulario de precio ventas -->
+        </div>
+        <?php endif?>
+        <?php if ($_GET['action'] == 'ventas' or $_GET['action'] == 'okVentas' or $_GET['action'] == 'borrarVenta' or $_GET['action'] == 'okBorradoVentas'): ?>
+        <div class="row">
+            <div class="col-md-8">
+                <table class="table table-bordered table-sm" id="ventas">
+                    <thead class="bg-primary text-white table-bordered">
+                        <tr>
+                            <th class="text-md-center">
+                                Producto
+                            </th>
+                            <th class="text-md-center">
+                                Cantidad
+                            </th>
+                            <th class="text-md-center">
+                                Precio
+                            </th>
+                             <th class="text-md-center">
+                                Total
+                            </th>
+
+                            <th class="text-md-center">Borrar</th>
+                        </tr>
+                    </thead>
+                    <?php $get = VentasController::getTempController();?>
+                    <?php foreach ($get as $key): ?>
+                    <tbody>
+                        <tr>
+                            <td align="center">
+                                <?php echo $key['nombreProducto'] ?>
+                            </td>
+                            <td align="center">
+                                <?php echo $key['cantidad'] ?>
+                            </td>
+                            <td align="center" width="50">
+                                <?php echo $key['precioVenta'] ?>
+                            </td>
+                             <td align="center" width="50">
+                                <?php echo $key['totalVenta'] ?>
+                            </td>
+
+                            <td align="center">
+                                <a href="index.php?action=borrarVenta&idTemp=<?php echo $key['idTemp'] ?> &idProducto=<?php echo $key['idProducto'] ?>&cantidad=<?php echo $key['cantidad'] ?> ">
+                                    <i class="fa fa-trash-o btn btn-secondary text-danger"></i>
+                                    </a>
+
+                            </td>
+                            <?php
+                            $total = $total + $key['totalVenta'];
+                            $total = number_format($total, 2, ',', '');
+                            ?>
+
+                        </tr>
+                    </tbody>
+                    <?php endforeach?>
+                </table>
+            </div>
+            <!-- segunda mitad de la tabla de ventas -->
+            <div class="col-md-4">
+                <h2 class="alert alert-danger text-lg-center text-danger">Detalles</h2>
+                
+                <div scope="row" class="">
+                    <h4>
+                        <?php echo ' <h4 class="alert alert-success text-success">Total:' . '<span class="right"> S/.' . $total . '</h4> </span>'; ?>
+                    </h4>
+                </div>
+                <div class="alert alert-info"><strong>Cliente: </strong> <?php echo $key['nombreCliente'] . ' ' . $key['apellidoCliente'] ?></div>
             </div>
         </div>
-
-        <input type="hidden" name="idProducto" id="idProducto"/>
-        <input type="hidden" name="nombreProducto" id="nombreProducto"/>
-        <input type="hidden" name="idCliente" id="idCliente"/>
-        <input type="hidden" name="cantidad" id="cant"/>
-        <input type="hidden" name="unidad" id="unidad"/>
-        <input type="hidden" name="precioVenta" id="precioVenta"/>
-        <input type="hidden" name="tipoFactura" id="tipoFactura"/>
-    </form>
-    <?php endif?>
+        <br>
+        <form  method="post">
+            <?php if (!empty($total)): ?>
+           <center> <?php require 'btn.php';?></center>
+            <?php endif?>
+            <?php $idFact = VentasController::getFecturaController();?>
+            <?php foreach ($idFact as $key): ?>
+            <input class="form-control text-md-center ventas" type="hidden" id="numFac" name="numFac" value="<?php echo $key['total'] + 1; ?>" readonly/>
+            <?php endforeach?>
+        </form>
+        <?php endif?>
+        <?php 
+            $get = VentasController::getTempController();
+            print_r($get)
+        ?>
 
 <!--Fin Formulario del precio Ventas -->
 
@@ -281,114 +306,88 @@ El producto fue Borrado del carrito  correctamente.
 ?>
 <?php if ($_GET['action'] == 'detalles' or $_GET['action'] == 'okVentas' or $_GET['action'] == 'borrarVenta' or $_GET['action'] == 'okBorradoVentas'): ?>
 
- <div class="sale">
-   <div class="row">
-    <div class="col-md-9" id="tabla">
-        <table class="table table-bordered table-sm" id="ventas">
-            <thead class="bg-primary text-white table-bordered">
-                <tr>
-                    <th class="text-md-center">
-                        Unidad
-                    </th>
-                    <th class="text-md-center">
-                        Producto
-                    </th>
-                    <th class="text-md-center">
-                        Cantidad
-                        <small>
-                            (kilos)
-                        </small>
-                    </th>
-                    <th class="text-md-center">
-                        Precio
-                    </th>
-                     <th class="text-md-center">
-                        Total
-                    </th>
+<div class="sale">
+    <div class="row">
+        <div class="col-md-9">
+            <table class="table table-bordered table-sm" id="ventas">
+                <thead class="bg-primary text-white table-bordered">
+                    <tr>
+                        <th class="text-md-center">
+                            Producto
+                        </th>
+                        <th class="text-md-center">
+                            Cantidad
+                            <small>
+                                (kilos)
+                            </small>
+                        </th>
+                        <th class="text-md-center">
+                            Precio
+                        </th>
+                         <th class="text-md-center">
+                            Total
+                        </th>
 
-                    <th class="text-md-center">Borrar</th>
-                </tr>
-            </thead>
-            <?php $get = VentasController::getTempController();?>
-            <?php foreach ($get as $key): ?>
-            <tbody>
-                <tr>
-                    <td align="center">
-                        <?php echo $key['unidad'] ?>
-                    </td>
-                    <td align="center">
-                        <?php echo $key['nombreProducto'] ?>
-                    </td>
-                    <td align="center">
-                        <?php echo $key['cantidad'] ?>
-                    </td>
-                    <td align="center" width="50">
-                        <?php echo $key['precioVenta'] ?>
-                    </td>
-                     <td align="center" width="50">
-                        <?php echo $key['totalVenta'] ?>
-                    </td>
+                        <th class="text-md-center">Borrar</th>
+                    </tr>
+                </thead>
+                <?php $get = VentasController::getTempController();?>
+                <?php foreach ($get as $key): ?>
+                <tbody>
+                    <tr>
+                        <td align="center">
+                            <?php echo $key['nombreProducto'] ?>
+                        </td>
+                        <td align="center">
+                            <?php echo $key['cantidad'] ?>
+                        </td>
+                        <td align="center" width="50">
+                            <?php echo $key['precioVenta'] ?>
+                        </td>
+                         <td align="center" width="50">
+                            <?php echo $key['totalVenta'] ?>
+                        </td>
 
-                    <td align="center">
-                        <a href="index.php?action=borrarVenta&idTemp=<?php echo $key['idTemp'] ?> &idProducto=<?php echo $key['idProducto'] ?>&unidad=<?php echo $key['unidad'] ?> ">
-                            <i class="fa fa-trash-o btn btn-secondary text-danger"></i>
-                            </a>
+                        <td align="center">
+                            <a href="index.php?action=borrarVenta&idTemp=<?php echo $key['idTemp'] ?> &idProducto=<?php echo $key['idProducto'] ?>&cantidad=<?php echo $key['cantidad'] ?> ">
+                                <i class="fa fa-trash-o btn btn-secondary text-danger"></i>
+                                </a>
 
-                    </td>
-                    <?php
-$total = $total + $key['totalVenta'];
-$total = number_format($total, 2, ',', '');
+                        </td>
+                        <?php
+                        $total = $total + $key['totalVenta'];
+                        $total = number_format($total, 2, ',', '');
+                        ?>
+                        <?php endforeach?>
 
-$iva = $total * 21 / 100;
-$iva = number_format($iva, 2, ',', '');
-$subTotal = $total - $iva;
-$subTotal = number_format($subTotal, 2, ',', '');
-
-?>
-                    <?php endforeach?>
-
-                </tr>
-            </tr>
-        </tbody>
-    </table>
-  </div>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 <!-- segunda mitad de la tabla de ventas -->
         <div class="col-md-3">
-        <h2 class="alert alert-danger text-lg-center text-danger">Detalles</h2>
-          <td align="center">
-              <?php echo '<span class="text-primary">Total</span> ' . '<span class="right"> $' . $total . '</span>'; ?>
-          </td>
-          <br>
-          <td align="center">
-              <?php echo '<span class="text-primary">Iva </span> ' . '<span class="right"> $' . $iva . '</span>'; ?>
-          </td>
-          <br>
-          <td align="center">
-              <?php echo '<span class="text-primary">Sub Total</span>   ' . '<span class="right"> $' . $subTotal . '</span>'; ?>
-          </td>
-          <hr>
-          <tr class="bg-primary ">
-              <th scope="row" class="text-lg-center">
-                  <h4>
-                 <?php echo ' <h4 class="alert alert-success text-success">Total' . '<span class="right"> $' . $total . '
-              </h4> </span>'; ?>
-                  </h4>
-              </th>
-             <span class="alert alert-info"><strong>Cliente:</strong> <?php echo $key['nombreCliente'] . ' ' . $key['apellidoCliente'] ?></span>
+            <h2 class="alert alert-danger text-lg-center text-danger">Detalles</h2>
+            
+            <div scope="row" class="">
+                <h4>
+                    <?php echo ' <h4 class="alert alert-success text-success">Total:' . '<span class="right"> $' . $total . '</h4> </span>'; ?>
+                </h4>
+            </div>
+            <div class="alert alert-info"><strong>Cliente: </strong> <?php echo $key['nombreCliente'] . ' ' . $key['apellidoCliente'] ?></div>
         </div>
 
-</div>
+    </div>
 </div>
 <br>
-            <form  method="post">
-                <?php if (!empty($total)): ?>
-               <center> <?php require 'btn.php';?></center>
-                <?php endif?>
-                <?php $idFact = VentasController::getFecturaController();?>
-                <?php foreach ($idFact as $key): ?>
-                <input class="form-control text-md-center ventas" type="hidden" id="numFac" name="numFac" value="<?php echo $key['total'] + 1; ?>" readonly/>
-                <?php endforeach?>
-            </form>
+<form  method="post">
+    <?php if (!empty($total)): ?>
+   <center> <?php require 'btn.php';?></center>
+    <?php endif?>
+    <?php $idFact = VentasController::getFecturaController();?>
+    <?php foreach ($idFact as $key): ?>
+    <input class="form-control text-md-center ventas" type="hidden" id="numFac" name="numFac" value="<?php echo $key['total'] + 1; ?>" readonly/>
+    <?php endforeach?>
+</form>
 <?php endif?>
 <!-- comienza la facturas -->
 <?php if ($_GET['action'] == 'factura' or $_GET['action'] == 'okBorradoFactura'): ?>
@@ -506,6 +505,7 @@ La Factura fue Borrada  correctamente.
         <?php endif?>
     </div>
 <br><br><br>
+</div>
     <!-- Final de los reporte -->
 <!-- script para pasar los datos de los productos al formulario de vanta. -->
 <script>
@@ -534,6 +534,19 @@ La Factura fue Borrada  correctamente.
 <script>
      $(function() {
      $("#post").attr('disabled', 'disabled');
+     $("#aceptar").attr('disabled', 'disabled');
+     $("#cantidad").attr('disabled', 'disabled');
+     $("#producto").attr('disabled', 'disabled');
+     // Habilita eleccion de producto
+     $("#clientes").chosen().change(function(){
+        $("#producto").removeAttr('disabled', 'disabled');
+        var e = $(this).val();
+        console.log(e);
+     });
+     if( !$('#clientes').val() == ''){
+        $("#producto").removeAttr('disabled', 'disabled');
+     }
+
      var items = <?=json_encode($array);?>;
      $('#producto').autocomplete({
          source: items,
@@ -544,7 +557,19 @@ La Factura fue Borrada  correctamente.
              $.get('views/productosAjax.php', params, function(respuesta) {
                  var json = JSON.parse(respuesta);
                  if (json.status == 200) {
+                     var pro = $('#producto').val();
+                     var cli = $('#clientes').val();
+                     console.log(pro + ' ' + cli + ' ' + cant);
+                     // Habilita cantidad de producto
+                     if(!pro == '' && !cli == ''){
+                        $("#cantidad").removeAttr('disabled', 'disabled');
+                     }
+
                      $('#cantidad').change(function() {
+                        var cant = $('#cantidad').val();
+                        if(!pro == '' && !cli == '' && !cant == ''){
+                            $("#aceptar").removeAttr('disabled', 'disabled');
+                        }
                       // asignamos el valor de cantidad
                          var cantidad = $('#cantidad').val();
                          $('#cant').val(cantidad);
@@ -554,25 +579,28 @@ La Factura fue Borrada  correctamente.
                          // sacamos el total
                          var total = json.precioVenta * cantidad;
                          $('#precioVenta').val(json.precioVenta);
-                         var iva = total * 21 / 100;
-                         $('#iva').val(iva.toFixed(2));
-                         var sub = total - iva;
+                         var x = $('#Factura').val();
+                         console.log(x);
                          $('#idProducto').val(json.idProducto);
                          $('#nombreProducto').val(json.nombre);
-                         $('#sub').val(sub.toFixed(2));
                          $("#aceptar").click(function() {
                              var a = $('#clientes').val();
                              $('#idCliente').val(a);
+                             console.log(a);
                               var tipoFac = $('#Factura').val();
                              $('#tipoFactura').val(tipoFac);
-                             var b = $('#unidades').val();
-                             $('#unidad').val(b);
-                             if (!b == '') {
+                             if (!a == '') {
                                $("#post").removeAttr('disabled', 'disabled');
                              }
                              console.log(json);
-                         })
-                     })
+                         });
+
+                         $("#post").click(function() {
+                            var a = $('#clientes').val();
+                            $("#clientes").val(a).trigger("change");
+                         });
+
+                     });
                  }
              });
              // fin del ajax
@@ -598,4 +626,7 @@ $agr->
     registrarVentasDetallesControllers();
 $agr->
     borrarFacturaController();
+$agr->
+    borrarPruebaController();
 ?>
+

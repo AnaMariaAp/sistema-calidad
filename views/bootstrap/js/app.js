@@ -25,6 +25,7 @@ $('#noCliente').modal('show');
 $('#editar').modal('show');
 $('#editarMem').modal('show');
 $('#editarMatr').modal('show');
+$('#editarProd').modal('show');
 $('#tablas').DataTable({
     "language": {
         "sProcessing": "Procesando...",

@@ -23,16 +23,14 @@ class VentasController
     {
         if (isset($_POST['post'])) {
             $datosController = array(
-                'idMatricula' => $_POST['idMatricula'],
+                'idProducto' => $_POST['idProducto'],
                 'nombreProducto' => $_POST['nombreProducto'],
                 'idCliente' => $_POST['idCliente'],
                 'precioVenta' => $_POST['precioVenta'],
                 'cantidad' => $_POST['cantidad'],
-                'iva' => $_POST['iva'],
                 'totalVenta' => $_POST['totalVenta'],
                 'numFac' => $_POST['numFac'],
                 'fechaVenta' => date('Y-m-d ', strtotime($_POST['fechaVenta'])),
-                'unidad' => $_POST['unidad'],
                 'tipoFactura' => $_POST['tipoFactura'],
             );
 
@@ -47,8 +45,32 @@ class VentasController
                 require 'views/modules/modals/noFacturaTipo.php';
             }
             if ($respuesta == 'success') {
-                header('location:okVentas');
+                header('location:ventas');
             }
+        }
+    }
+
+    public function borrarPruebaController()
+    {
+        if (isset($_POST['enviaPrueba'])) {
+            $respuesta = VentasModel::getTempModel('temp');
+            foreach($respuesta as $key){
+                $datosController = $key['idTemp'];
+                $datosControl = $key['idProducto'];
+                $cantidad = $key['cantidad'];
+                $borrado = VentasModel::borrarVentasModel($datosController, $datosControl, $cantidad, 'temp');
+
+                if ($borrado == 'success') {
+                    header('location:ventas');
+                }
+            }
+            // $datosController = $_GET['idTemp'];
+            // $datosControl = $_GET['idProducto'];
+            // $cantidad = $_GET['cantidad'];
+            // $respuesta = VentasModel::borrarVentasModel($datosController, $datosControl, $cantidad, 'temp');
+            // if ($respuesta == 'success') {
+            //     header('location:okBorradoVentas');
+            // }
         }
     }
 
@@ -56,9 +78,9 @@ class VentasController
     {
         if (isset($_GET['idTemp'])) {
             $datosController = $_GET['idTemp'];
-            $datosControl = $_GET['idMatricula'];
-            $unidad = $_GET['unidad'];
-            $respuesta = VentasModel::borrarVentasModel($datosController, $datosControl, $unidad, 'temp');
+            $datosControl = $_GET['idProducto'];
+            $cantidad = $_GET['cantidad'];
+            $respuesta = VentasModel::borrarVentasModel($datosController, $datosControl, $cantidad, 'temp');
 
             if ($respuesta == 'success') {
                 header('location:okBorradoVentas');
