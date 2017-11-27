@@ -26,36 +26,14 @@ class VentasModel
         $sql->close();
     }
 
-    public static function borrarTodoModel($tabla)
+    public static function getInvTempModel($tabla)
     {
-        $sql = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+
+        $sql = Conexion::conectar()->prepare("SELECT *  FROM $tabla");
         $sql->execute();
+        return $sql->fetchAll();
 
-        if($sql->execute()){
-            return 'success';
-        }
-
-        // $porBorrar = $sql->fetchAll();
-        // foreach ($porBorrar as $key){
-        //     // $key['cantidad']
-        //     $idTemp = $key['idTemp'];
-        //     $cantidad = $key['cantidad'];
-        //     $idProducto = $key['idProducto'];
-        //     $sql1 = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE idTemp = $idTemp");
-        //     $sql1->execute();
-        //     if($sql1->execute()){
-        //         return 'success';
-        //     }
-        //     $sql1->close();
-
-        //     $sql2 = Conexion::conectar()->prepare("UPDATE inventario SET cantidadIngresada = cantidadIngresada + $cantidad WHERE idProducto = $idProducto");
-        //     $sql2->execute();
-
-        //     if($sql2->execute()){
-        //         return 'success';
-        //     }
-        //     $sql2->close();
-        // } 
+        $sql->close();
     }
 
     public static function registroFacturaModel($datosModel, $tabla)
@@ -100,7 +78,7 @@ class VentasModel
             //
             $cantidad = $datosModel['cantidad'];
             $idProducto = $datosModel['idProducto'];
-            $sql1 = Conexion::conectar()->prepare("UPDATE inventario SET cantidadIngresada = cantidadIngresada - $cantidad  WHERE idProducto = $idProducto");
+            $sql1 = Conexion::conectar()->prepare("UPDATE inventariotmp SET cantidadIngresada = cantidadIngresada - $cantidad  WHERE idProducto = $idProducto");
             $sql1->execute();
 
             if ($sql->execute()) {
@@ -138,7 +116,7 @@ class VentasModel
         $cantidad = $datosModel['cantidad'];
         $idProducto = $datosModel['idProducto'];
 
-        $sql1 = Conexion::conectar()->prepare("UPDATE inventario SET cantidadIngresada = cantidadIngresada - $cantidad  WHERE idProducto = $idProducto");
+        $sql1 = Conexion::conectar()->prepare("UPDATE inventariotmp SET cantidadIngresada = cantidadIngresada - $cantidad  WHERE idProducto = $idProducto");
         $sql1->execute();
 
         if ($sql->execute()) {
@@ -155,7 +133,7 @@ class VentasModel
 
         //
         // vuelve la venta atras.
-        $sql1 = Conexion::conectar()->prepare("UPDATE inventario SET cantidadIngresada = cantidadIngresada + $cantidad  WHERE idProducto = $datosControl");
+        $sql1 = Conexion::conectar()->prepare("UPDATE inventariotmp SET cantidadIngresada = cantidadIngresada + $cantidad  WHERE idProducto = $datosControl");
         $sql1->execute();   
 
         if ($sql->execute()) {
@@ -164,9 +142,23 @@ class VentasModel
         $sql->close();
     }
 
+    public static function cancelarVenta()
+    {
+        $sql = Conexion::conectar()->prepare("DELETE FROM temp");
+        $sql->execute();
+
+        $respuesta = VentasModel::getInvTempModel('inventario');
+        $sql1 = Conexion::conectar()->prepare("UPDATE inventariotmp SET cantidadIngresada = ".intval($respuesta[0]['cantidadIngresada'])."  WHERE idProducto = ".$respuesta[0]['idProducto']);
+        $sql->execute();
+        $sql1->execute();
+        return 'success';
+        
+        $sql->close();
+    }
+
     public static function registrarVentasDetallesModel($datosModel, $tabla, $idAdmin, $numFac)
     {
-        $sql = Conexion::conectar()->prepare("INSERT INTO $tabla(idCliente,idProducto,fechaVenta,precioVenta,cantidad,totalVenta,numFac,tipoFactura)SELECT tem.idCliente,tem.idProducto,tem.fechaVenta,tem.precioVenta,tem.cantidad,tem.totalVenta,tem.numFac,tem.tipoFactura
+        $sql = Conexion::conectar()->prepare("INSERT INTO $tabla(idCliente,idProducto,fechaVenta,precioVenta,cantidadKilos,totalVenta,numFac,tipoFactura)SELECT tem.idCliente,tem.idProducto,tem.fechaVenta,tem.precioVenta,tem.cantidad,tem.totalVenta,tem.numFac,tem.tipoFactura
             FROM temp tem ");
 
         if ($sql->execute()) {

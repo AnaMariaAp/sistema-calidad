@@ -230,9 +230,6 @@
                                 <a href="index.php?action=borrarVenta&idTemp=<?php echo $key['idTemp'] ?> &idProducto=<?php echo $key['idProducto'] ?>&cantidad=<?php echo $key['cantidad'] ?> ">
                                     <i class="fa fa-trash-o btn btn-secondary text-danger"></i>
                                     </a>
-                                <a href="index.php?action=enviaPrueba&table=temp">
-                                    <i class="fa fa-trash-o btn btn-secondary text-danger"></i>
-                                    </a>
                             </td>
                             <?php
                             $total = $total + $key['totalVenta'];
@@ -269,7 +266,7 @@
         <?php endif?>
         <?php 
             $get = VentasController::getTempController();
-            print_r($get);
+            //print_r($get);
         ?>
 
 <!--Fin Formulario del precio Ventas -->
@@ -306,7 +303,7 @@ El producto fue Borrado del carrito  correctamente.
 
 }
 ?>
-<?php if ($_GET['action'] == 'detalles' or $_GET['action'] == 'okVentas' or $_GET['action'] == 'borrarVenta' or $_GET['action'] == 'okBorradoVentas'): ?>
+<?php if ($_GET['action'] == 'detalles' or $_GET['action'] == 'okVentas' or $_GET['action'] == 'borrarVenta' or $_GET['action'] == 'okBorradoVentas') : ?>
 
 <div class="sale">
     <div class="row">
@@ -617,7 +614,6 @@ La Factura fue Borrada  correctamente.
 function abrirVentana(url) {
     window.open(url, "Factura", "directories=no, location=no, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=900, height=800 ,left=220");
 }
-
 </script>
 <?php $agr = new VentasController();
 $agr->
@@ -629,6 +625,6 @@ $agr->
 $agr->
     borrarFacturaController();
 $agr->
-    borrarPruebaController();
+    cancelarVentaController();
 ?>
 

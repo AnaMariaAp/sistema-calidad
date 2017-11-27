@@ -50,18 +50,6 @@ class VentasController
         }
     }
 
-    public function borrarTodoController()
-    {
-        if (isset($_GET['table'])) {
-            $nomTable = $_GET['table'];
-            $respuesta = VentasModel::borrarTodoModel($nomTable);
-
-            if ($respuesta == 'success') {
-                header('location:ventas');
-            }
-        }
-    }
-
     public function borrarVentasController()
     {
         if (isset($_GET['idTemp'])) {
@@ -76,6 +64,19 @@ class VentasController
         }
     }
 
+    public function cancelarVentaController()
+    {
+        if (isset($_POST['enviarCancelar'])) {
+            $respuesta = VentasModel::cancelarVenta();
+            if ($respuesta == 'success') {
+                //require 'views/modules/modals/cancelarVenta.php';
+                header('location:ventas');
+            }
+        }
+        //header('location:ventas');
+        
+    }
+
     public function registrarVentasDetallesControllers()
     {
         if (isset($_POST['enviarDetalles'])) {
@@ -85,6 +86,9 @@ class VentasController
             if ($respuesta == 'success') {
                 header('location:ventas');
             }
+            $respuesta2 = VentasModel::getInvTempModel('inventariotmp');
+            $sql1 = Conexion::conectar()->prepare("UPDATE inventario SET cantidadIngresada = ".intval($respuesta2[0]['cantidadIngresada'])."  WHERE idProducto = ".$respuesta2[0]['idProducto']);
+            $sql1->execute();
         }
     }
     public static function imprimirVentasController($numFac)
