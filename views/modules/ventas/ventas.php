@@ -187,7 +187,7 @@
         <!-- Fin Formulario de precio ventas -->
         </div>
         <?php endif?>
-        <?php if ($_GET['action'] == 'ventas' or $_GET['action'] == 'okVentas' or $_GET['action'] == 'borrarVenta' or $_GET['action'] == 'okBorradoVentas'): ?>
+        <?php if ($_GET['action'] == 'ventas' or $_GET['action'] == 'okVentas' or $_GET['action'] == 'borrarVenta' or $_GET['action'] == 'enviaPrueba' or $_GET['action'] == 'okBorradoVentas'): ?>
         <div class="row">
             <div class="col-md-8">
                 <table class="table table-bordered table-sm" id="ventas">
@@ -230,7 +230,9 @@
                                 <a href="index.php?action=borrarVenta&idTemp=<?php echo $key['idTemp'] ?> &idProducto=<?php echo $key['idProducto'] ?>&cantidad=<?php echo $key['cantidad'] ?> ">
                                     <i class="fa fa-trash-o btn btn-secondary text-danger"></i>
                                     </a>
-
+                                <a href="index.php?action=enviaPrueba&table=temp">
+                                    <i class="fa fa-trash-o btn btn-secondary text-danger"></i>
+                                    </a>
                             </td>
                             <?php
                             $total = $total + $key['totalVenta'];
@@ -267,7 +269,7 @@
         <?php endif?>
         <?php 
             $get = VentasController::getTempController();
-            print_r($get)
+            print_r($get);
         ?>
 
 <!--Fin Formulario del precio Ventas -->

@@ -68,11 +68,11 @@ class EnlacesPaginas
         //  Páginas DE ventas
         // --------------------------------------------------------
 
-        else if ($get == "ventas" || $get == 'detalles' || $get == 'okVentas' || $get == 'borrarVenta' || $get == 'factura' || $get == 'reportes') {
+        else if ($get == "ventas" || $get == 'detalles' || $get == 'okVentas' || $get == 'borrarVenta' || $get == "enviarPrueba" || $get == 'factura' || $get == 'reportes') {
 
             $module = "views/modules/ventas/ventas.php";
 
-        } else if ($get == "agragarventas" or $get == 'okBorradoVentas' or $get == 'okBorradoFactura' or $get == "borrarVentaTotal") {
+        } else if ($get == "agragarventas" or $get == 'okBorradoVentas' or $get == 'okBorradoFactura' ) {
 
             $module = "views/modules/ventas/ventas.php";
 

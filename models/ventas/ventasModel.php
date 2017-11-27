@@ -26,6 +26,38 @@ class VentasModel
         $sql->close();
     }
 
+    public static function borrarTodoModel($tabla)
+    {
+        $sql = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+        $sql->execute();
+
+        if($sql->execute()){
+            return 'success';
+        }
+
+        // $porBorrar = $sql->fetchAll();
+        // foreach ($porBorrar as $key){
+        //     // $key['cantidad']
+        //     $idTemp = $key['idTemp'];
+        //     $cantidad = $key['cantidad'];
+        //     $idProducto = $key['idProducto'];
+        //     $sql1 = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE idTemp = $idTemp");
+        //     $sql1->execute();
+        //     if($sql1->execute()){
+        //         return 'success';
+        //     }
+        //     $sql1->close();
+
+        //     $sql2 = Conexion::conectar()->prepare("UPDATE inventario SET cantidadIngresada = cantidadIngresada + $cantidad WHERE idProducto = $idProducto");
+        //     $sql2->execute();
+
+        //     if($sql2->execute()){
+        //         return 'success';
+        //     }
+        //     $sql2->close();
+        // } 
+    }
+
     public static function registroFacturaModel($datosModel, $tabla)
     {
 
