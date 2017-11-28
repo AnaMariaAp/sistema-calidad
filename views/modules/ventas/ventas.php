@@ -13,10 +13,42 @@
 </section>
 <div class="album text-muted">
     <div class="container">
+        <!-- Comienza la tabla de ventas -->
+<?php if ($_GET['action'] == 'okVentas') {
+    echo ' <div id="oks" class="alert alert-success alert-dismissible fade show" role="alert">
+<button aria-label="Close" class="close" data-dismiss="alert" type="button">
+    <span aria-hidden="true">
+        ×
+    </span>
+</button>
+<strong>
+    El producto fue agregado al carrito correctamente.
+</strong>
+
+</div>';
+    echo " <meta HTTP-EQUIV = 'Refresh'CONTENT = '3; URL=ventas' /  > ";
+}
+if ($_GET['action'] == 'okBorradoVentas') {
+    echo '
+<div  class="alert alert-warning alert-dismissible fade show" role="alert">
+<button aria-label="Close" class="close" data-dismiss="alert" type="button">
+    <span aria-hidden="true">
+        ×
+    </span>
+</button>
+<strong>
+    El producto fue borrado del carrito correctamente.
+</strong>
+
+</div>';
+    echo " <meta HTTP-EQUIV = 'Refresh'CONTENT = '3; URL=ventas' /  > ";
+
+}
+?>
         <!-- Formulario de ventas -->
         <?php if (isset($_GET['action'])): ?>
-        <?php if ($_GET['action'] == 'ventas' or $_GET['action'] == 'enviaPrueba'): ?>
-        <div class="row">
+        <?php if ($_GET['action'] == 'ventas' or $_GET['action'] == 'enviaPrueba' or $_GET['action'] == 'okBorradoVentas' or $_GET['action'] == 'okVentas'): ?>
+        <div class="row" style="padding-bottom: 20px; border-bottom: 1px solid #bfbfbf;">
             <div class="col-md-8">
                 <?php $ven = ProductosController::getInventarioController();
                 $array = array();?>
@@ -105,22 +137,13 @@
                 </div>
                 <br>
                 <input type="hidden" value="A" name="Factura" id="Factura" readonly/>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <button type="button" id="aceptar" class="btn btn-primary btn-block btn-block">
-                                Calcular precio
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
             <!-- Fin Formulario de ventas -->
             <!--Formulario del precio Ventas -->
             <div class="col-md-4">
                 <form method="post">
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label class="">
                                     <!-- Sub Total -->
@@ -133,6 +156,16 @@
                                         </i>S/.
                                     </span>
                                     <input class="form-control text-md-center " type="text" placeholder="0.00" id="disabledTextInput" name="totalVenta" readonly required=""/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="" style="color: transparent;">Calcular precio</label>
+                                <div class="input-group">
+                                    <button type="button" id="aceptar" class="btn btn-outline-primary btn-block btn-block">
+                                        Calcular precio
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -172,9 +205,7 @@
                     </div>
                     <br>
                     <button type="submit" class="btn btn-outline-danger btn-block" name="post" id="post">
-                        <i class="fa fa-check">
-                        </i>
-                        Confirmar
+                        Agregar producto
                     </button>
                     <input type="hidden" name="idProducto" id="idProducto"/>
                     <input type="hidden" name="nombreProducto" id="nombreProducto"/>
@@ -188,6 +219,12 @@
         </div>
         <?php endif?>
         <?php if ($_GET['action'] == 'ventas' or $_GET['action'] == 'okVentas' or $_GET['action'] == 'borrarVenta' or $_GET['action'] == 'enviaPrueba' or $_GET['action'] == 'okBorradoVentas'): ?>
+        <br>
+        <br>
+        <?php 
+            $get = VentasController::getTempController();
+            if(!empty($get)):
+        ?>
         <div class="row">
             <div class="col-md-8">
                 <table class="table table-bordered table-sm" id="ventas">
@@ -243,150 +280,34 @@
             </div>
             <!-- segunda mitad de la tabla de ventas -->
             <div class="col-md-4">
-                <h2 class="alert alert-danger text-lg-center text-danger">Detalles</h2>
-                
-                <div scope="row" class="">
-                    <h4>
-                        <?php echo ' <h4 class="alert alert-success text-success">Total:' . '<span class="right"> S/.' . $total . '</h4> </span>'; ?>
-                    </h4>
+                <div class="alert alert-info" style="padding: 20px;">
+                    <h2 class="text-center">Detalles</h2><br>
+                    <h5><strong>Cliente: </strong> <span class="right"><?php echo $key['nombreCliente'] . ' ' . $key['apellidoCliente'] ?></span></h5>
+                    <?php echo ' <h5 class=""><strong>Total:</strong>' . '<span class="right"> S/.' . $total . '</span></h5> '; ?>
                 </div>
-                <div class="alert alert-info"><strong>Cliente: </strong> <?php echo $key['nombreCliente'] . ' ' . $key['apellidoCliente'] ?></div>
+                <form  method="post">
+                    <?php if (!empty($total)): ?>
+                   <center> <?php require 'btn.php';?></center>
+                    <?php endif?>
+                    <?php $idFact = VentasController::getFecturaController();?>
+                    <?php foreach ($idFact as $key): ?>
+                    <input class="form-control text-md-center ventas" type="hidden" id="numFac" name="numFac" value="<?php echo $key['total'] + 1; ?>" readonly/>
+                    <?php endforeach?>
+                </form>
             </div>
         </div>
+        <?php endif ?>
         <br>
-        <form  method="post">
-            <?php if (!empty($total)): ?>
-           <center> <?php require 'btn.php';?></center>
-            <?php endif?>
-            <?php $idFact = VentasController::getFecturaController();?>
-            <?php foreach ($idFact as $key): ?>
-            <input class="form-control text-md-center ventas" type="hidden" id="numFac" name="numFac" value="<?php echo $key['total'] + 1; ?>" readonly/>
-            <?php endforeach?>
-        </form>
+        
         <?php endif?>
-        <?php 
-            $get = VentasController::getTempController();
-            //print_r($get);
-        ?>
 
 <!--Fin Formulario del precio Ventas -->
 
-<!-- Comienza la tabla de ventas -->
-<?php if ($_GET['action'] == 'okVentas') {
-    echo ' <div id="oks" class="alert alert-success alert-dismissible fade show" role="alert">
-<button aria-label="Close" class="close" data-dismiss="alert" type="button">
-    <span aria-hidden="true">
-        ×
-    </span>
-</button>
-<strong>
-    Enorabuena!
-</strong>
-El producto fue agregado al carrito correctamente.
-</div>';
-    echo " <meta HTTP-EQUIV = 'Refresh'CONTENT = '2; URL=detalles' /  > ";
-}
-if ($_GET['action'] == 'okBorradoVentas') {
-    echo '
-<div  class="alert alert-warning alert-dismissible fade show" role="alert">
-<button aria-label="Close" class="close" data-dismiss="alert" type="button">
-    <span aria-hidden="true">
-        ×
-    </span>
-</button>
-<strong>
-    Enorabuena!
-</strong>
-El producto fue Borrado del carrito  correctamente.
-</div>';
-    echo " <meta HTTP-EQUIV = 'Refresh'CONTENT = '2; URL=detalles' /  > ";
 
-}
-?>
 <?php if ($_GET['action'] == 'detalles' or $_GET['action'] == 'okVentas' or $_GET['action'] == 'borrarVenta' or $_GET['action'] == 'okBorradoVentas') : ?>
 
-<div class="sale">
-    <div class="row">
-        <div class="col-md-9">
-            <table class="table table-bordered table-sm" id="ventas">
-                <thead class="bg-primary text-white table-bordered">
-                    <tr>
-                        <th class="text-md-center">
-                            Producto
-                        </th>
-                        <th class="text-md-center">
-                            Cantidad
-                            <small>
-                                (kilos)
-                            </small>
-                        </th>
-                        <th class="text-md-center">
-                            Precio
-                        </th>
-                         <th class="text-md-center">
-                            Total
-                        </th>
 
-                        <th class="text-md-center">Borrar</th>
-                    </tr>
-                </thead>
-                <?php $get = VentasController::getTempController();?>
-                <?php foreach ($get as $key): ?>
-                <tbody>
-                    <tr>
-                        <td align="center">
-                            <?php echo $key['nombreProducto'] ?>
-                        </td>
-                        <td align="center">
-                            <?php echo $key['cantidad'] ?>
-                        </td>
-                        <td align="center" width="50">
-                            <?php echo $key['precioVenta'] ?>
-                        </td>
-                         <td align="center" width="50">
-                            <?php echo $key['totalVenta'] ?>
-                        </td>
 
-                        <td align="center">
-                            <a href="index.php?action=borrarVenta&idTemp=<?php echo $key['idTemp'] ?> &idProducto=<?php echo $key['idProducto'] ?>&cantidad=<?php echo $key['cantidad'] ?> ">
-                                <i class="fa fa-trash-o btn btn-secondary text-danger"></i>
-                                </a>
-
-                        </td>
-                        <?php
-                        $total = $total + $key['totalVenta'];
-                        $total = number_format($total, 2, ',', '');
-                        ?>
-                        <?php endforeach?>
-
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-<!-- segunda mitad de la tabla de ventas -->
-        <div class="col-md-3">
-            <h2 class="alert alert-danger text-lg-center text-danger">Detalles</h2>
-            
-            <div scope="row" class="">
-                <h4>
-                    <?php echo ' <h4 class="alert alert-success text-success">Total:' . '<span class="right"> $' . $total . '</h4> </span>'; ?>
-                </h4>
-            </div>
-            <div class="alert alert-info"><strong>Cliente: </strong> <?php echo $key['nombreCliente'] . ' ' . $key['apellidoCliente'] ?></div>
-        </div>
-
-    </div>
-</div>
-<br>
-<form  method="post">
-    <?php if (!empty($total)): ?>
-   <center> <?php require 'btn.php';?></center>
-    <?php endif?>
-    <?php $idFact = VentasController::getFecturaController();?>
-    <?php foreach ($idFact as $key): ?>
-    <input class="form-control text-md-center ventas" type="hidden" id="numFac" name="numFac" value="<?php echo $key['total'] + 1; ?>" readonly/>
-    <?php endforeach?>
-</form>
 <?php endif?>
 <!-- comienza la facturas -->
 <?php if ($_GET['action'] == 'factura' or $_GET['action'] == 'okBorradoFactura'): ?>
@@ -568,21 +489,24 @@ La Factura fue Borrada  correctamente.
                         var cant = $('#cantidad').val();
                         if(!pro == '' && !cli == '' && !cant == ''){
                             $("#aceptar").removeAttr('disabled', 'disabled');
+                            $("#aceptar").removeClass('btn-outline-primary');
+                            $("#aceptar").addClass('btn-primary');
                         }
-                      // asignamos el valor de cantidad
-                         var cantidad = $('#cantidad').val();
-                         $('#cant').val(cantidad);
-                         // calculo matemático del precio * cantidad
-                         var disabledTextInput = json.precioVenta * cantidad
-                         $('#disabledTextInput').val(disabledTextInput.toFixed(2));
-                         // sacamos el total
-                         var total = json.precioVenta * cantidad;
-                         $('#precioVenta').val(json.precioVenta);
-                         var x = $('#Factura').val();
-                         console.log(x);
-                         $('#idProducto').val(json.idProducto);
-                         $('#nombreProducto').val(json.nombre);
+                        // asignamos el valor de cantidad
+                         
                          $("#aceptar").click(function() {
+                             var cantidad = $('#cantidad').val();
+                             $('#cant').val(cantidad);
+                             // calculo matemático del precio * cantidad
+                             var disabledTextInput = json.precioVenta * cantidad;
+                             console.log(disabledTextInput);
+                             $('#disabledTextInput').val(disabledTextInput.toFixed(2));
+                             // sacamos el total
+                             var total = json.precioVenta * cantidad;
+                             $('#precioVenta').val(json.precioVenta);
+                             $('#idProducto').val(json.idProducto);
+                             $('#nombreProducto').val(json.nombre);
+                             // JEJE
                              var a = $('#clientes').val();
                              $('#idCliente').val(a);
                              console.log(a);
@@ -590,6 +514,8 @@ La Factura fue Borrada  correctamente.
                              $('#tipoFactura').val(tipoFac);
                              if (!a == '') {
                                $("#post").removeAttr('disabled', 'disabled');
+                               $("#post").removeClass('btn-outline-danger');
+                               $("#post").addClass('btn-danger');
                              }
                              console.log(json);
                          });

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-11-2017 a las 01:01:15
--- Versión del servidor: 10.1.26-MariaDB
--- Versión de PHP: 7.1.9
+-- Tiempo de generación: 27-11-2017 a las 21:24:17
+-- Versión del servidor: 10.1.25-MariaDB
+-- Versión de PHP: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -111,7 +111,9 @@ CREATE TABLE `detalles` (
 INSERT INTO `detalles` (`idDetalle`, `idCliente`, `idProducto`, `fechaVenta`, `precioVenta`, `cantidadKilos`, `totalVenta`, `numFac`, `tipoFactura`) VALUES
 (1, 23, 32, '2017-11-22', 3, 4, 12, 1, 'A'),
 (2, 11, 32, '2017-11-22', 3, 5, 15, 2, 'A'),
-(3, 23, 32, '2017-11-23', 3, 1, 3, 3, 'A');
+(3, 23, 32, '2017-11-23', 3, 1, 3, 3, 'A'),
+(7, 11, 32, '2017-11-27', 3, 3, 9, 4, 'A'),
+(8, 13, 32, '2017-11-27', 3, 3, 9, 5, 'A');
 
 -- --------------------------------------------------------
 
@@ -137,7 +139,9 @@ INSERT INTO `factura` (`idFactura`, `numFac`, `fechaVenta`, `idCliente`, `idAdmi
 (4, 3, '2017-11-22', 21, 1, 2400, 'A'),
 (5, 1, '2017-11-22', 23, 5, 12, 'A'),
 (6, 2, '2017-11-22', 11, 5, 15, 'A'),
-(7, 3, '2017-11-23', 23, 1, 3, 'A');
+(7, 3, '2017-11-23', 23, 1, 3, 'A'),
+(8, 4, '2017-11-27', 12, 1, 3.5, 'A'),
+(11, 4, '2017-11-27', 11, 1, 9, 'A');
 
 -- --------------------------------------------------------
 
@@ -159,7 +163,29 @@ CREATE TABLE `inventario` (
 INSERT INTO `inventario` (`idInventario`, `cantidadIngresada`, `precioVenta`, `idProducto`) VALUES
 (20, 105, 3, 32),
 (21, 30, 1.5, 33),
-(22, 40, 3.5, 34);
+(22, 35, 3.5, 34);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `inventariotmp`
+--
+
+CREATE TABLE `inventariotmp` (
+  `idInventario` int(11) NOT NULL,
+  `cantidadIngresada` int(11) NOT NULL,
+  `precioVenta` double NOT NULL,
+  `idProducto` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `inventariotmp`
+--
+
+INSERT INTO `inventariotmp` (`idInventario`, `cantidadIngresada`, `precioVenta`, `idProducto`) VALUES
+(20, 105, 3, 32),
+(21, 30, 1.5, 33),
+(22, 35, 3.5, 34);
 
 -- --------------------------------------------------------
 
@@ -270,14 +296,6 @@ CREATE TABLE `temp` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `temp`
---
-
-INSERT INTO `temp` (`idTemp`, `idProducto`, `idCliente`, `precioVenta`, `cantidad`, `iva`, `totalVenta`, `numFac`, `fechaVenta`, `unidad`, `tipoFactura`) VALUES
-(22, 32, 0, 3, 3, 1.89, 9, 4, '2017-11-23', 1, 'A'),
-(23, 32, 0, 3, 5, 3.15, 15, 4, '2017-11-23', 1, 'A');
-
---
 -- Índices para tablas volcadas
 --
 
@@ -313,6 +331,13 @@ ALTER TABLE `factura`
 -- Indices de la tabla `inventario`
 --
 ALTER TABLE `inventario`
+  ADD PRIMARY KEY (`idInventario`),
+  ADD KEY `FK_inventario_productos` (`idProducto`);
+
+--
+-- Indices de la tabla `inventariotmp`
+--
+ALTER TABLE `inventariotmp`
   ADD PRIMARY KEY (`idInventario`),
   ADD KEY `FK_inventario_productos` (`idProducto`);
 
@@ -360,61 +385,56 @@ ALTER TABLE `temp`
 --
 ALTER TABLE `administrador`
   MODIFY `idAdmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
 --
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
   MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
-
 --
 -- AUTO_INCREMENT de la tabla `detalles`
 --
 ALTER TABLE `detalles`
-  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
+  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `idFactura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
+  MODIFY `idFactura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `inventario`
 --
 ALTER TABLE `inventario`
   MODIFY `idInventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
-
+--
+-- AUTO_INCREMENT de la tabla `inventariotmp`
+--
+ALTER TABLE `inventariotmp`
+  MODIFY `idInventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT de la tabla `matricula`
 --
 ALTER TABLE `matricula`
   MODIFY `idMatricula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
-
 --
 -- AUTO_INCREMENT de la tabla `membresias`
 --
 ALTER TABLE `membresias`
   MODIFY `idMembresia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `pass`
 --
 ALTER TABLE `pass`
   MODIFY `idpass` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
   MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
-
 --
 -- AUTO_INCREMENT de la tabla `temp`
 --
 ALTER TABLE `temp`
-  MODIFY `idTemp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
-COMMIT;
+  MODIFY `idTemp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

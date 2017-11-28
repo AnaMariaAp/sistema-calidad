@@ -54,7 +54,7 @@ class VentasModel
         //
         // verifica el stock
         $idProducto = $datosModel['idProducto'];
-        $stock = Conexion::conectar()->prepare("SELECT * FROM inventario
+        $stock = Conexion::conectar()->prepare("SELECT * FROM inventariotmp
             WHERE idProducto = $idProducto");
         $stock->execute();
         $resultado = $stock->fetchAll();
@@ -158,7 +158,7 @@ class VentasModel
 
     public static function registrarVentasDetallesModel($datosModel, $tabla, $idAdmin, $numFac)
     {
-        $sql = Conexion::conectar()->prepare("INSERT INTO $tabla(idCliente,idProducto,fechaVenta,precioVenta,cantidadKilos,totalVenta,numFac,tipoFactura)SELECT tem.idCliente,tem.idProducto,tem.fechaVenta,tem.precioVenta,tem.cantidad,tem.totalVenta,tem.numFac,tem.tipoFactura
+        $sql = Conexion::conectar()->prepare("INSERT INTO $tabla(idCliente,idProducto,fechaVenta,precioVenta,cantidad,totalVenta,numFac,tipoFactura)SELECT tem.idCliente,tem.idProducto,tem.fechaVenta,tem.precioVenta,tem.cantidad,tem.totalVenta,tem.numFac,tem.tipoFactura
             FROM temp tem ");
 
         if ($sql->execute()) {

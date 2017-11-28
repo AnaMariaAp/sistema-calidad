@@ -45,7 +45,7 @@ class VentasController
                 require 'views/modules/modals/noFacturaTipo.php';
             }
             if ($respuesta == 'success') {
-                header('location:ventas');
+                header('location:okVentas');
             }
         }
     }

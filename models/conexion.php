@@ -7,7 +7,7 @@ class Conexion
     {
 
         try {
-            $link = new PDO("mysql:host=localhost;dbname=rokagym_db2", "root", "");
+            $link = new PDO("mysql:host=localhost;dbname=rokagym_db", "root", "");
             $link->exec('SET CHARACTER SET utf8');
             $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $link;

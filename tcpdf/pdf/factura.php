@@ -113,7 +113,7 @@ class ImprimirVentas
             <td style="border: 1px solid #666; background-color:#4AA0F1; color:#fff">Producto</td>
             <td style="border: 1px solid #666; background-color:#4AA0F1; color:#fff">Cantidad</td>
             <td style="border: 1px solid #666; background-color:#4AA0F1; color:#fff">Precio</td>
-            <td style="border: 1px solid #666; background-color:#4AA0F1; color:#fff">Sub Total</td>
+            <td style="border: 1px solid #666; background-color:#4AA0F1; color:#fff">TOTAL</td>
         </tr>
     </table>
 EOD;
