@@ -163,18 +163,19 @@ if (!$_SESSION["nombreAdmin"]) {
         $(document).ready(function(){
             $("#fechaFin").attr('disabled', 'disabled');
             $("#fechaInicio").attr('disabled', 'disabled');
-            $(".datepicker-fecha").datepicker({
+            /*$(".datepicker-fecha").datepicker({
                 dateFormat: 'dd-mm-yy',
                 yearRange: '2017:2018',
                 changeYear: true,
                 changeMonth: true,
                 selectOtherMonths: true
-            });
-            $(".datepicker-today").datepicker({dateFormat: 'yy-mm-dd'}).datepicker("setDate", new Date());
+            });*/
+            //$(".datepicker-today").datepicker({dateFormat: 'yy-mm-dd'}).datepicker("setDate", new Date());
+            var cantMeses=0;
             $("#idMembresia").chosen().change(function(){
                 $("#fechaFin").removeAttr('disabled', 'disabled');
                 $("#fechaInicio").removeAttr('disabled', 'disabled');
-                var cantMeses = parseInt($('option:selected', this).attr('myMonth'));
+                cantMeses = parseInt($('option:selected', this).attr('myMonth'));
                 console.log(cantMeses);
                 var je = $("#fechaInicio");
                 var date = new Date($('#fechaInicio').val());
@@ -194,6 +195,17 @@ if (!$_SESSION["nombreAdmin"]) {
                 // var y = CurrentDate.setMonth(CurrentDate.getMonth() + cantMeses);
                 // console.log(CurrentDate);
                 // console.log(y);
+            });
+            $("#fechaInicio").datepicker({
+                dateFormat: "dd-mm-yy",
+                onSelect: function(dateText, instance) {
+                    date = $.datepicker.parseDate(instance.settings.dateFormat, dateText, instance.settings);
+                    date.setMonth(date.getMonth() + cantMeses);
+                    $("#fechaFin").datepicker("setDate", date);
+                }
+            });
+            $("#fechaFin").datepicker({
+                dateFormat: "dd-mm-yy"
             });
         })
     </script>
@@ -224,7 +236,7 @@ if (!$_SESSION["nombreAdmin"]) {
                     </option>
                     <?php $mem = membresiasController::getMembresiasSelectController(); ?>
                     <?php foreach ($mem as $key): ?>
-                    <option value=" <?php echo $key['idMembresia'];?> " myMonth="<?php echo $key['mesesMembresia'];?>">
+                    <option value=" <?php echo $key['mesesMembresia'];?> " myMonth="<?php echo $key['mesesMembresia'];?>">
                         <?php echo $key['nombreMembresia']; ?>
                     </option>
                     <?php endforeach?>
@@ -236,7 +248,7 @@ if (!$_SESSION["nombreAdmin"]) {
             <div class="form-group" id="form">
                 <div class="form-group">
                     <label for="exampleInputPassword1">Fecha de Inicio </label>
-                    <input readonly type="text" name="fechaInicio" value="<?php echo date('d-m-Y'); ?> " class="fechaInicio form-control" placeholder="Ingrese fecha de inicio" disabled="" />
+                    <input readonly type="text" id="fechaInicio" name="fechaInicio" value="<?php echo date('d-m-Y'); ?> " class="fechaInicio form-control" placeholder="Ingrese fecha de inicio" disabled="" />
                 </div>
             </div>
             <span id="pro">
@@ -245,7 +257,7 @@ if (!$_SESSION["nombreAdmin"]) {
         <div class="col-md-6">
             <div class="form-group" id="form">
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Fecha de Fin </label>
+                    <label for="fechaFin">Fecha de Fin </label>
                     <input readonly type="text" id="fechaFin" name="fechaFin" class="form-control datepicker-fecha" placeholder="Ingrese fecha de fin" disabled>
                 </div>
             </div>
