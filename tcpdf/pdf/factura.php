@@ -36,7 +36,7 @@ class ImprimirVentas
         foreach ($result as $resultado) {
             $fecha = $resultado['fechaVenta'];
             $fechas = date('d-m-Y', strtotime($fecha));
-            define('PDF_HEADER_STRINGT', " Incar s.r.l - www.diegopennisi.es \n Fecha: $fechas  \n Iva Habilitado : $iva \n");
+            define('PDF_HEADER_STRINGT', " s \n Fecha: $fechas  \n Iva Habilitado : $iva \n");
 // set default header data
             $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE . '  ' . $numFac, PDF_HEADER_STRINGT, array(5, 64, 255), array(9, 64, 128));
             $pdf->setFooterData(array(0, 64, 0), array(0, 64, 128));
@@ -237,16 +237,6 @@ EOF;
 
  <table style="text-align:center; font-size:20px;background-color:#F85833; color:#fff;">
                  <tr>
-                 <td></td>
-                 <td>SUBTOTAL :</td>
-                    <td>$ $subTotal</td>
-                </tr>
-                <tr>
-                 <td></td>
-                 <td>IVA(21%) :</td>
-                      <td>$ $iva</td>
-                </tr>
-                 <tr>
                   <td></td>
                  <td>TOTAL :</td>
                     <td>$ $total</td>
@@ -256,7 +246,7 @@ EOF;
 </div>
       <table style="text-align:center; font-size:7px;background-color:#3895F4; color:#fff;">
          <tr>
-         <td><h3>Haga su pedido online www.diegopennisi.es</h3></td>
+         <td><h3>-</h3></td>
          </tr>
         </table>
 EOD;

@@ -4,8 +4,7 @@
         <h1 class="jumbotron-heading">Ventas</h1>
         <p class="lead text-muted">Aquí podras gestionar las ordenes de venta de productos</p>
         <p>
-            <a href="ventas" class="btn btn-primary">Generar venta</a>
-            <a href="detalles" class="btn btn-primary">Detalles</a>
+            <a href="ventas" class="btn btn-primary">Agregar Orden de Compra</a>
             <a href="factura" class="btn btn-primary">Recibos</a>
             <a href="reportes" class="btn btn-primary">Reportes</a>
         </p>
@@ -302,14 +301,6 @@ if ($_GET['action'] == 'okBorradoVentas') {
         <?php endif?>
 
 <!--Fin Formulario del precio Ventas -->
-
-
-<?php if ($_GET['action'] == 'detalles' or $_GET['action'] == 'okVentas' or $_GET['action'] == 'borrarVenta' or $_GET['action'] == 'okBorradoVentas') : ?>
-
-
-
-<?php endif?>
-<!-- comienza la facturas -->
 <?php if ($_GET['action'] == 'factura' or $_GET['action'] == 'okBorradoFactura'): ?>
 <?php if ($_GET['action'] == 'okBorradoFactura') {
     echo ' <div id="oks" class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -321,7 +312,7 @@ if ($_GET['action'] == 'okBorradoVentas') {
 <strong>
 Enorabuena!
 </strong>
-La Factura fue Borrada  correctamente.
+La Factura fue borrada correctamente.
 </div>';
 
 }
@@ -506,7 +497,7 @@ La Factura fue Borrada  correctamente.
                              $('#precioVenta').val(json.precioVenta);
                              $('#idProducto').val(json.idProducto);
                              $('#nombreProducto').val(json.nombre);
-                             // JEJE
+                             
                              var a = $('#clientes').val();
                              $('#idCliente').val(a);
                              console.log(a);

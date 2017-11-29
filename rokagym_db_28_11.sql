@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-11-2017 a las 05:07:14
+-- Tiempo de generación: 28-11-2017 a las 03:25:49
 -- Versión del servidor: 10.1.26-MariaDB
 -- Versión de PHP: 7.1.9
 
@@ -70,11 +70,7 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`idCliente`, `nombreCliente`, `apellidoCliente`, `estado`, `telefono`, `direccion`, `dni`, `sexo`, `edad`, `fechaNacimiento`) VALUES
-(1, 'Ana María', 'Alvarado Porras', 1, '962768687', 'Jr. La calidad', 75971786, 'femenino', 21, '1995-12-04'),
-(2, 'Arleth', 'Alvarado Porras', 1, '234234234', 'Jr La calidad', 67867867, 'femenino', 15, '2002-02-04'),
-(3, 'Ruth', 'Porras Almerco', 1, '456134763', 'Jr la clidad', 45679344, 'femenino', 46, '1971-06-04'),
-(4, 'Arnaldo', 'Alvarado Lugo', 1, '567876456', 'Jr la calidad', 45645678, 'masculino', 45, '1972-11-26'),
-(5, 'Yadira', 'Gomero', 1, '345345678', 'Jr la calidad', 34534534, 'femenino', 22, '1995-11-08');
+(1, 'Ana Maria', 'Alvarado Porras', 1, '962768687', 'Jr.Union 317 - Comas', 75071786, 'femenino', 21, '1995-12-04');
 
 -- --------------------------------------------------------
 
@@ -95,15 +91,6 @@ CREATE TABLE `detalles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `detalles`
---
-
-INSERT INTO `detalles` (`idDetalle`, `idCliente`, `idProducto`, `fechaVenta`, `precioVenta`, `cantidad`, `totalVenta`, `numFac`, `tipoFactura`) VALUES
-(1, 1, 2, '2017-11-28', 3, 2, 6, 1, 'A');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `factura`
 --
 
@@ -118,15 +105,6 @@ CREATE TABLE `factura` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `factura`
---
-
-INSERT INTO `factura` (`idFactura`, `numFac`, `fechaVenta`, `idCliente`, `idAdmin`, `totalVenta`, `tipoFactura`) VALUES
-(1, 1, '2017-11-28', 1, 1, 6, 'A');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `inventario`
 --
 
@@ -138,16 +116,6 @@ CREATE TABLE `inventario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `inventario`
---
-
-INSERT INTO `inventario` (`idInventario`, `cantidadIngresada`, `precioVenta`, `idProducto`) VALUES
-(1, 120, 3, 1),
-(2, 120, 3, 2);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `inventariotmp`
 --
 
@@ -157,8 +125,6 @@ CREATE TABLE `inventariotmp` (
   `precioVenta` double NOT NULL,
   `idProducto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `matricula`
@@ -174,8 +140,6 @@ CREATE TABLE `matricula` (
   `idAdmin` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
 -- Estructura de tabla para la tabla `membresias`
 --
@@ -183,18 +147,17 @@ CREATE TABLE `matricula` (
 CREATE TABLE `membresias` (
   `idMembresia` int(11) NOT NULL,
   `nombreMembresia` varchar(50) NOT NULL,
-  `costoMembresia` int(11) NOT NULL,
-  `mesesMembresia` int(11) NOT NULL
+  `costoMembresia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `membresias`
 --
 
-INSERT INTO `membresias` (`idMembresia`, `nombreMembresia`, `costoMembresia`, `mesesMembresia`) VALUES
-(1, 'General  ', 150, 3),
-(2, 'Gold  ', 300, 12),
-(3, 'Silver ', 250, 6);
+INSERT INTO `membresias` (`idMembresia`, `nombreMembresia`, `costoMembresia`) VALUES
+(1, 'General', 500),
+(2, 'Gold', 320),
+(3, 'Silver', 250);
 
 -- --------------------------------------------------------
 
@@ -226,7 +189,8 @@ CREATE TABLE `productos` (
 
 INSERT INTO `productos` (`idProducto`, `nombreProducto`, `precioProducto`) VALUES
 (1, 'Volt (Energizante)', 2.5),
-(2, 'Quemador X', 2.5);
+(2, 'Agua Cielo', 1),
+(3, 'Quemador X', 2);
 
 -- --------------------------------------------------------
 
@@ -343,37 +307,37 @@ ALTER TABLE `administrador`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `detalles`
 --
 ALTER TABLE `detalles`
-  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `idFactura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idFactura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `inventario`
 --
 ALTER TABLE `inventario`
-  MODIFY `idInventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idInventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `inventariotmp`
 --
 ALTER TABLE `inventariotmp`
-  MODIFY `idInventario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idInventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `matricula`
 --
 ALTER TABLE `matricula`
-  MODIFY `idMatricula` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idMatricula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT de la tabla `membresias`
@@ -391,13 +355,13 @@ ALTER TABLE `pass`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `temp`
 --
 ALTER TABLE `temp`
-  MODIFY `idTemp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idTemp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

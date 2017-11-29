@@ -12,6 +12,7 @@ class membresiasController
              <td>' . $key['idMembresia'] . '</td>
              <td>' . $key['nombreMembresia'] . '</td>
              <td>' . $key['costoMembresia'] . '</td>
+             <td>' . $key['mesesMembresia'] . ' meses</td>
              <td align="center"><a href="index.php?action=editarMem&idEditar=' . $key['idMembresia'] . '"><i class="fa fa-edit btn btn-outline-primary btn-sm"></i></a> <a href="index.php?action=membresias&id=' . $key['idMembresia'] . '"><i class="fa fa-trash  btn btn-outline-danger btn-sm"></i></a></td>
              </tr>';
         }
@@ -19,20 +20,16 @@ class membresiasController
 
     public function getMembresiasSelectController()
     {
-
         $respuesta = membresiasModel::getMembresiasModel('membresias');
-        foreach ($respuesta as $key) {
-            echo '
-           <option value="' . $key['idMembresia'] . '">' . ucwords($key['nombreMembresia']) . ' </option>
-         ';
-        }
+        return $respuesta;
     }
 
     public function agregarMembresiasController()
     {
         if (isset($_POST['agragarMembresias'])) {
             $datosController = array('nombreMembresia' => $_POST['nombreMembresia'],
-                'costoMembresia' => $_POST['costoMembresia']);
+                'costoMembresia' => $_POST['costoMembresia'],
+                'mesesMembresia' => $_POST['mesesMembresia']);
 
             $respuesta = membresiasModel::agregarMembresiasModel($datosController, 'membresias');
 
@@ -84,6 +81,7 @@ class membresiasController
         if (isset($_POST['editarMem'])) {
             $datosController = array('nombreMembresia' => $_POST['nombreMembresia'],
                 'costoMembresia' => $_POST['costoMembresia'],
+                'mesesMembresia' => $_POST['mesesMembresia'],
                 'idMembresia' => $_POST['idMembresia'],
             );
 

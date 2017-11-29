@@ -108,10 +108,12 @@ if (isset($_GET['action'])) {
                 <table class="table table-striped table-sm" id="tablas">
                     <thead class="bg-primary text-white">
                         <tr>
-                            <td class="text-lg-center">NOMBRES</td>
-                            <td class="text-lg-center">APELLIDOS</td>
+                            <td class="text-lg-center">Nombres</td>
+                            <td class="text-lg-center">Apellidos</td>
                             <td class="text-lg-center">DNI</td>
-                            <td class="text-lg-center">ACCIONES</td>
+                            <td class="text-lg-center">Fecha de Nacimiento</td>
+                            <td class="text-lg-center">Edad</td>
+                            <td class="text-lg-center">Acciones</td>
                         </tr>
                     </thead>
                     <?php foreach ($cli as $key): ?>
@@ -119,6 +121,8 @@ if (isset($_GET['action'])) {
                             <td class="text-lg-left"><?php echo $key['nombreCliente'] ?></td>
                             <td class="text-lg-left"><?php echo $key['apellidoCliente'] ?></td>
                             <td class="text-lg-left"><?php echo $key['dni'] ?></td>
+                            <td class="text-lg-left"><?php echo date("Y-m-d", strtotime($key['fechaNacimiento'])) ?></td>
+                            <td class="text-lg-left"><?php echo $key['edad'] ?></td>
                             <td class="text-lg-center">
                                 <a href="index.php?action=verClientes&idCliente=<?php echo $key['idCliente'] ?>"> <i class="fa fa-eye"></i></a>
                                 <a href="index.php?action=editClientes&idCliente=<?php echo $key['idCliente'] ?>"> <i class="fa fa-edit"></i></a>
@@ -137,13 +141,35 @@ if (isset($_GET['action'])) {
                         <script type="text/javascript">
                             $(document).ready(function(){
                                 $(".datepicker").datepicker({
-                                    dateFormat: 'dd/mm/yy',
-                                    yearRange: '1990:2050',
+                                    dateFormat: 'yy-mm-dd',
+                                    yearRange: '1940:2018',
                                     changeYear: true
                                 }); 
+
+                                function getAge(dateString) {
+                                    var today = new Date();
+                                    var birthDate = new Date(dateString);
+                                    var age = today.getFullYear() - birthDate.getFullYear();
+                                    var m = today.getMonth() - birthDate.getMonth();
+                                    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                                    age--;
+                                    }
+                                    return age;
+                                }
+
+                                $("#fechaNacimiento").change(function(){
+                                    var birthDate = $(this).val();
+                                    var todayDate = new Date(); 
+                                    $('.edad').val(getAge(birthDate));
+                                    var edad = $('.edad').val();
+                                    console.log(edad);
+                                    $('#edad').val(edad);
+                                    console.log($('#edad').val());
+                                });
+
                             })
                         </script>
-                        <div class="row">
+                        <div class="row" class="agregarcliente">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="nombreCliente">Nombre </label>
@@ -153,29 +179,35 @@ if (isset($_GET['action'])) {
                             <div class="col-md-4">
                                <div class="form-group">
                                 <label for="exampleInputPassword1">Apellido </label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Apellido Cliente" name="apellidoCliente" data-validacion-tipo="requerido|min:3">
+                                <input type="text" class="form-control" id="apellidoCliente" placeholder="Apellido Cliente" name="apellidoCliente" data-validacion-tipo="requerido|min:3">
                               </div>
                             </div>
                             <div class="col-md-4">
                               <div class="form-group">
                                 <label for="exampleInputPassword1">Telefono </label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Telefono" name="telefono" data-validacion-tipo="requerido|numero">
+                                <input type="number" class="form-control" id="telefono" placeholder="Telefono" name="telefono" data-validacion-tipo="requerido|min:9|max:9">
                               </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
                               <div class="form-group">
-                                <label for="sexo">Sexo</label>
-                                <input type="radio" name="sexo" value="femenino" data-validacion-tipo="requerido">Femenino
-                                <input type="radio" name="sexo" value="masculino" data-validacion-tipo="requerido">Masculino
+                                <label for="sexo">Sexo </label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="radio" name="sexo" value="femenino" data-validacion-tipo="requerido" required="" checked=""> Femenino 
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="radio" name="sexo" value="masculino" data-validacion-tipo="requerido" required=""> Masculino
+                                    </div>
+                                </div>
                               </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group" id="form">
                                     <div class="form-group">
                                         <label for="fechaNacimiento">Fecha de Nacimiento </label>
-                                        <input readonly type="text" name="fechaNacimiento" value="" class="form-control datepicker" placeholder="Ingrese fecha de nacimiento" data-validacion-tipo="requerido" />
+                                        <input readonly type="text" name="fechaNacimiento" id="fechaNacimiento" class="form-control datepicker fechaNacimiento" placeholder="Ingrese fecha de nacimiento" data-validacion-tipo="requerido" />
                                     </div>
                                 </div>
                                 <span id="pro">
@@ -183,34 +215,34 @@ if (isset($_GET['action'])) {
                             </div>
                             <div class="col-md-4">
                               <div class="form-group">
-                                <label for="edad">Edad</label>
-                                <input type="text" class="form-control" id="edad" name="edad" value="" data-validacion-tipo="requerido|min:1">
+                                <label for="edad">Edad </label>
+                                <input type="text" class="form-control edad"  name="edadDefault" data-validacion-tipo="requerido" disabled>
                               </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
                               <div class="form-group">
-                                <label for="exampleInputPassword1">Dirección</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Dirección" name="direccion" data-validacion-tipo="requerido">
+                                <label for="exampleInputPassword1">Dirección </label>
+                                <input type="text" class="form-control" id="direccion" placeholder="Dirección" name="direccion" data-validacion-tipo="requerido|min:3">
                               </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group"  id="form">
-                                    <label for="exampleInputPassword1">DNI</label>
-                                <input class="form-control" id="clientes"  name="dni" type="text" placeholder="DNI" data-validacion-tipo="requerido|min:8">
+                                    <label for="exampleInputPassword1">DNI o CARNET EXT.</label>
+                                <input class="form-control" id="dni"  name="dni" type="number" placeholder="DNI o CARNET EXT." data-validacion-tipo="requerido|min:8|max:12">
                                 <span id="cli"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1" class="" style="color: transparent;">Agregar cliente</label>
+                                    <input class="btn btn-danger btn-block" id="button" name="agragarclientes" type="submit" value="Agregar Cliente">
+                                </div>
                             </div>
                         </div>
                         </div>
-                        <div class="row">
-                          <div class="col-md-6">
-                              <div class="form-group">
-                                    <label for="exampleInputPassword1" class="label"></label>
-                                <input class="btn btn-outline-danger btn-block" id="button" name="agragarclientes" type="submit" value="Agregar Cliente">
-                            </div>
-                        </div>
-                        </div>
+                        <input type="hidden" id="edad" name="edad">
                     </form>
                     <script>
                         $(document).ready(function(){
@@ -236,33 +268,54 @@ if (isset($_GET['action'])) {
             <?php foreach ($edit as $value): ?>
             <?php endforeach?>
 
-                <form method="post" onsubmit="return validarclientes()">
+                <form method="post" id="form-validate" onsubmit="return validarclientes()">
                     <script type="text/javascript">
                         $(document).ready(function(){
                             $(".datepicker").datepicker({
-                                dateFormat: 'dd/mm/yy',
-                                yearRange: '1990:2050',
+                                dateFormat: 'yy-mm-dd',
+                                yearRange: '1940:2017',
                                 changeYear: true
                             }); 
+
+                            function getAge(dateString) {
+                                var today = new Date();
+                                var birthDate = new Date(dateString);
+                                var age = today.getFullYear() - birthDate.getFullYear();
+                                var m = today.getMonth() - birthDate.getMonth();
+                                if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                                age--;
+                                }
+                                return age;
+                            }
+
+                            $("#fechaNacimiento").change(function(){
+                                var birthDate = $(this).val();
+                                var todayDate = new Date(); 
+                                $('.edad').val(getAge(birthDate));
+                                var edad = $('.edad').val();
+                                console.log(edad);
+                                $('#edad').val(edad);
+                                console.log($('#edad').val());
+                            });
                         })
                     </script>
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Nombre Cliente</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" name="nombreCliente" value="<?php echo $value['nombreCliente'] ?>"  data-validacion-tipo="requerido|min:1">
+                                <input type="text" class="form-control" id="exampleInputPassword1" name="nombreCliente" value="<?php echo $value['nombreCliente'] ?>"  data-validacion-tipo="requerido|min:3">
                               </div>
                         </div>
                         <div class="col-md-4">
                            <div class="form-group">
                             <label for="exampleInputPassword1">Apellido Cliente</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1" name="apellidoCliente"  value="<?php echo $value['apellidoCliente'] ?>">
+                            <input type="text" class="form-control" id="exampleInputPassword1" name="apellidoCliente"  value="<?php echo $value['apellidoCliente'] ?>" data-validacion-tipo="requerido|min:3">
                           </div>
                         </div>
                         <div class="col-md-4">
                           <div class="form-group">
                             <label for="exampleInputPassword1">Telefono</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1" name="telefono" value="<?php echo $value['telefono'] ?>">
+                            <input type="text" class="form-control" id="exampleInputPassword1" name="telefono" value="<?php echo $value['telefono'] ?>" data-validacion-tipo="requerido|min:9|max:9">
                           </div>
                         </div>
                         
@@ -292,7 +345,7 @@ if (isset($_GET['action'])) {
                             <div class="form-group" id="form">
                                 <div class="form-group">
                                     <label for="fechaNacimiento">Fecha de Nacimiento</label>
-                                    <input readonly type="text" name="fechaNacimiento" value="<?php echo date("d/m/Y", strtotime($key['fechaNacimiento'])) ?>" class="form-control datepicker" placeholder="Ingrese fecha de nacimiento" data-validacion-tipo="requerido" />
+                                    <input readonly type="text" id="fechaNacimiento" name="fechaNacimiento" value="<?php echo date("Y-m-d", strtotime($value['fechaNacimiento'])) ?>" class="form-control datepicker" placeholder="Ingrese fecha de nacimiento" data-validacion-tipo="requerido" />
                                 </div>
                             </div>
                             <span id="pro">
@@ -301,7 +354,7 @@ if (isset($_GET['action'])) {
                         <div class="col-md-4">
                           <div class="form-group">
                             <label for="edad">Edad</label>
-                            <input type="text" class="form-control" id="edad" name="edad" value="<?php echo $value['edad'] ?>">
+                            <input type="text" class="form-control edad" name="edad" value="<?php echo $value['edad'] ?>" disabled>
                           </div>
                         </div>
                     </div>
@@ -309,14 +362,14 @@ if (isset($_GET['action'])) {
                         <div class="col-md-4">
                           <div class="form-group">
                             <label for="exampleInputPassword1">Dirección</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1" name="direccion" value="<?php echo $value['direccion'] ?>">
+                            <input type="text" class="form-control" id="exampleInputPassword1" name="direccion" value="<?php echo $value['direccion'] ?>" data-validacion-tipo="requerido|min:3">
                           </div>
                         </div>
                       
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="dni">DNI</label>
-                            <input class="form-control"  name="dni" type="text" value="<?php echo $value['dni'] ?>">
+                            <input class="form-control"  name="dni" type="number" value="<?php echo $value['dni'] ?>" data-validacion-tipo="requerido|min:8|max:12">
                             </div>
                         </div>
                     </div>
@@ -330,7 +383,15 @@ if (isset($_GET['action'])) {
                     </div>
                     </div>
                     <input type="hidden" name="idCliente" value="<?php echo $value['idCliente'] ?>">
+                    <input type="hidden" name="edad" id="edad" value="<?php echo $value['edad'] ?>">
                 </form>
+                <script>
+                    $(document).ready(function(){
+                        $("#form-validate").submit(function(){
+                            return $(this).validate();
+                        });
+                    })
+                </script>
             </div>
         </div>
         <?php endif?>

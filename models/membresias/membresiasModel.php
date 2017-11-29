@@ -18,9 +18,10 @@ class membresiasModel
     public static function agregarMembresiasModel($datosModel, $tabla)
     {
 
-        $sql = Conexion::conectar()->prepare("INSERT INTO $tabla (nombreMembresia,costoMembresia)VALUES(:nombreMembresia, :costoMembresia)");
+        $sql = Conexion::conectar()->prepare("INSERT INTO $tabla (nombreMembresia,costoMembresia,mesesMembresia)VALUES(:nombreMembresia, :costoMembresia, :mesesMembresia)");
         $sql->bindParam(':nombreMembresia', $datosModel['nombreMembresia']);
         $sql->bindParam(':costoMembresia', $datosModel['costoMembresia']);
+        $sql->bindParam(':mesesMembresia', $datosModel['mesesMembresia']);
 
         if ($sql->execute()) {
             return 'success';
@@ -68,9 +69,10 @@ class membresiasModel
     public static function actualizarMembresiaModel($datosModel, $tabla)
     {
 
-        $sql = Conexion::conectar()->prepare("UPDATE $tabla SET nombreMembresia = :nombreMembresia, costoMembresia = :costoMembresia WHERE idMembresia = :idMembresia");
+        $sql = Conexion::conectar()->prepare("UPDATE $tabla SET nombreMembresia = :nombreMembresia, costoMembresia = :costoMembresia, mesesMembresia = :mesesMembresia WHERE idMembresia = :idMembresia");
         $sql->bindParam(':nombreMembresia', $datosModel['nombreMembresia']);
         $sql->bindParam(':costoMembresia', $datosModel['costoMembresia']);
+        $sql->bindParam(':mesesMembresia', $datosModel['mesesMembresia']);
         $sql->bindParam(':idMembresia', $datosModel['idMembresia']);
 
         if ($sql->execute()) {

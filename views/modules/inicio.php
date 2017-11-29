@@ -47,6 +47,35 @@ if (!$_SESSION["nombreAdmin"])
                     </div>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="card card-inverse" style="background-color: #333; border-color: #333;">
+                    <div class="card-block">
+                        <h3 class="card-title">Productos</h3>
+                        <p class="card-text">Aquí podras gestionar los productos y el stock de estas.</p>
+                        <a href="membresias" class="btn btn-primary">Ir a Productos</a>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <div class="row" style="padding-top: 30px">
+            <div class="col-md-6">
+                <div class="card card-inverse" style="background-color: #333; border-color: #333;">
+                    <div class="card-block">
+                        <h3 class="card-title">Ventas</h3>
+                        <p class="card-text">Aquí podras generar tickets por compra de productos y matricula</p>
+                        <a href="membresias" class="btn btn-primary">Ir a Ventas</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card card-inverse" style="background-color: #333; border-color: #333;">
+                    <div class="card-block">
+                        <h3 class="card-title">Caja</h3>
+                        <p class="card-text">Aquí podras efectuar el pago de los productos comprados por los clientes y matriculas</p>
+                        <a href="membresias" class="btn btn-primary">Ir a Caja</a>
+                    </div>
+                </div>
+            </div>
         </div> 
         <p>
             <?php echo md5('admin'); ?>

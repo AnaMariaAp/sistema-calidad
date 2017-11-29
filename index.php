@@ -1,5 +1,5 @@
 <?php
-date_default_timezone_set('America/Argentina/Buenos_Aires');
+date_default_timezone_set('America/Lima');
 
 // controlladores
 require_once "controllers/enlaces/enlacesController.php";

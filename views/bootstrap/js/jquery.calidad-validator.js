@@ -2,18 +2,18 @@ jQuery.fn.validate = function ()
 {
     /* Mensajes por defecto */
     var _mensaje = {
-        campo_obligatorio: 'Este campo es obligatorio',
-        campo_numerico: 'Este campo es numérico',
-        campo_correo: 'Este campo no es un correo',
-        campo_longitud: 'Este campo debe tener una longitud de {0} caracteres',
-        campo_min: 'Este campo debe tener como mínimo {0} caracteres',
-        campo_max: 'Este campo debe tener como máximo {0} caracteres',
-        campo_valido: 'Este campo no es válido',
-        campo_ip: 'Este campo no es una IP válida',
-        campo_url: 'Este campo no es una URL válida',
-        campo_social_twitter: 'Este campo no es una URL válida de Twitter',
-        campo_social_facebook: 'Este campo no es una URL válida de Facebook',
-        campo_social_youtube: 'Este campo no es una URL válida de Youtube'
+        campo_obligatorio: ' Este campo es obligatorio',
+        campo_numerico: ' Este campo es numérico',
+        campo_correo: ' Este campo no es un correo',
+        campo_longitud: ' Este campo debe tener una longitud de {0} caracteres',
+        campo_min: ' Este campo debe tener como mínimo {0} caracteres',
+        campo_max: ' Este campo debe tener como máximo {0} caracteres',
+        campo_valido: ' Este campo no es válido',
+        campo_ip: ' Este campo no es una IP válida',
+        campo_url: ' Este campo no es una URL válida',
+        campo_social_twitter: ' Este campo no es una URL válida de Twitter',
+        campo_social_facebook: ' Este campo no es una URL válida de Facebook',
+        campo_social_youtube: ' Este campo no es una URL válida de Youtube'
     };
 
     var form = $(this);

@@ -89,25 +89,15 @@ class ImprimirVentas
         $pdf->setTextShadow(array('enabled' => true, 'depth_w' => 0.2, 'depth_h' => 0.2, 'color' => array(196, 196, 196), 'opacity' => 1, 'blend_mode' => 'Normal'));
 
 // Set some content to print
-        $ciudad = strtolower($key[nombreCiudad]);
         $html = <<<EOD
         <div  style="border: 1px solid #c9c9c9">
        <table>
         <tr>
           <td style="width:540px">Cliente: $key[nombreCliente]   $key[apellidoCliente]</td>
         </tr>
-         <tr>
-          <td style="width:540px">Direccion: $key[direccion]</td>
-        </tr>
-         <tr>
-          <td style="width:540px">Provincia : $key[nombreProvincia] -  Ciudad: $ciudad</td>
-        </tr>
-         <tr>
-          <td style="width:540px">Cuit : $key[cuit]</td>
-        </tr>
-         <tr>
+         <!--<tr>
           <td style="width:540px">Tipo Factura : $key[tipoFactura]</td>
-        </tr>
+        </tr>-->
 
 <tr>
             <td width="200px"></td>
@@ -124,10 +114,10 @@ class ImprimirVentas
 
    <table style="border: 1px solid #4AA0F1; text-align:center; line-height: 20px; font-size:23px">
         <tr>
-            <td style="border: 1px solid #666; background-color:#4AA0F1; color:#fff">Producto</td>
-            <td style="border: 1px solid #666; background-color:#4AA0F1; color:#fff">Cantidad</td>
-            <td style="border: 1px solid #666; background-color:#4AA0F1; color:#fff">Precio</td>
-            <td style="border: 1px solid #666; background-color:#4AA0F1; color:#fff">TOTAL</td>
+            <td style="border: 1px solid #666;">Producto</td>
+            <td style="border: 1px solid #666;">Cantidad</td>
+            <td style="border: 1px solid #666;">Precio</td>
+            <td style="border: 1px solid #666;">TOTAL</td>
         </tr>
     </table>
 EOD;
@@ -163,124 +153,28 @@ EOF;
             // $pdf->writeHTML($html2, true, true, true, true, '');
         }
 // ---------------------------------------------------------
-        $iva = $total / 21;
-        $iva = number_format($iva, 2, ',', ' ');
-        $subTotal = $total - $iva;
-        $subTotal = number_format($subTotal, 2, ',', ' ');
         $total = number_format($total, 2, ',', ' ');
         $html3 = <<<EOD
 <div  style="border: 1px solid #c9c9c9;padding:10px">
 
-        <table>
-         <tr>
-         <td></td>
-         </tr>
-        </table>
 
-         <table>
-         <tr>
-         <td></td>
-         </tr>
-        </table>
-
-          <table>
-         <tr>
-         <td></td>
-         </tr>
-        </table>
-
- <table>
-         <tr>
-         <td></td>
-         </tr>
-        </table>
- <table>
-         <tr>
-         <td></td>
-         </tr>
-        </table>
- <table>
-         <tr>
-         <td></td>
-         </tr>
-        </table>
- <table>
-         <tr>
-         <td></td>
-         </tr>
-        </table>
- <table>
-         <tr>
-         <td></td>
-         </tr>
-        </table>
- <table>
-         <tr>
-         <td></td>
-         </tr>
-        </table>
- <table>
-         <tr>
-         <td></td>
-         </tr>
-        </table>
- <table>
-         <tr>
-         <td></td>
-         </tr>
-        </table>
- <table>
-         <tr>
-         <td></td>
-         </tr>
-        </table>
- <table>
-         <tr>
-         <td></td>
-         </tr>
-        </table>
-
-         <table>
-         <tr>
-         <td></td>
-         </tr>
-        </table>
- <table>
-         <tr>
-         <td></td>
-         </tr>
-        </table>
- <table>
          <tr>
          <td></td>
          </tr>
         </table>
 
 
- <table style="text-align:center; font-size:20px;background-color:#F85833; color:#fff;">
-                 <tr>
-                 <td></td>
-                 <td>SUBTOTAL :</td>
-                    <td>$ $subTotal</td>
-                </tr>
-                <tr>
-                 <td></td>
-                 <td>IVA(21%) :</td>
-                      <td>$ $iva</td>
-                </tr>
+
+ <table style="text-align:center; font-size:20px;">
                  <tr>
                   <td></td>
                  <td>TOTAL :</td>
-                    <td>$ $total</td>
+                    <td>S/. $total</td>
                 </tr>
               </table>
 
 </div>
-       <table style="text-align:center; font-size:7px;background-color:#3895F4; color:#fff;">
-         <tr>
-         <td><h3>Haga su pedido online www.diegopennisi.es</h3></td>
-         </tr>
-        </table>
+      
 EOD;
 
         $pdf->writeHTMLCell(0, 0, '', '', $html3, 0, 1, 0, true, '', true);

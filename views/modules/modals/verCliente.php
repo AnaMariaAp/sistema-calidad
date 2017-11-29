@@ -18,22 +18,22 @@
                           <table class="table table-striped table-sm">
                                 <thead class="bg-primary text-white">
                                     <tr>
-                                        <td>Ciudad</td>
+                                        <td>Telefono</td>
                                         <td>DNI</td>
-                                         <td>Usuario</td>
-                                         <td>contraseña</td>
-                                         <td>Email</td>
-                                         <td>Dirección</td>
+                                         <td>Direccion</td>
+                                         <td>Sexo</td>
+                                         <td>Edad</td>
+                                         <td>Fecha de Nacimiento</td>
                                         <td>Ver </td>
                                     </tr>
                                 </thead>
                                     <tr>
-                                        <td class="text-lg-center"><?php echo $key['nombreCiudad'] ?></td>
+                                        <td class="text-lg-center"><?php echo $key['telefono'] ?></td>
                                         <td class="text-lg-center"><?php echo $key['dni'] ?></td>
-                                        <td class="text-lg-center"><?php echo $key['usuarioCliente'] ?></td>
-                                        <td class="text-lg-center"><?php echo $key['passwordCliente'] ?></td>
-                                        <td class="text-lg-center"><?php echo $key['emailCliente'] ?></td>
                                         <td class="text-lg-center"><?php echo $key['direccion'] ?></td>
+                                        <td class="text-lg-center"><?php echo $key['sexo'] ?></td>
+                                        <td class="text-lg-center"><?php echo $key['edad'] ?></td>
+                                        <td class="text-lg-center"><?php echo date("Y-m-d", strtotime($key['fechaNacimiento'])) ?></td>
                                         <td class="text-lg-center"><a href="index.php?action=editClientes&idCliente=<?php echo $key['idCliente'] ?>"> <i class="fa fa-edit"></i></a> <a href="index.php?action=clientes&id=<?php echo $key['idCliente'] ?>"> <i class="fa fa-trash"></i></a></td>
                                     </tr>
                             </table>

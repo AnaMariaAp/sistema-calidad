@@ -97,7 +97,10 @@ if (!$_SESSION["nombreAdmin"]) {
                             Tipo Membresia
                         </td>
                         <td>
-                            Precio<span class="text-danger">(*)</span>
+                            Precio
+                        </td>
+                        <td>
+                            Meses
                         </td>
                         <td>
                             Fecha Inicio
@@ -121,14 +124,17 @@ if (!$_SESSION["nombreAdmin"]) {
                         <?php echo $key['nombreMembresia'] ?>
                     </td>
                     <td>
-                        $
+                        S/.
                         <?php echo $key['costoMembresia'] ?>
                     </td>
                     <td>
-                        <?php echo date("d/m/Y", strtotime($key['fechaInicio'])) ?>
+                        <?php echo $key['mesesMembresia'] ?>
+                    </td>
+                    <td>
+                        <?php echo date("d-m-Y", strtotime($key['fechaInicio'])) ?>
                     </td>
                      <td align="center">
-                        <?php echo date("d/m/Y", strtotime($key['fechaFin'])) ?>
+                        <?php echo date("d-m-Y", strtotime($key['fechaFin'])) ?>
                     </td>
                     <td align="center">
                         <a href="index.php?action=editarMatr&idMatrEdit=<?php echo $key['idMatricula'] ?> ">
@@ -155,15 +161,40 @@ if (!$_SESSION["nombreAdmin"]) {
 <form id="form-validate" method="post">
     <script type="text/javascript">
         $(document).ready(function(){
-            $(".datepicker").datepicker({
-                dateFormat: 'dd/mm/yy',
+            $("#fechaFin").attr('disabled', 'disabled');
+            $("#fechaInicio").attr('disabled', 'disabled');
+            $(".datepicker-fecha").datepicker({
+                dateFormat: 'dd-mm-yy',
                 yearRange: '2017:2018',
                 changeYear: true,
                 changeMonth: true,
                 selectOtherMonths: true
             });
-            $(".datepicker-today").datepicker().datepicker("setDate", new Date());
+            $(".datepicker-today").datepicker({dateFormat: 'yy-mm-dd'}).datepicker("setDate", new Date());
+            $("#idMembresia").chosen().change(function(){
+                $("#fechaFin").removeAttr('disabled', 'disabled');
+                $("#fechaInicio").removeAttr('disabled', 'disabled');
+                var cantMeses = parseInt($('option:selected', this).attr('myMonth'));
+                console.log(cantMeses);
+                var je = $("#fechaInicio");
+                var date = new Date($('#fechaInicio').val());
+                var input = document.getElementById("fechaInicio").value;
+                var dateEntered = new Date(input);
+                console.log(dateEntered);
 
+
+                
+                // //calculando fecha de fin de membresia
+                // var fecInicio = new Date($("#fechaInicio").val());
+                // var fecFin = new Date($("#fechaFin").val());
+                // console.log(fechaInicio + " - " +fecInicio.getMonth());
+
+                // var CurrentDate = new Date();
+                // console.log(CurrentDate);
+                // var y = CurrentDate.setMonth(CurrentDate.getMonth() + cantMeses);
+                // console.log(CurrentDate);
+                // console.log(y);
+            });
         })
     </script>
     <div class="row">
@@ -172,7 +203,7 @@ if (!$_SESSION["nombreAdmin"]) {
                 <label for="nombreCategorias">
                     Nombre Cliente
                 </label>
-                <select class="form-control chosen-select" id="idClienteNuevo" name="idCliente">
+                <select class="form-control chosen-select" id="idClienteNuevo" name="idCliente" required="">
                     <option>
                         Elegir Cliente
                     </option>
@@ -187,20 +218,25 @@ if (!$_SESSION["nombreAdmin"]) {
                 <label for="nombreCategorias">
                     Membresia
                 </label>
-                <select class="form-control chosen-select"  name="idMembresia" data-validacion-tipo="requerido">
+                <select class="form-control chosen-select" id="idMembresia"  name="idMembresia" required="">
                     <option>
                         Elegir Membresia
                     </option>
-                    <?php $a = new membresiasController;
-                    $a->getMembresiasSelectController();?>
+                    <?php $mem = membresiasController::getMembresiasSelectController(); ?>
+                    <?php foreach ($mem as $key): ?>
+                    <option value=" <?php echo $key['idMembresia'];?> " myMonth="<?php echo $key['mesesMembresia'];?>">
+                        <?php echo $key['nombreMembresia']; ?>
+                    </option>
+                    <?php endforeach?>
                 </select>
             </div>
         </div>
+
         <div class="col-md-6">
             <div class="form-group" id="form">
                 <div class="form-group">
                     <label for="exampleInputPassword1">Fecha de Inicio </label>
-                    <input readonly type="text" name="fechaInicio" class="form-control datepicker-today" placeholder="Ingrese fecha de inicio" data-validacion-tipo="requerido" disabled="" />
+                    <input readonly type="text" name="fechaInicio" value="<?php echo date('d-m-Y'); ?> " class="fechaInicio form-control" placeholder="Ingrese fecha de inicio" disabled="" />
                 </div>
             </div>
             <span id="pro">
@@ -210,7 +246,7 @@ if (!$_SESSION["nombreAdmin"]) {
             <div class="form-group" id="form">
                 <div class="form-group">
                     <label for="exampleInputPassword1">Fecha de Fin </label>
-                    <input readonly type="text" name="fechaFin" class="form-control datepicker" placeholder="Ingrese fecha de fin" data-validacion-tipo="requerido" />
+                    <input readonly type="text" id="fechaFin" name="fechaFin" class="form-control datepicker-fecha" placeholder="Ingrese fecha de fin" disabled>
                 </div>
             </div>
             <span id="pro">
@@ -219,11 +255,21 @@ if (!$_SESSION["nombreAdmin"]) {
         <div class="col-md-6">
             <div class="form-group" style="padding-top: 12px">
                 <input type="hidden" id="idAdmin" name="idAdmin" value="1"/>
-                <input type="hidden" id="fechaMatricula" name="fechaMatricula" value="<?php echo date('Y-m-d'); ?> "/>
+                <input type="hidden" id="cantMesMem" name="cantMesMem" value="1"/>
+                <input type="hidden" name="fechaInicio" id="fechaInicio" value="<?php echo date('d-m-Y');  ?>">
+                <input type="hidden" id="fechaMatricula" name="fechaMatricula" value="<?php echo date('d-m-Y'); ?> "/>
                 <input type="submit" name="agragarpro" id="button" value="Guardar Matrícula" class="btn btn-primary"/>
             </div>
         </div>
+        <?php echo $key['mesesMembresia'] ?>
     </form>
+    <script>
+        $(document).ready(function(){
+            $("#form-validate").submit(function(){
+                return $(this).validate();
+            });
+        })
+    </script>
 </div>
 <?php endif?>
 <!--  -->

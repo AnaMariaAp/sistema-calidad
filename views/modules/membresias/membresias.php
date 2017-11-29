@@ -85,6 +85,9 @@ La membresia fue agregada correctamente.
                                 Costo
                             </td>
                             <td>
+                                Tiempo
+                            </td>
+                            <td>
                                 Acciones
                             </td>
                         </tr>
