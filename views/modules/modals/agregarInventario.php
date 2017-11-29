@@ -9,15 +9,15 @@
         </button>
       </div>
       <div class="modal-body">
-<form method="post" >
+<form method="post" id="form-validate">
 
             <div class="form-group">
                 <label for="nombreCategorias" class=''>
-                   Nombre Productos <small>(Opcinal)</small>
+                   Nombre Productos
                 </label>
-                <select class="form-control" name="idProducto" id="idProducto">
+                <select class="form-control" name="idProducto" id="idProducto" required="" data-validacion-tipo="requerido|min:1">
                     <option>
-                        Elegir Producto
+                        Elegir Producto 
                     </option>
                     <?php $a = ProductosController::getProductosControllers();?>
                     <?php foreach ($a as $key): ?>
@@ -30,15 +30,15 @@
 
             <div class="form-group">
                 <label for="cantidadIngresada" class="">
-                    Cantidad de Unidades <small>(Obligatorio)</small>
+                    Cantidad de Unidades 
                 </label>
-                <input type="number" class="form-control" id="cantidadIngresada" placeholder="Cantidad de Unidades"  name="cantidadIngresada" required=""/>
+                <input type="number" class="form-control" id="cantidadIngresada" placeholder="Cantidad de Unidades"  name="cantidadIngresada" data-validacion-tipo="requerido|min:1">
             </div>
             <div class="form-group">
                 <label for="precioVenta" class="">
-                    Precio de Venta <small>(Opcinal)</small>
+                    Precio de Venta 
                 </label>
-                <input type="text" class="form-control" id="precioVenta" placeholder="Precio de Venta"  name="precioVenta" />
+                <input type="text" class="form-control" id="precioVenta" placeholder="Precio de Venta"  name="precioVenta" data-validacion-tipo="requerido|min:1">
             </div>
             <div class="form-group">
                 <label for="precioVenta" class="text-primary">
@@ -53,6 +53,13 @@
             </div>
       </div>
 </form>
+<script>
+    $(document).ready(function(){
+        $("#form-validate").submit(function(){
+            return $(this).validate();
+        });
+    })
+</script>
     </div>
   </div>
 </div>

@@ -17,40 +17,33 @@
 		<form method="post">
             <script type="text/javascript">
                 $(document).ready(function(){
-                    $(".datepicker").datepicker({
-                        dateFormat: 'dd-mm-yy',
-                        yearRange: '2017:2018',
-                        changeYear: true,
-                        changeMonth: true,
-                        selectOtherMonths: true
+                    var cantMeses=0;
+                    console.log(cantMeses);
+                    $("#idMembresia").chosen().change(function(){
+                        // $("#fechaFin").removeAttr('disabled', 'disabled');
+                        $("#fechaInicio").removeAttr('disabled', 'disabled');
+                        
                     });
-                    // $(".datepicker-today").datepicker().datepicker("setDate", new Date());
-                    // $(".fechaInicio").change(function(){
-                    //     var x = $(".fechaInicio").val();
-                    //     var y = $("#fechaFin").val();
-                    //     var f1 = new Date(x).valueOf();
-                    //     var f2 = new Date(y).valueOf();
-                    //     var res = f2 - f1;
-                    //     // console.log(f1);
-                    //     // console.log(f2);
-                    //     console.log(res);
-                    //     if(Date.parse(x) < Date.parse(y)){
-                    //         console.log('primero');
-                    //     }else{
-                    //         console.log('segundo');
-                    //     }
-
-                    // });
-                    // 
-                    $("#fechaFin").change(function(){
-                        var fechafin = $(this).val();
-                        var datefecha = new Date(fechafin);
-                        var fechahoy1 = new Date('12-12-2014');
-                        var fechahoy2 = new Date('2014-12-12');
-                        console.log(fechafin);
-                        console.log(datefecha);
-                        // console.log(fechahoy1);  
-                        // console.log(fechahoy2); 
+                    $("#fechaInicio").datepicker().change(function(){
+                        var ee = $('#idMembresia').val();
+                        console.log(ee);
+                        cantMeses = parseInt($('option:selected', this).attr('myMonth'));
+                            console.log(cantMeses);
+                    })
+                    $("#fechaInicio").datepicker({
+                        dateFormat: "dd-mm-yy",
+                        onSelect: function(dateText, instance) {
+                            
+                            cantMeses = parseInt($('option:selected', this).attr('myMonth'));
+                            console.log(cantMeses);
+                            date = $.datepicker.parseDate(instance.settings.dateFormat, dateText, instance.settings);
+                            date.setMonth(date.getMonth() + cantMeses);
+                            $("#fechaFin").datepicker("setDate", date);
+                            $("#buttonSend").removeAttr('disabled', 'disabled');
+                        }
+                    });
+                    $("#fechaFin").datepicker({
+                        dateFormat: "dd-mm-yy"
                     });
                 });
             </script>
@@ -59,7 +52,7 @@
             <div class="form-group" id="form">
                 <div class="form-group">
                     <label for="exampleInputPassword1">Fecha de Inicio</label>
-                    <input readonly type="text" name="fechaInicio" value="<?php echo date("d-m-Y", strtotime($key['fechaInicio'])) ?>" class="form-control datepicker fechaInicio">
+                    <input readonly type="text" ID="fechaInicio" name="fechaInicio" value="<?php echo date("d-m-Y", strtotime($key['fechaInicio'])) ?>" class="form-control datepicker fechaInicio">
                 </div>
             </div>
             <span id="pro">
@@ -81,10 +74,10 @@
                     Tipo de Membresía
                 </label>
                 <select  class="form-control"  name="idMembresia">
-                    <option value="<?php echo $key['idMembresia'] ?>"><?php echo $key['nombreMembresia'] ?></option>
+                    <option value="<?php echo $key['idMembresia'] ?>" myMonth="<?php echo $key['mesesMembresia'];?>" selected><?php echo $key['nombreMembresia'] ?></option>
                     <?php $mem = membresiasController::getMembresiasSelectController(); ?>
                     <?php foreach ($mem as $key): ?>
-                    <option value=" <?php echo $key['idMembresia'] ?> ">
+                    <option value=" <?php echo $key['idMembresia'] ?> " myMonth="<?php echo $key['mesesMembresia'];?>">
                         <?php echo $key['nombreMembresia']; ?>
                     </option>
                     <?php endforeach?>

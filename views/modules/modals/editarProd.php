@@ -14,13 +14,13 @@
 <?php $editarProd = ProductosController::editarProductosController();?>
 <?php foreach ($editarProd as $key): ?>
 
-		<form method="post">
+		<form method="post" id="form-validate">
 
             <div class="form-group" id="form">
                 <label for="nombreCategorias">
                     Nombre Productos
                 </label>
-                <input type="text" class="form-control" id="nombreProductos"   name="nombreProducto" value="<?php echo $key['nombreProducto'] ?>"/>
+                <input type="text" class="form-control" id="nombreProductos"   name="nombreProducto" value="<?php echo $key['nombreProducto'] ?>" data-validacion-tipo="requerido|min:3"/>
             </div>
             <span id="pro">
             </span>
@@ -28,7 +28,7 @@
                 <label for="nombreCategorias">
                     Precio Productos ($ 2.50 )
                 </label>
-                <input type="text" class="form-control" id="precioCategorias" placeholder="precio del Producto"  name="precioProducto" value="<?php echo $key['precioProducto'] ?>"/>
+                <input type="text" class="form-control" id="precioCategorias" placeholder="precio del Producto"  name="precioProducto" value="<?php echo $key['precioProducto'] ?>" data-validacion-tipo="requerido|min:1"/>
             </div>
         <input type="hidden" name="idProducto" value="<?php echo $key['idProducto'] ?>">
         <div class="modal-footer">
@@ -36,6 +36,13 @@
           <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
         </div>
     </form>
+    <script>
+        $(document).ready(function(){
+            $("#form-validate").submit(function(){
+                return $(this).validate();
+            });
+        })
+    </script>
 
        </div>
       

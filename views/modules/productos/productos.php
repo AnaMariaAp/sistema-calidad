@@ -142,14 +142,14 @@ El Prducto fue Borrado correctamente del sistema.
 <div class="jumbotron text-center" style="padding: 1rem 2rem;">
     <h1>Crear producto</h1>
 </div>
-<form method="post">
+<form method="post" id="form-validate">
     <div class="row">
         <div class="col-md-6">
             <div class="form-group" id="form">
                 <label for="nombreCategorias">
                     Nombre Productos
                 </label>
-                <input type="text" class="form-control" id="nombreProductos" placeholder="Nombre del Producto"  name="nombreProducto" required=""/>
+                <input type="text" class="form-control" id="nombreProductos" placeholder="Nombre del Producto"  name="nombreProducto" data-validacion-tipo="requerido|min:3"/>
             </div>
             <span id="pro">
             </span>
@@ -159,7 +159,7 @@ El Prducto fue Borrado correctamente del sistema.
                 <label for="nombreCategorias">
                     Precio Productos (S/. 2.50 )
                 </label>
-                <input type="text" class="form-control" id="precioCategorias" placeholder="precio del Producto"  name="precioProducto" required=""/>
+                <input type="number" class="form-control" id="precioCategorias" placeholder="precio del Producto"  name="precioProducto" data-validacion-tipo="requerido|min:1"/>
             </div>
         </div>
         <div class="col-md-12">
@@ -168,6 +168,13 @@ El Prducto fue Borrado correctamente del sistema.
         </div>
        
     </form>
+    <script>
+        $(document).ready(function(){
+            $("#form-validate").submit(function(){
+                return $(this).validate();
+            });
+        })
+    </script>
 </div>
 <?php endif?>
 <!--  -->
